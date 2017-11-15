@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/FoodTruckMania">
+	<Resource auth="Container" driverClassName="com.mysql.jdbc.Driver"
+		logAbandoned="true" maxActive="100" maxIdle="30" maxWait="10000"
+		name="jdbc/foodTruckMania" password="Uncc2017" removeAbandoned="true"
+		removeAbandonedTimeout="60" type="javax.sql.DataSource"
+		url="jdbc:sqlserver://uncc-anderson.database.windows.net:1433"
+		username="durga" />
+</Context>
