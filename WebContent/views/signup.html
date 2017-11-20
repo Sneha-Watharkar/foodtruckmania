@@ -1,0 +1,63 @@
+<div class="container">
+	<div class="row">
+	    <div class="col-4 mx-auto">
+            <div class="card">
+            	<h4 class="card-header card-header-color">Register</h4>
+            	<div class="card-block">
+            		<form>
+            		  <div class="form-group">
+					    <label for="firstname">First Name</label>
+					    <input type="text" ng-model="firstname" class="form-control" 
+					    	id="firstname" aria-describedby="emailError" placeholder="First Name">
+					    <!-- <small id="emailError" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+					  </div>
+					  <div class="form-group">
+					    <label for="lastname">Last Name</label>
+					    <input type="text" ng-model="lastname" class="form-control" 
+					    	id="lastname" aria-describedby="emailError" placeholder="Last Name">
+					    <!-- <small id="emailError" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+					  </div>
+					  <div class="form-group">
+					    <label for="username">Email address</label>
+					    <input type="email" ng-model="username" class="form-control" 
+					    	id="username" aria-describedby="emailError" placeholder="Enter email">
+					    <!-- <small id="emailError" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+					  </div>
+					  <div class="form-group">
+					    <label for="password">Password</label>
+					    <input type="password" class="form-control" ng-model="password" id="password" 
+					    placeholder="Password">
+					  </div>
+					  <div class="form-group">
+					    <label for="confirmpassword">Confirm Password</label>
+					    <input type="password" class="form-control" ng-model="confirmpassword" 
+					    	id="confirmpassword" placeholder="Confirm Password">
+					  </div>
+					  <div class="form-group">
+					    <label for="userPhone">Phone Number</label>
+					    <input type="text" class="form-control" ng-model="userPhone" 
+					    	id="userPhone" placeholder="Ex:XXX-XXX-XXXX">
+					  </div>
+					  <div class="form-group">
+					    <div class="form-check form-check-inline">
+							<label class="form-check-label">
+							    <input class="form-check-input" type="radio" name="userTypeRadio" id="customer" value="customer"> Customer
+							</label>
+						</div>
+						<div class="form-check form-check-inline">
+							<label class="form-check-label">
+							    <input class="form-check-input" type="radio" name="userTypeRadio" id="vendor" value="vendor"> Vendor
+							</label>
+						</div>
+					  </div>
+					  <div class="form-group">
+					  	<button type="submit" class="btn btn-primary float-right" ng-model="signUpBtn">Register</button>
+					  	<button type="submit" class="btn btn-default float-right" ng-model="cancelBtn" 
+					  	ng-click="goBacktoLoginPage()">Cancel</button>
+					  </div>
+					 </form>  
+				</div>
+           	</div>
+        </div>
+	</div>
+</div>
