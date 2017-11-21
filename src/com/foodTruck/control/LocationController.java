@@ -3,10 +3,30 @@ package com.foodTruck.control;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.foodTruck.data.FoodTruck;
+import com.foodTruck.db.gateway.TableDataGateway;
+
 public class LocationController {
 
-	public int reserveLocation(int foodtruckId, String location) {
-		return 0;
+	private static final String STATUS_PENDING = "Pending";
+	
+	private static final String STATUS_ACTIVE = "Active";
+
+	public static int reserveLocation(HttpServletRequest request, HttpServletResponse response) {
+		FoodTruck foodTruck = new FoodTruck();
+
+		String userId = request.getParameter("emailAddress");
+		foodTruck.setFoodTruckName(request.getParameter("foodTruckName"));
+		foodTruck.setFoodTruckLocation(request.getParameter("location"));
+		// foodTruck.setFoodTruckTime(Date.parse((request.getParameter("dateTime")));
+		foodTruck.setLatitude(Float.valueOf(request.getParameter("latitude")));
+		foodTruck.setLongitude(Float.valueOf(request.getParameter("longitude")));
+		foodTruck.setFoodTruckStatus(STATUS_PENDING);
+		int dataInserted = TableDataGateway.reserveLocation(userId, foodTruck);
+		return dataInserted;
 	}
 
 	private ArrayList[] convertLocationToCoordinates() {

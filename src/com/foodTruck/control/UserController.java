@@ -12,6 +12,7 @@ public class UserController {
 
 	public static int registerUser(HttpServletRequest request, HttpServletResponse response) {
 		UserAccount userAcc = new UserAccount();
+
 		userAcc.setUserFirstName(request.getParameter("firstName"));
 		userAcc.setUserLastName(request.getParameter("lastName"));
 		userAcc.setUserType(request.getParameter("userType"));
@@ -19,6 +20,7 @@ public class UserController {
 		userAcc.setLogin_password(request.getParameter("password"));
 		userAcc.setUserPhoneNumber(Long.parseLong(request.getParameter("phoneNumber")));
 		userAcc.setUserEmailAddress(request.getParameter("emailAddress"));
+
 		int success = TableDataGateway.registerUser(userAcc);
 		return success;
 
@@ -42,5 +44,22 @@ public class UserController {
 		// Triggers call to the tabledatagateway for verify credentials
 		userAcc = TableDataGateway.signUpUser(loginName, password, userType);
 	}
+
+	/*
+	 * Method for test purpose
+	public static void registerUser() {
+		UserAccount userAcc = new UserAccount();
+		// Hardcoding userAccount to chec database inserts
+		userAcc.setUserFirstName("Test");
+		userAcc.setUserLastName("User1");
+		userAcc.setUserType("Customer");
+		userAcc.setLoginName("newUser");
+		userAcc.setLogin_password("testPwd1");
+		userAcc.setUserPhoneNumber(Long.valueOf("1234567890"));
+		userAcc.setUserEmailAddress("testUser1@email.com");
+		int success = TableDataGateway.registerUser(userAcc);
+		System.out.println("return success message:" + success);
+
+	}*/
 
 }

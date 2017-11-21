@@ -8,10 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.foodTruck.control.LocationController;
 import com.foodTruck.control.UserController;
+import com.foodTruck.db.UserUpdate;
 
 public class FoodTruckControllerFacade extends HttpServlet {
 
+	private static final long serialVersionUID = 4624480356432936867L;
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -19,22 +24,26 @@ public class FoodTruckControllerFacade extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		String action = request.getParameter("action");
+		System.out.println("Action is : " + action);
 		switch (action) {
-		case "register":
-			UserController.registerUser(request,response);
+		case "registerUser":
+			UserController.registerUser(request, response);
 			break;
 		case "signUp":
-			UserController.signUpUser(request,response);
+			UserController.signUpUser(request, response);
 			break;
-		case "reserve_location":
-			//after logging in if user is vendor he/she chooses the location and time of food truck.
-			//data enters the FoodTruck DB.
+		case "reserveLocation":
+			// after logging in if user is vendor he/she chooses the location and time of
+			// food truck.
+			// data enters the FoodTruck DB.
+			LocationController.reserveLocation(request, response);
 			break;
 		case "approveVendorRequest":
-			//once vendor chooses time and location admin approves the request.
+			// once vendor chooses time and location admin approves the request.
+//			UserUpdate.approveVendorRequests(request,response)
 			break;
 		}
-		
+
 		getServletContext().getRequestDispatcher(url).forward(request, response);
 	}
 

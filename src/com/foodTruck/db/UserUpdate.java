@@ -1,6 +1,7 @@
 package com.foodTruck.db;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +10,7 @@ import java.util.HashMap;
 
 import com.foodTruck.data.FoodTruck;
 import com.foodTruck.data.UserAccount;
-
+import com.foodTruck.db.gateway.TableDataGateway;
 import com.foodTruck.util.ConnectionPool;
 
 import com.foodTruck.util.DBUtil;
@@ -17,13 +18,18 @@ import com.foodTruck.util.DBUtil;
 public class UserUpdate {
 
 	public static int registerUser(UserAccount userAcc) {
-		ConnectionPool pool = ConnectionPool.getInstance();
-		Connection connection = pool.getConnection();
+		/*
+		 * ConnectionPool pool = ConnectionPool.getInstance(); Connection connection =
+		 * pool.getConnection();
+		 */
 		PreparedStatement ps = null;
 		String query = "INSERT INTO UserAccount (userFirstName, userLastName, userType,loginName,password,userPhoneNumber,userEmailAddress) "
-				+ "VALUES (?, ?, ?,?,?,?,?)";
+				+ "VALUES (?,?,?,?,?,?,?)";
 		try {
+			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			System.out.println(connection.toString());
 			ps = connection.prepareStatement(query);
+			System.out.println(ps.toString());
 			ps.setString(1, userAcc.getUserFirstName());
 			ps.setString(2, userAcc.getUserLastName());
 			ps.setString(3, userAcc.getUserType());
@@ -37,63 +43,71 @@ public class UserUpdate {
 			return 0;
 		} finally {
 			DBUtil.closePreparedStatement(ps);
-			pool.freeConnection(connection);
+			// pool.freeConnection(connection);
 		}
 
 	}
-	
-	public static UserAccount selectUserForLogin(String loginName,String password,String userType) {
-		ConnectionPool pool = ConnectionPool.getInstance();
-		Connection connection = pool.getConnection();
+
+	public static UserAccount selectUserForLogin(String loginName, String password, String userType) {
+		// ConnectionPool pool = ConnectionPool.getInstance();
+		// Connection connection = pool.getConnection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
-		String query = "SELECT FROM UserAccount"
-				+ "where loginName = ? and password = ? and userType = ?";
+
+		/*
+		 * String query = "SELECT FROM UserAccount " +
+		 * "where loginName = ? and password = ? and userType = ?";
+		 */
+		String query = "Select * from UserAccount";
+
 		try {
+			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			System.out.println("Select query is:" + query);
 			ps = connection.prepareStatement(query);
-            ps.setString(1, loginName);
-            ps.setString(2, password);
-            ps.setString(3, userType);
-            rs = ps.executeQuery();
-            UserAccount userAcc = null;
-            if(rs.next()) {
-            	userAcc = new UserAccount();
-            	userAcc.setUserId(rs.getInt("userId"));
-            	userAcc.setUserFirstName(rs.getString("userFirstName"));
-            	userAcc.setUserLastName(rs.getString("userLastName"));
-            	userAcc.setUserType(rs.getString("userType"));
-            	userAcc.setLoginName(rs.getString("loginName"));
-            	userAcc.setLogin_password(rs.getString("password"));
-            	userAcc.setUserPhoneNumber(Long.parseLong((rs.getString("userPhoneNumber"))));
-            	userAcc.setUserEmailAddress(rs.getString("emailAddress"));
-            }
-            return userAcc;
-		}catch(SQLException e) {
+			/*
+			 * ps.setString(1, loginName); ps.setString(2, password); ps.setString(3,
+			 * userType);
+			 */
+			rs = ps.executeQuery();
+			System.out.println("Result set is :" + rs.getRow());
+			UserAccount userAcc = null;
+			if (rs.next()) {
+				userAcc = new UserAccount();
+				userAcc.setUserId(rs.getInt("userId"));
+				userAcc.setUserFirstName(rs.getString("userFirstName"));
+				userAcc.setUserLastName(rs.getString("userLastName"));
+				userAcc.setUserType(rs.getString("userType"));
+				userAcc.setLoginName(rs.getString("loginName"));
+				userAcc.setLogin_password(rs.getString("password"));
+				userAcc.setUserPhoneNumber(Long.parseLong((rs.getString("userPhoneNumber"))));
+				userAcc.setUserEmailAddress(rs.getString("userEmailAddress"));
+			}
+			return userAcc;
+		} catch (SQLException e) {
 			System.out.println(e);
-            return null;
-		}finally {
+			return null;
+		} finally {
 			DBUtil.closeResultSet(rs);
-            DBUtil.closePreparedStatement(ps);
-            pool.freeConnection(connection);
+			DBUtil.closePreparedStatement(ps);
+			// pool.freeConnection(connection);
 		}
 	}
-	
-	//Made it hashmap instead of arraylist. For each userIdinsert the food truck info.
+
+	// Made it hashmap instead of arraylist. For each userIdinsert the food truck
+	// info.
 	public static int approveVendorRequests(ArrayList vendorLists) {
 		ConnectionPool pool = ConnectionPool.getInstance();
 		Connection connection = pool.getConnection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
-		String query = "UPDATE FoodTruck set foodTruckStatus=?"+ "where foodTruck_id=?";
+
+		String query = "UPDATE FoodTruck set foodTruckStatus=?" + "where foodTruck_id=?";
 		/*
-		 * To add code to iterate the foodtruckstatus to active
-		 * for(FoodTruck fdTruck:vendorLists) {
-			fdTruck = new FoodTruck();
-		}*/ 
-		
+		 * To add code to iterate the foodtruckstatus to active for(FoodTruck
+		 * fdTruck:vendorLists) { fdTruck = new FoodTruck(); }
+		 */
+
 		return 0;
-		
+
 	}
 }
