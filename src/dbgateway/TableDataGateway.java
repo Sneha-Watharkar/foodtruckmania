@@ -8,10 +8,10 @@ import db.UserUpdate;
 public class TableDataGateway {
 	
 	//Adding connection string here. Not reading from context.xml file. Once dev work is complete can check that.
-	public static final String connectionString = "jdbc:sqlserver://uncc-anderson.database.windows.net:1433;"
+	/*public static final String connectionString = "jdbc:sqlserver://uncc-anderson.database.windows.net:1433;"
 			+ "database=FoodTruckMania;" + "user=durga;" + "password=Uncc2017;" + "encrypt=true;"
 			+ "trustServerCertificate=false;" + "hostNameInCertificate=*.database.windows.net;"
-			+ "loginTimeout=30;";
+			+ "loginTimeout=30;";*/
 
 	public static int registerUser(UserAccount userAcc) {
 		int isDataInserted = 0;

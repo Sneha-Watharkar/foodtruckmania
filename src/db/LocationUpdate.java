@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 
 import data.FoodTruck;
 import dbgateway.TableDataGateway;
+import util.ConnectionPool2;
 import util.DBUtil;
 
 public class LocationUpdate {
@@ -19,7 +20,8 @@ public class LocationUpdate {
 		String query = "INSERT INTO FoodTruck (userId, foodTruckName, latitude, longitude, truckTime, foodTruckStatus) "
 				+ "VALUES (?,?,?,?,?,?)";
 		try {
-			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			Connection connection = ConnectionPool2.getConnection();
 			System.out.println(connection.toString());
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());

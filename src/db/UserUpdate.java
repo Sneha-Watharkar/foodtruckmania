@@ -13,6 +13,7 @@ import data.UserAccount;
 import dbgateway.TableDataGateway;
 import util.ConnectionPool;
 import util.DBUtil;
+import util.ConnectionPool2;
 
 public class UserUpdate {
 
@@ -25,7 +26,8 @@ public class UserUpdate {
 		String query = "INSERT INTO UserAccount (userFirstName, userLastName, userType,loginName,password,userPhoneNumber,userEmailAddress) "
 				+ "VALUES (?,?,?,?,?,?,?)";
 		try {
-			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			Connection connection = ConnectionPool2.getConnection();
 			System.out.println(connection.toString());
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());
@@ -55,9 +57,9 @@ public class UserUpdate {
 
 		
 		String query = "SELECT FROM UserAccount " +  "where loginName = ? and password = ?";
-		
 		try {
-			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			Connection connection = ConnectionPool2.getConnection();
 			System.out.println("Select query is:" + query);
 			ps = connection.prepareStatement(query);
 			ps.setString(1, loginName); ps.setString(2, password);
@@ -78,6 +80,9 @@ public class UserUpdate {
 			return userAcc;
 		} catch (SQLException e) {
 			System.out.println(e);
+			return null;
+		} catch(ClassNotFoundException ex){
+			System.out.println(ex);
 			return null;
 		} finally {
 			DBUtil.closeResultSet(rs);
