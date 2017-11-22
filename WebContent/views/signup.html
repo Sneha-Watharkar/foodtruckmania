@@ -18,9 +18,9 @@
 					    <!-- <small id="emailError" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
 					  </div>
 					  <div class="form-group">
-					    <label for="username">Email address</label>
-					    <input type="email" ng-model="username" class="form-control" 
-					    	id="username" aria-describedby="emailError" placeholder="Enter email">
+					    <label for="useremail">Email address</label>
+					    <input type="email" ng-model="useremail" class="form-control" 
+					    	id="useremail" aria-describedby="emailError" placeholder="Enter email">
 					    <!-- <small id="emailError" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
 					  </div>
 					  <div class="form-group">
@@ -41,17 +41,20 @@
 					  <div class="form-group">
 					    <div class="form-check form-check-inline">
 							<label class="form-check-label">
-							    <input class="form-check-input" type="radio" name="userTypeRadio" id="customer" value="customer"> Customer
+							    <input class="form-check-input" type="radio" name="userTypeRadio" id="customer" 
+							    ng-model="userType" value="customer"> Customer
 							</label>
 						</div>
 						<div class="form-check form-check-inline">
 							<label class="form-check-label">
-							    <input class="form-check-input" type="radio" name="userTypeRadio" id="vendor" value="vendor"> Vendor
+							    <input ng-model="userType" class="form-check-input" type="radio" name="userTypeRadio" id="vendor" 
+							    value="vendor"> Vendor
 							</label>
 						</div>
 					  </div>
 					  <div class="form-group">
-					  	<button type="submit" class="btn btn-primary float-right" ng-model="signUpBtn">Register</button>
+					  	<button type="submit" class="btn btn-primary float-right" ng-model="signUpBtn"
+					  	ng-click="registerNewUser()">Register</button>
 					  	<button type="submit" class="btn btn-default float-right" ng-model="cancelBtn" 
 					  	ng-click="goBacktoLoginPage()">Cancel</button>
 					  </div>

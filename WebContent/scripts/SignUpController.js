@@ -6,4 +6,21 @@ mainApp.controller('signUpController', function($scope, $location) {
 		$scope.goBacktoLoginPage = function() {
 			$location.path($scope.rootUrl);
 		}
+		
+		$scope.registerNewUser = function() {
+			if(!($scope.password==$scope.confirmpassword)){
+				console.log("Passwords must match!");
+				return;
+			}
+			$scope.userDetails = {
+					firstname: $scope.firstname,
+					lastname: $scope.lastname,
+					email:$scope.useremail,
+					password:$scope.password,
+					phone:$scope.userPhone,
+					type: $scope.userType		
+			};
+			
+			console.log("User details ",$scope.userDetails);
+		}
     });
