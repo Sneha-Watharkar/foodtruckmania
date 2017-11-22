@@ -45,6 +45,14 @@ public class UserController {
 		userAcc = TableDataGateway.signUpUser(loginName, password, userType);
 	}
 
+	public static UserAccount login(HttpServletRequest request, HttpServletResponse response) {
+		UserAccount userAcc = new UserAccount();
+		String loginName = request.getParameter("email");
+		String password = request.getParameter("password");
+		// Triggers call to the tabledatagateway for verify credentials
+		userAcc = TableDataGateway.loginUser(loginName, password);
+		return userAcc;
+	}
 	/*
 	 * Method for test purpose
 	public static void registerUser() {

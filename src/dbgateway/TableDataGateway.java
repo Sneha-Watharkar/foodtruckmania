@@ -17,14 +17,20 @@ public class TableDataGateway {
 		int isDataInserted = 0;
 		//Delegate call to UserUpdate class for inserting into the dB.
 		isDataInserted = UserUpdate.registerUser(userAcc);
-		userAcc = UserUpdate.selectUserForLogin("newUser", "testPwd1", "Customer");
+		userAcc = UserUpdate.selectUserForLogin("newUser", "testPwd1");
 		return isDataInserted;
 	}
 
 	public static UserAccount signUpUser(String loginName, String password, String userType) {
 		UserAccount userAcc = new UserAccount();
 		//Delegate call to the UserUpdate class to verify user credentials.
-		userAcc = UserUpdate.selectUserForLogin(loginName, password, userType);
+		userAcc = UserUpdate.selectUserForLogin(loginName, password);
+		return userAcc;
+	}
+	public static UserAccount loginUser(String loginName, String password) {
+		UserAccount userAcc = new UserAccount();
+		//Delegate call to the UserUpdate class to verify user credentials.
+		userAcc = UserUpdate.selectUserForLogin(loginName, password);
 		return userAcc;
 	}
 

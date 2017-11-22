@@ -47,26 +47,20 @@ public class UserUpdate {
 
 	}
 
-	public static UserAccount selectUserForLogin(String loginName, String password, String userType) {
+	public static UserAccount selectUserForLogin(String loginName, String password) {
 		// ConnectionPool pool = ConnectionPool.getInstance();
 		// Connection connection = pool.getConnection();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		/*
-		 * String query = "SELECT FROM UserAccount " +
-		 * "where loginName = ? and password = ? and userType = ?";
-		 */
-		String query = "Select * from UserAccount";
-
+		
+		String query = "SELECT FROM UserAccount " +  "where loginName = ? and password = ?";
+		
 		try {
 			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
 			System.out.println("Select query is:" + query);
 			ps = connection.prepareStatement(query);
-			/*
-			 * ps.setString(1, loginName); ps.setString(2, password); ps.setString(3,
-			 * userType);
-			 */
+			ps.setString(1, loginName); ps.setString(2, password);
 			rs = ps.executeQuery();
 			System.out.println("Result set is :" + rs.getRow());
 			UserAccount userAcc = null;

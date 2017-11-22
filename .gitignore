@@ -1,5 +1,5 @@
 *.class
-
+*.class
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -27,6 +27,7 @@ nb-configuration.xml
 .classpath
 .project
 .settings/
+build/
 
 # Intellij
 .idea/
