@@ -6,7 +6,7 @@
     </session-config>
   <servlet>
   	<servlet-name>FoodTruckControllerFacade</servlet-name>
-  	<servlet-class>com.foodTruck.facade.FoodTruckControllerFacade</servlet-class>
+  	<servlet-class>facade.FoodTruckControllerFacade</servlet-class>
   </servlet>
   <servlet-mapping>
   	<servlet-name>FoodTruckControllerFacade</servlet-name>
@@ -26,6 +26,6 @@
   </servlet-mapping>
   
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
 </web-app>
