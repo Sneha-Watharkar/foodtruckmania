@@ -1,6 +1,6 @@
-mainApp.controller('signUpController', function($scope, $location) {
+mainApp.controller('signUpController', function($scope, $location, $http, UserService) {
         // create a message to display in our view
-		$scope.rootUrl = $location.$$absUrl;
+	$scope.rootUrl = $location.$$absUrl.substring(0,$scope.rootUrl.lastIndexOf('/')+1);
 		console.log("Root url",$scope.rootUrl);
 		
 		$scope.goBacktoLoginPage = function() {
@@ -20,6 +20,16 @@ mainApp.controller('signUpController', function($scope, $location) {
 					phone:$scope.userPhone,
 					type: $scope.userType		
 			};
+			
+			var res = $http.post('registerUser', $scope.userDetails);
+			res.success(function(data, status, headers, config) {
+				console.log("Success");
+				$scope.message = data;
+			});
+			res.error(function(data, status, headers, config) {
+				console.log("Failure "+ JSON.stringify({data: data}));
+				/*alert( "failure message: " + JSON.stringify({data: data}));*/
+			});	
 			
 			console.log("User details ",$scope.userDetails);
 		}

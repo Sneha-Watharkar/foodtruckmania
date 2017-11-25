@@ -16,21 +16,16 @@
 
 
 <!-- Including all js files -->
-<script src="scripts/LoginController.js"></script>
-<script src="scripts/SignUpController.js"></script>
-<script src="scripts/HomePageController.js"></script>
-<script src="scripts/LocateTruckController.js"></script>
+<script src="scripts/uicontrollers/LoginController.js"></script>
+<script src="scripts/uicontrollers/SignUpController.js"></script>
+<script src="scripts/uicontrollers/HomePageController.js"></script>
+<script src="scripts/uicontrollers/LocateTruckController.js"></script>
+<script src="scripts/uicontrollers/ManageAlertsController.js"></script>
+<script src="scripts/uiservices/userService.js"></script>
+<script src="scripts/uiservices/foodTruckService.js"></script>
 </head>
 <body ng-controller="mainController">
 	<div ng-view></div>
-	<form action="loginUser?action=login" method="post" class="form-group ">
-		<input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-		<input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-		<input type="submit" value="Log On" class="btn btn-def btn-block">
-	</form>
-	<div class="form-group">
-            <h1 align="center">${requestScope.msg}</h1>
-        </div>
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>

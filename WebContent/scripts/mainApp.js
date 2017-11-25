@@ -21,6 +21,10 @@ var mainApp = angular.module('mainApp', ['ngRoute']);
 	            templateUrl : 'views/homePage.html',
 	            controller  : 'homeController'
 	        })
+	        .when('/manageAlerts', {
+	            templateUrl : 'views/manageAlerts.html',
+	            controller  : 'manageAlertsController'
+	        })
 	        .otherwise({ redirectTo: '/' });
 	    /*$locationProvider.html5Mode(true);*/
 	

@@ -19,7 +19,7 @@ public class FoodTruckControllerFacade extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		System.out.println("Came to face controller");
 		String url = "/index.jsp";
 		
 		HttpSession session = request.getSession();
