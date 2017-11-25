@@ -56,20 +56,14 @@ mainApp.controller('signUpController', function($scope, $location, $http, UserSe
 	             transformRequest: angular.identity,
 	             headers: {'Content-Type': undefined}
 	        })
-	        .success(function (data) {
-	        	console.log("Success");
-				$scope.message = data;
-	        })
-	        .error(function (data, status) {
-	        	console.log("Failure "+ JSON.stringify({data: data}));
-	        });*/
+	       */
 			$http({
 	            method: 'POST',
 	            url: 'registerUser',
 	            headers: {
-	                'Content-Type': undefined
+	                'Content-Type': 'application/json'
 	            },
-	            data:	JSON.stringify({data: $scope.dataTosend}),
+	            data:	JSON.stringify({data: $scope.dataTosend, action:'registerUser'}),
 	            /*transformRequest: function (data, headersGetter) {
 	                var formData = new FormData();
 	                angular.forEach(data, function (value, key) {
@@ -81,6 +75,13 @@ mainApp.controller('signUpController', function($scope, $location, $http, UserSe
 	                return formData;
 	            }*/
 	        })
+	        .success(function (data) {
+	        	console.log("Success");
+				$scope.message = data;
+	        })
+	        .error(function (data, status) {
+	        	console.log("Failure "+ JSON.stringify({data: data}));
+	        });
 	        
 			/*var res = $http.post('registerUser', $scope.userDetails);
 			res.success(function(data, status, headers, config) {
