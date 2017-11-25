@@ -1,0 +1,79 @@
+<div class="container">
+	<div class="row">
+	    <div class="col-9 mx-auto">
+            <div class="card">
+            	<h4 class="card-header card-header-color">Register</h4>
+            	<div class="card-block">
+            		<form id="stepform">
+            		  <h5>Personal details</h5>
+            		  <div class="row">
+	            		  <div class="form-group col-4">
+						    <label for="vendorfirstname">First Name</label>
+						    <input type="text" ng-model="vendorfirstname" class="form-control" 
+						    	id="vendorfirstname" aria-describedby="emailError" placeholder="First Name">
+						    <!-- <small id="emailError" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+						  </div>
+						  <div class="form-group col-4">
+						    <label for="vendorlastname">Last Name</label>
+						    <input type="text" ng-model="vendorlastname" class="form-control" 
+						    	id="vendorlastname" aria-describedby="emailError" placeholder="Last Name">
+						    <!-- <small id="emailError" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+						  </div>
+						  <div class="form-group col-4">
+							 <label for="vendorPhone">Phone Number</label>
+							 <input type="text" class="form-control" ng-model="vendorPhone" 
+							   id="vendorPhone" placeholder="Ex:XXX-XXX-XXXX">
+						  </div>
+						</div>
+						<div class="row">
+							<div class="form-group col-4">
+							    <label for="vendoremail">Email address</label>
+							    <input type="email" ng-model="vendoremail" class="form-control" 
+							    	id="vendoremail" aria-describedby="emailError" placeholder="Enter email">
+							    <!-- <small id="emailError" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+							  </div>
+							  <div class="form-group col-4">
+							    <label for="vendorpassword">Password</label>
+							    <input type="password" class="form-control" ng-model="vendorpassword" id="vendorpassword" 
+							    placeholder="Password">
+							  </div>
+							  <div class="form-group col-4">
+							    <label for="vendorconfirmpassword">Confirm Password</label>
+							    <input type="password" class="form-control" ng-model="vendorconfirmpassword" 
+							    	id="vendorconfirmpassword" placeholder="Confirm Password">
+							  </div>
+						</div>
+					  <h5>Food truck details</h5>
+					  <div class="row">
+						  <div class="form-group col-4">
+						    <label for="truckName">Foodtruck Name</label>
+						    <input type="text" class="form-control" ng-model="truckName" 
+						    	id="truckName" placeholder="Truck name">
+						  </div>
+						  <div class="form-group col-4">
+						    <label for="truckLocation">Select Foodtruck Location</label>
+						    <select ng-model="truckLocation" class="form-control">
+						    	<option value="1">Opp. Student Union</option>
+						    	<option value="2">Richard Stadium</option>
+						    	<option value="3">Grigg Hall</option>
+						    	<option value="4">Portal</option>
+						    	<option value="5">Cato Hall</option>
+						    </select>
+						  </div>
+						  <div class="form-group col-4">
+						    <label for="truckMenu">Upload FoodTruck Menu</label>
+						    <input type="file" file="file" required/>
+						  </div>
+					  </div>
+						  <div class="form-group">
+						  	<button type="submit" class="btn btn-primary float-right" ng-model="signUpBtn"
+						  	ng-click="registerNewUser('vendor')">Register</button>
+						  	<button type="submit" class="btn btn-default float-right" ng-model="cancelBtn" 
+						  	ng-click="goBacktoLoginPage()">Cancel</button>
+						  </div>
+					 </form>  
+				</div>
+           	</div>
+        </div>
+	</div>
+</div>

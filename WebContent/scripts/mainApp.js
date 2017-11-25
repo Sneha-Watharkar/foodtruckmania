@@ -4,7 +4,7 @@ var mainApp = angular.module('mainApp', ['ngRoute']);
 	    $routeProvider
 	        // route for the signup page
 	        .when('/register', {
-	            templateUrl : 'views/signup.html',
+	            templateUrl : 'views/signupCustomer.html',
 	            controller  : 'signUpController'
 	        })
 	
@@ -25,14 +25,11 @@ var mainApp = angular.module('mainApp', ['ngRoute']);
 	            templateUrl : 'views/manageAlerts.html',
 	            controller  : 'manageAlertsController'
 	        })
+	        .when('/vendorRegister', {
+	            templateUrl : 'views/signupVendor.html',
+	            controller  : 'signUpController'
+	        })
 	        .otherwise({ redirectTo: '/' });
-	    /*$locationProvider.html5Mode(true);*/
-	
-	       /* // route for the contact page
-	        .when('/contact', {
-	            templateUrl : 'pages/contact.html',
-	            controller  : 'contactController'
-	        });*/
 	});
 	
     mainApp.controller('mainController', function($scope, $location) {

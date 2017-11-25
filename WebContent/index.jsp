@@ -23,6 +23,7 @@
 <script src="scripts/uicontrollers/ManageAlertsController.js"></script>
 <script src="scripts/uiservices/userService.js"></script>
 <script src="scripts/uiservices/foodTruckService.js"></script>
+<script src="scripts/directives/fileUpload.js"></script>
 </head>
 <body ng-controller="mainController">
 	<div ng-view></div>
