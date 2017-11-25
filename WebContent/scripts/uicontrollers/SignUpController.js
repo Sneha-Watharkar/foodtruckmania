@@ -44,23 +44,17 @@ mainApp.controller('signUpController', function($scope, $location, $http, UserSe
 			}
 			
 			console.log("Details to send ",$scope.dataTosend);
-			$http({
-	            method: 'POST',
-	            url: 'registerUser',
-	            headers: {
-	                'Content-Type': undefined
-	            },
-	            data: $scope.dataTosend,
-	            transformRequest: function (data, headersGetter) {
-	                var formData = new FormData();
-	                angular.forEach(data, function (value, key) {
-	                    formData.append(key, value);
-	                });
+			/*var fd = new FormData();
+	        fd.append('file', $scope.file);
 
-	               /* var headers = headersGetter();
-	                delete headers['Content-Type'];*/
-	                return formData;
-	            }
+	        var info = {
+	            "text":"additional info"
+	        };
+	        fd.append('data', $scope.dataTosend);*/
+
+	       /* $http.post('registerUser', fd, {
+	             transformRequest: angular.identity,
+	             headers: {'Content-Type': undefined}
 	        })
 	        .success(function (data) {
 	        	console.log("Success");
@@ -68,7 +62,26 @@ mainApp.controller('signUpController', function($scope, $location, $http, UserSe
 	        })
 	        .error(function (data, status) {
 	        	console.log("Failure "+ JSON.stringify({data: data}));
-	        });
+	        });*/
+			$http({
+	            method: 'POST',
+	            url: 'registerUser',
+	            headers: {
+	                'Content-Type': undefined
+	            },
+	            data:	JSON.stringify({data: $scope.dataTosend}),
+	            /*transformRequest: function (data, headersGetter) {
+	                var formData = new FormData();
+	                angular.forEach(data, function (value, key) {
+	                    formData.append(key, value);
+	                });
+
+	                var headers = headersGetter();
+	                delete headers['Content-Type'];
+	                return formData;
+	            }*/
+	        })
+	        
 			/*var res = $http.post('registerUser', $scope.userDetails);
 			res.success(function(data, status, headers, config) {
 				
