@@ -16,7 +16,6 @@ public class TableDataGateway {
 	public static int registerUser(UserAccount userAcc) {
 		int isDataInserted = 0;
 		//Delegate call to UserUpdate class for inserting into the dB.
-		System.out.println(userAcc.getUserPhoneNumber());
 		isDataInserted = UserUpdate.registerUser(userAcc);
 		//userAcc = UserUpdate.selectUserForLogin("newUser", "testPwd1");
 		return isDataInserted;
@@ -29,7 +28,6 @@ public class TableDataGateway {
 		userAcc.setLoginName(email);
 		userAcc.setUserType(type);
 		userAcc.setUserPhoneNumber(phone);
-	
 		//Delegate call to the UserUpdate class to verify user credentials.
 		int result = UserUpdate.registerUser(userAcc);
 		System.out.println(result);
