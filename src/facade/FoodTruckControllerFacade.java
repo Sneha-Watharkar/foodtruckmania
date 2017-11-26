@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
@@ -38,18 +39,37 @@ public class FoodTruckControllerFacade extends HttpServlet {
         while ((str = br.readLine()) != null) {
             sb.append(str);
         }
-        
         System.out.println("Request is "+sb.toString());
-        JSONObject jObj = new JSONObject(sb.toString());
-        JSONObject name = jObj.getJSONObject("data");
-        System.out.println("Data is "+name);
+        JSONObject jObj;
+		try {
+			jObj = new JSONObject(sb.toString());
+			JSONObject data = jObj.getJSONObject("data");
+			System.out.println("Data is "+data);	 
+			String action = jObj.getString("action");
+			System.out.println("Action is "+action);
+			switch (action) {
+				case "registerUser":
+					if (UserController.registerUser(request, response,data) == 1){
+						System.out.print("Register is successful");
+						request.setAttribute("msg", "Register is successful");
+					}
+					else{
+						System.out.print("Register failed");
+						request.setAttribute("msg", "Register failed");
+					}
+					break;
+			}
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		getServletContext().getRequestDispatcher(url).forward(request, response);
+       
         
-        /*JsonObject js = gson.toJson(sb.toString());*/
-        /*String name = jObj.getString("name");
- 
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("hello from java. you entered : " + name);*/
+        
+        
         /*JsonParser parser = new JsonParser();
         BufferedReader s = request.getReader();
         

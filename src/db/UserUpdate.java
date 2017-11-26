@@ -26,8 +26,8 @@ public class UserUpdate {
 		String query = "INSERT INTO UserAccount (userFirstName, userLastName, userType,loginName,password,userPhoneNumber,userEmailAddress) "
 				+ "VALUES (?,?,?,?,?,?,?)";
 		try {
-			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
-			Connection connection = ConnectionPool2.getConnection();
+			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			//Connection connection = ConnectionPool2.getConnection();
 			System.out.println(connection.toString());
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());

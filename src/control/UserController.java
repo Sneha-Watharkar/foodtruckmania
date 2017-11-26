@@ -5,23 +5,28 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+
 import data.UserAccount;
 import dbgateway.TableDataGateway;
 
 public class UserController {
 
-	public static int registerUser(HttpServletRequest request, HttpServletResponse response) {
+	public static int registerUser(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
+		System.out.println("Inside register User");
+		JSONObject userJson = data.getJSONObject("userDetails");
 		UserAccount userAcc = new UserAccount();
 
-		userAcc.setUserFirstName(request.getParameter("firstName"));
-		userAcc.setUserLastName(request.getParameter("lastName"));
-		userAcc.setUserType(request.getParameter("userType"));
-		userAcc.setLoginName(request.getParameter("loginName"));
-		userAcc.setLogin_password(request.getParameter("password"));
-		userAcc.setUserPhoneNumber(Long.parseLong(request.getParameter("phoneNumber")));
-		userAcc.setUserEmailAddress(request.getParameter("emailAddress"));
+		userAcc.setUserFirstName(userJson.getString("firstname"));
+		userAcc.setUserLastName(userJson.getString("lastname"));
+		userAcc.setUserType(userJson.getString("type"));
+		userAcc.setLoginName(userJson.getString("email"));
+		userAcc.setLogin_password(userJson.getString("password"));
+		userAcc.setUserPhoneNumber(Long.parseLong(userJson.getString("phone")));
+		userAcc.setUserEmailAddress(userJson.getString("email"));
 
 		int success = TableDataGateway.registerUser(userAcc);
+		
 		return success;
 
 	}
@@ -37,12 +42,15 @@ public class UserController {
 	}
 
 	public static void signUpUser(HttpServletRequest request, HttpServletResponse response) {
-		UserAccount userAcc = new UserAccount();
-		String loginName = request.getParameter("loginName");
-		String password = request.getParameter("password");
-		String userType = request.getParameter("userType");
+		/*
+		String firstName = userJson.getString("firstname");
+		String lastName = userJson.getString("lastname");
+		String email = userJson.getString("email");
+		String password = userJson.getString("password");
+		long phone = Long.parseLong(userJson.getString("phone"));
+		String type = request.getParameter("type");
 		// Triggers call to the tabledatagateway for verify credentials
-		userAcc = TableDataGateway.signUpUser(loginName, password, userType);
+		userAcc = TableDataGateway.signUpUser(firstName, lastName,email,password, type,phone);*/
 	}
 
 	public static UserAccount login(HttpServletRequest request, HttpServletResponse response) {

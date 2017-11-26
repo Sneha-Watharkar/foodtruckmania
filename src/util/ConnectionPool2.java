@@ -1,11 +1,12 @@
 package util;
 
 import java.sql.*;
+import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 public class ConnectionPool2 {
 
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        Class.forName("com.microsoft.jdbc.sqlserver.SQLServerDriver");
         String dbName = "FoodTruckMania";
         String userName = "nikhil";
         String password = "Uncc2017";
