@@ -87,7 +87,6 @@ public class UserUpdate {
 		} finally {
 			DBUtil.closeResultSet(rs);
 			DBUtil.closePreparedStatement(ps);
-			// pool.freeConnection(connection);
 		}
 	}
 

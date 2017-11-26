@@ -21,6 +21,7 @@ import com.google.gson.JsonParser;
 
 import control.LocationController;
 import control.UserController;
+import data.UserAccount;
 import db.UserUpdate;
 
 public class FoodTruckControllerFacade extends HttpServlet {
@@ -58,6 +59,34 @@ public class FoodTruckControllerFacade extends HttpServlet {
 						request.setAttribute("msg", "Register failed");
 					}
 					break;
+				case "login":
+					UserAccount userAcc = UserController.login(request, response,data);
+					if(userAcc != null){
+						if(userAcc.getUserType() == "Customer"){
+							url = "/customer.jsp";
+							request.setAttribute("userType", "Customer");
+							request.setAttribute("user", userAcc);
+							request.setAttribute("msg", "Login Successful");
+						}
+						else if(userAcc.getUserType() == "Vendor"){
+							url = "/vendor.jsp";
+							request.setAttribute("userType", "Vendor");
+							request.setAttribute("user", userAcc);
+							request.setAttribute("msg", "Login Successful");
+						}
+						else{
+							url = "/admin.jsp";
+							request.setAttribute("userType", "Admin");
+							request.setAttribute("user", userAcc);
+							request.setAttribute("msg", "Login Successful");
+						}
+					}
+					else{
+						url = "/login.jsp";
+						request.setAttribute("msg", "Login Failed");
+					}
+					break;
+						
 			}
 			
 		} catch (JSONException e) {

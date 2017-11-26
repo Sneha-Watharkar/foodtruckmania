@@ -41,24 +41,14 @@ public class UserController {
 		return 0;
 	}
 
-	public static void signUpUser(HttpServletRequest request, HttpServletResponse response) {
-		/*
-		String firstName = userJson.getString("firstname");
-		String lastName = userJson.getString("lastname");
-		String email = userJson.getString("email");
-		String password = userJson.getString("password");
-		long phone = Long.parseLong(userJson.getString("phone"));
-		String type = request.getParameter("type");
-		// Triggers call to the tabledatagateway for verify credentials
-		userAcc = TableDataGateway.signUpUser(firstName, lastName,email,password, type,phone);*/
-	}
-
-	public static UserAccount login(HttpServletRequest request, HttpServletResponse response) {
+	public static UserAccount login(HttpServletRequest request, HttpServletResponse response,JSONObject data) {
+		System.out.println("Inside register User");
+		JSONObject userJson = data.getJSONObject("userDetails");
 		UserAccount userAcc = new UserAccount();
-		String loginName = request.getParameter("email");
-		String password = request.getParameter("password");
+		userAcc.setLoginName(userJson.getString("email"));
+		userAcc.setLogin_password(userJson.getString("password"));
 		// Triggers call to the tabledatagateway for verify credentials
-		userAcc = TableDataGateway.loginUser(loginName, password);
+		userAcc = TableDataGateway.loginUser(userAcc.getLoginName(), userAcc.getLogin_password());
 		return userAcc;
 	}
 	/*
