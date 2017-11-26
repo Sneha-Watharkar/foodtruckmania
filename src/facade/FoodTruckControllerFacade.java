@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import control.AlertsController;
 import control.LocationController;
 import control.UserController;
 import data.UserAccount;
@@ -74,19 +75,26 @@ public class FoodTruckControllerFacade extends HttpServlet {
 							request.setAttribute("user", userAcc);
 							request.setAttribute("msg", "Login Successful");
 						}
-						else{
+						else if(userAcc.getUserType() == "Admin"){
 							url = "/admin.jsp";
 							request.setAttribute("userType", "Admin");
 							request.setAttribute("user", userAcc);
 							request.setAttribute("msg", "Login Successful");
 						}
+						else{
+							url = "/login.jsp";
+							request.setAttribute("msg", "Login Failed");
+						}
+						break;
 					}
-					else{
-						url = "/login.jsp";
-						request.setAttribute("msg", "Login Failed");
-					}
+				case "getAlerts":
+					String alerts = AlertsController.getAlerts(request, response, data);
+					request.setAttribute("alerts", alerts);
 					break;
-						
+				case "setAlerts":
+					int success = AlertsController.insertAlerts(request, response, data);
+					request.setAttribute("msg", "Alerts inserted successfully");
+					break;
 			}
 			
 		} catch (JSONException e) {
@@ -96,39 +104,6 @@ public class FoodTruckControllerFacade extends HttpServlet {
 		
 		getServletContext().getRequestDispatcher(url).forward(request, response);
        
-        
-        
-        
-        /*JsonParser parser = new JsonParser();
-        BufferedReader s = request.getReader();
-        
-        JsonObject obj = (JsonObject) parser
-                .parse(request.getReader());*/
-        /*System.out.println("Object is"+obj);*/
-		
-		/*HttpSession session = request.getSession();
-		String action = request.getParameter("action");
-		System.out.println("Action is : " + action);
-		switch (action) {
-		case "registerUser":
-			UserController.registerUser(request, response);
-			break;
-		case "signUp":
-			UserController.signUpUser(request, response);
-			break;
-		case "reserveLocation":
-			// after logging in if user is vendor he/she chooses the location and time of
-			// food truck.
-			// data enters the FoodTruck DB.
-			LocationController.reserveLocation(request, response);
-			break;
-		case "approveVendorRequest":
-			// once vendor chooses time and location admin approves the request.
-//			UserUpdate.approveVendorRequests(request,response)
-			break;
-		}
-
-		getServletContext().getRequestDispatcher(url).forward(request, response);*/
 	}
 
 	@Override

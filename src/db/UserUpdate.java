@@ -89,6 +89,48 @@ public class UserUpdate {
 			DBUtil.closePreparedStatement(ps);
 		}
 	}
+	
+	public static UserAccount getUserAlerts(String loginName) {
+		// ConnectionPool pool = ConnectionPool.getInstance();
+		// Connection connection = pool.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		
+		String query = "SELECT FROM UserAccount " +  "where loginName = ?";
+		try {
+			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			Connection connection = ConnectionPool2.getConnection();
+			System.out.println("Select query is:" + query);
+			ps = connection.prepareStatement(query);
+			ps.setString(1, loginName);
+			rs = ps.executeQuery();
+			System.out.println("Result set is :" + rs.getRow());
+			UserAccount userAcc = null;
+			if (rs.next()) {
+				userAcc = new UserAccount();
+				userAcc.setUserId(rs.getInt("userId"));
+				userAcc.setUserFirstName(rs.getString("userFirstName"));
+				userAcc.setUserLastName(rs.getString("userLastName"));
+				userAcc.setUserType(rs.getString("userType"));
+				userAcc.setLoginName(rs.getString("loginName"));
+				userAcc.setLogin_password(rs.getString("password"));
+				userAcc.setUserPhoneNumber(Long.parseLong((rs.getString("userPhoneNumber"))));
+				userAcc.setUserEmailAddress(rs.getString("userEmailAddress"));
+				userAcc.setUserAlertPreference(rs.getString("userAlertPreference"));
+			}
+			return userAcc;
+		} catch (SQLException e) {
+			System.out.println(e);
+			return null;
+		} catch(ClassNotFoundException ex){
+			System.out.println(ex);
+			return null;
+		} finally {
+			DBUtil.closeResultSet(rs);
+			DBUtil.closePreparedStatement(ps);
+		}
+	}
 
 	// Made it hashmap instead of arraylist. For each userIdinsert the food truck
 	// info.

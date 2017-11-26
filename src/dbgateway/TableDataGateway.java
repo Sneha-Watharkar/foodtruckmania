@@ -45,5 +45,10 @@ public class TableDataGateway {
 		isDataInserted = LocationUpdate.reserveLocation(userId,foodTruck);
 		return isDataInserted;
 	}
+	
+	public static String getUserAlerts(String userId) {
+		UserAccount userAcc = UserUpdate.getUserAlerts(userId);
+		return userAcc.getUserAlertPreference();
+	}
 
 }

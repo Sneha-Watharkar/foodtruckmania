@@ -5,6 +5,7 @@ package data;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * @author Durga
@@ -30,11 +31,7 @@ public class UserAccount implements Serializable {
 	public int getUserId() {
 		return userId;
 	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
+	
 	public String getUserFirstName() {
 		return userFirstName;
 	}
@@ -105,6 +102,11 @@ public class UserAccount implements Serializable {
 
 	public void setFavTrucks(ArrayList favTrucks) {
 		this.favTrucks = favTrucks;
+	}
+
+	public void setUserId(int userid) {
+		this.userId = userid;
+		
 	}
 
 }
