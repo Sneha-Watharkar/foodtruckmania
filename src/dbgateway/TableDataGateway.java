@@ -43,13 +43,16 @@ public class TableDataGateway {
 		return userAcc;
 	}
 	public static int approveRequests(int foodTruckId, String foodTruckStatus) {
-		
 		int success = AdminUpdate.updateFoodTruckStatus(foodTruckId, foodTruckStatus);
 		return success;
 	}
 
 	public static ArrayList<FoodTruck> fetchPendingApprovals() {
 		return AdminUpdate.fetchPendingApprovals();
+	}
+
+	public static int registerFoodTruck(UserAccount userAcc) {
+		return UserUpdate.registerFoodTruck(userAcc);
 	}
 
 }
