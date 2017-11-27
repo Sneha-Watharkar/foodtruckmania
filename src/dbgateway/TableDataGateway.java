@@ -2,6 +2,7 @@ package dbgateway;
 
 import data.FoodTruck;
 import data.UserAccount;
+import db.AdminUpdate;
 import db.LocationUpdate;
 import db.UserUpdate;
 
@@ -58,7 +59,10 @@ public class TableDataGateway {
 		int success = UserUpdate.insertAlerts(userAcc);
 		return 0;
 	}
-	
+	public static int approveRequests(int foodTruckId, String foodTruckStatus) {
+		int success = AdminUpdate.updateFoodTruckStatus(foodTruckId, foodTruckStatus);
+		return success;
+	}
 
 }
 

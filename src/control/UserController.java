@@ -34,7 +34,6 @@ public class UserController {
 			int foodSuccess = UserUpdate.registerFoodTruck(userAcc);
 		}
 		return success;
-
 	}
 
 	public static Map<Integer,String> fetchPendingApprovals() {
@@ -46,10 +45,14 @@ public class UserController {
 		return results;
 	}
 
-	public int approveFoodTruckRequests() {
-		return 0;
+	public static int approveFoodTruckRequests(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
+		JSONObject userJson = data.getJSONObject("userDetails");
+		UserAccount userAcc = new UserAccount();
+		int foodTruckId = userJson.getInt("foodTruckId");
+		String foodTruckStatus = userJson.getString("foodTruckStatus");
+		int success = TableDataGateway.approveRequests(foodTruckId, foodTruckStatus);
+		return success;
 	}
-
 	public static UserAccount login(HttpServletRequest request, HttpServletResponse response,JSONObject data) {
 		System.out.println("Inside register User");
 		JSONObject userJson = data.getJSONObject("userDetails");

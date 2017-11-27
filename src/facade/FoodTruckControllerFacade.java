@@ -23,6 +23,7 @@ import control.AlertsController;
 import control.LocationController;
 import control.UserController;
 import data.UserAccount;
+import db.AdminUpdate;
 import db.UserUpdate;
 
 public class FoodTruckControllerFacade extends HttpServlet {
@@ -93,7 +94,14 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					request.setAttribute("msg", "Returned "+results.values().size()+" records");
 					break;
 				case "approveFoodTrucks":
-					
+					int updateResult = UserController.approveFoodTruckRequests(request, response, data);
+					if(updateResult == 1){
+						request.setAttribute("msg", "Approval Successful");
+					}
+					else{
+						request.setAttribute("msg", "Approval failed");
+					}
+					break;
 				case "setAlerts":
 					int success = AlertsController.insertAlerts(request, response, data);
 					request.setAttribute("msg", "Alerts inserted successfully");

@@ -36,4 +36,23 @@ public class AdminUpdate {
 			DBUtil.closePreparedStatement(ps);
 		}
 	}
+	public static int updateFoodTruckStatus(int foodTruckId, String foodTruckStatus){
+		PreparedStatement ps = null;
+		String query = "UPDATE FoodTruck SET foodTruckStatus = ? WHERE foodTruckId=?";
+		try {
+			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			Connection connection = ConnectionPool2.getConnection();
+			System.out.println(connection.toString());
+			ps = connection.prepareStatement(query);
+			System.out.println(ps.toString());
+			ps.setString(1,foodTruckStatus);
+			ps.setInt(1, foodTruckId);
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+			return 0;
+		} finally {
+			DBUtil.closePreparedStatement(ps);
+		}
+	}
 }
