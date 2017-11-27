@@ -1,13 +1,16 @@
 package control;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import data.FoodTruck;
 import data.UserAccount;
+import db.AdminUpdate;
 import dbgateway.TableDataGateway;
 
 public class UserController {
@@ -31,10 +34,13 @@ public class UserController {
 
 	}
 
-	private ArrayList fetchPendingApprovals() {
-		ArrayList pendingApprovals = new ArrayList();
-		return pendingApprovals;
-
+	public static Map<Integer,String> fetchPendingApprovals() {
+		ArrayList<FoodTruck> pendingApprovals = AdminUpdate.fetchPendingApprovals();
+		Map<Integer,String> results = null;
+		for (FoodTruck userAcc:pendingApprovals){
+			results.put(userAcc.getFoodTruckId(), userAcc.getFoodTruckName());
+		}
+		return results;
 	}
 
 	public int approveFoodTruckRequests() {
@@ -47,7 +53,6 @@ public class UserController {
 		UserAccount userAcc = new UserAccount();
 		userAcc.setLoginName(userJson.getString("email"));
 		userAcc.setLogin_password(userJson.getString("password"));
-		// Triggers call to the tabledatagateway for verify credentials
 		userAcc = TableDataGateway.loginUser(userAcc.getLoginName(), userAcc.getLogin_password());
 		return userAcc;
 	}

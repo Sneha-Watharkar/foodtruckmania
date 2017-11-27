@@ -87,9 +87,17 @@ public class FoodTruckControllerFacade extends HttpServlet {
 						request.setAttribute("msg", "Login Failed");
 					}
 					break;
+				case "fetchPendingApprovals":
+					Map<Integer,String> results = UserController.fetchPendingApprovals();
+					request.setAttribute("results", results);
+					request.setAttribute("msg", "Returned "+results.values().size()+" records");
 				case "setAlerts":
 					int success = AlertsController.insertAlerts(request, response, data);
 					request.setAttribute("msg", "Alerts inserted successfully");
+					break;
+				case "getAlerts":
+					String alerts = AlertsController.getAlerts(request, response, data);
+					request.setAttribute("alerts", alerts);
 					break;
 			}
 
