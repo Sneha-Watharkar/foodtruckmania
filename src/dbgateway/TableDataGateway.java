@@ -1,5 +1,7 @@
 package dbgateway;
 
+import java.util.ArrayList;
+
 import data.FoodTruck;
 import data.UserAccount;
 import db.AdminUpdate;
@@ -40,28 +42,14 @@ public class TableDataGateway {
 		userAcc = UserUpdate.selectUserForLogin(loginName, password);
 		return userAcc;
 	}
-
-	public static int reserveLocation(int userId, FoodTruck foodTruck) {
-		int isDataInserted = 0;
-		isDataInserted = LocationUpdate.reserveLocation(userId,foodTruck);
-		return isDataInserted;
-	}
-	
-	public static String getUserAlerts(String userId) {
-		UserAccount userAcc = UserUpdate.getUserAlerts(userId);
-		return userAcc.getUserAlertPreference();
-	}
-
-	public static int insertAlerts(String loginName, String alerts) {
-		UserAccount userAcc = new UserAccount();
-		userAcc.setLoginName(loginName);
-		userAcc.setUserAlertPreference(alerts);
-		int success = UserUpdate.insertAlerts(userAcc);
-		return 0;
-	}
 	public static int approveRequests(int foodTruckId, String foodTruckStatus) {
+		
 		int success = AdminUpdate.updateFoodTruckStatus(foodTruckId, foodTruckStatus);
 		return success;
+	}
+
+	public static ArrayList<FoodTruck> fetchPendingApprovals() {
+		return AdminUpdate.fetchPendingApprovals();
 	}
 
 }

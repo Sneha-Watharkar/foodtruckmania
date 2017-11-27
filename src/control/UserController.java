@@ -35,16 +35,14 @@ public class UserController {
 		}
 		return success;
 	}
-
 	public static Map<Integer,String> fetchPendingApprovals() {
-		ArrayList<FoodTruck> pendingApprovals = AdminUpdate.fetchPendingApprovals();
+		ArrayList<FoodTruck> pendingApprovals = TableDataGateway.fetchPendingApprovals();
 		Map<Integer,String> results = null;
 		for (FoodTruck userAcc:pendingApprovals){
 			results.put(userAcc.getFoodTruckId(), userAcc.getFoodTruckName());
 		}
 		return results;
 	}
-
 	public static int approveFoodTruckRequests(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
 		JSONObject userJson = data.getJSONObject("userDetails");
 		UserAccount userAcc = new UserAccount();
