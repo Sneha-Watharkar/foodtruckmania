@@ -91,6 +91,9 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					Map<Integer,String> results = UserController.fetchPendingApprovals();
 					request.setAttribute("results", results);
 					request.setAttribute("msg", "Returned "+results.values().size()+" records");
+					break;
+				case "approveFoodTrucks":
+					
 				case "setAlerts":
 					int success = AlertsController.insertAlerts(request, response, data);
 					request.setAttribute("msg", "Alerts inserted successfully");

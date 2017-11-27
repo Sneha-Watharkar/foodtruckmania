@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import data.FoodTruck;
 import data.UserAccount;
 import db.AdminUpdate;
+import db.UserUpdate;
 import dbgateway.TableDataGateway;
 
 public class UserController {
@@ -29,7 +30,9 @@ public class UserController {
 		userAcc.setUserEmailAddress(userJson.getString("email"));
 
 		int success = TableDataGateway.registerUser(userAcc);
-		
+		if(success == 1 && userAcc.getUserType() == "Vendor"){
+			int foodSuccess = UserUpdate.registerFoodTruck(userAcc);
+		}
 		return success;
 
 	}

@@ -48,7 +48,64 @@ public class UserUpdate {
 		}
 
 	}
+	
+	public static int registerFoodTruck(UserAccount userAcc) {
+		/*
+		 * ConnectionPool pool = ConnectionPool.getInstance(); Connection connection =
+		 * pool.getConnection();
+		 */
+		PreparedStatement ps = null;
+		String query = "INSERT INTO foodtruck(userID, foodTruckName,foodTruckStatus) "
+				+ "VALUES (?,?,?)";
+		try {
+			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			//Connection connection = ConnectionPool2.getConnection();
+			System.out.println(connection.toString());
+			ps = connection.prepareStatement(query);
+			System.out.println(ps.toString());
+			ps.setInt(1, getUserID(userAcc).getUserId());
+			ps.setString(2, userAcc.getUserFirstName() + userAcc.getUserLastName());
+			ps.setString(3, "Pending");
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+			return 0;
+		} finally {
+			DBUtil.closePreparedStatement(ps);
+			// pool.freeConnection(connection);
+		}
 
+	}
+	public static UserAccount getUserID(UserAccount userAcc) {
+		/*
+		 * ConnectionPool pool = ConnectionPool.getInstance(); Connection connection =
+		 * pool.getConnection();
+		 */
+		PreparedStatement ps = null;
+		String query = "SELECT userId FROM UserAccount " +  "where loginName = ?";
+		try {
+			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			//Connection connection = ConnectionPool2.getConnection();
+			System.out.println(connection.toString());
+			ps = connection.prepareStatement(query);
+			System.out.println(ps.toString());
+			ps.setString(1, userAcc.getLoginName());
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				userAcc.setUserId(rs.getInt("userId"));
+				return userAcc;
+			}
+			return null;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		} finally {
+			DBUtil.closePreparedStatement(ps);
+			// pool.freeConnection(connection)
+		}
+		
+
+	}
 	public static UserAccount selectUserForLogin(String loginName, String password) {
 		// ConnectionPool pool = ConnectionPool.getInstance();
 		// Connection connection = pool.getConnection();
