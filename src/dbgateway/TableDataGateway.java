@@ -40,7 +40,7 @@ public class TableDataGateway {
 		return userAcc;
 	}
 
-	public static int reserveLocation(String userId, FoodTruck foodTruck) {
+	public static int reserveLocation(int userId, FoodTruck foodTruck) {
 		int isDataInserted = 0;
 		isDataInserted = LocationUpdate.reserveLocation(userId,foodTruck);
 		return isDataInserted;
@@ -51,4 +51,14 @@ public class TableDataGateway {
 		return userAcc.getUserAlertPreference();
 	}
 
+	public static int insertAlerts(String loginName, String alerts) {
+		UserAccount userAcc = new UserAccount();
+		userAcc.setLoginName(loginName);
+		userAcc.setUserAlertPreference(alerts);
+		int success = UserUpdate.insertAlerts(userAcc);
+		return 0;
+	}
+	
+
 }
+

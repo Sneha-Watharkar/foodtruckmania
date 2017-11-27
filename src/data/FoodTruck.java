@@ -84,3 +84,4 @@ public class FoodTruck implements Serializable {
 	}
 
 }
+

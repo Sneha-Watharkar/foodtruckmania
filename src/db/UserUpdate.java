@@ -149,4 +149,9 @@ public class UserUpdate {
 		return 0;
 
 	}
+
+	public static int insertAlerts(UserAccount userAcc) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

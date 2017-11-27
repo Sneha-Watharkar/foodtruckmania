@@ -46,9 +46,9 @@ public class FoodTruckControllerFacade extends HttpServlet {
 		try {
 			jObj = new JSONObject(sb.toString());
 			JSONObject data = jObj.getJSONObject("data");
-			System.out.println("Data is "+data);	 
+			System.out.println("Data is " + data);
 			String action = jObj.getString("action");
-			System.out.println("Action is "+action);
+			System.out.println("Action is " + action);
 			switch (action) {
 				case "registerUser":
 					if (UserController.registerUser(request, response,data) == 1){
@@ -81,29 +81,22 @@ public class FoodTruckControllerFacade extends HttpServlet {
 							request.setAttribute("user", userAcc);
 							request.setAttribute("msg", "Login Successful");
 						}
-						else{
-							url = "/login.jsp";
-							request.setAttribute("msg", "Login Failed");
-						}
-						break;
 					}
-				case "getAlerts":
-					String alerts = AlertsController.getAlerts(request, response, data);
-					request.setAttribute("alerts", alerts);
+					else{
+						url = "/login.jsp";
+						request.setAttribute("msg", "Login Failed");
+					}
 					break;
 				case "setAlerts":
 					int success = AlertsController.insertAlerts(request, response, data);
 					request.setAttribute("msg", "Alerts inserted successfully");
 					break;
 			}
-			
+
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		getServletContext().getRequestDispatcher(url).forward(request, response);
-       
 	}
 
 	@Override
@@ -113,3 +106,4 @@ public class FoodTruckControllerFacade extends HttpServlet {
 	}
 
 }
+

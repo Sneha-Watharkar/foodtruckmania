@@ -10,7 +10,7 @@ import dbgateway.TableDataGateway;
 
 public class AlertsController {
 	public static String getAlerts(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
-		System.out.println("Inside register User");
+		System.out.println("Inside get Alerts");
 		JSONObject userJson = data.getJSONObject("userDetails");
 
 		String loginName = userJson.getString("email");
@@ -21,19 +21,13 @@ public class AlertsController {
 
 	}
 	public static int insertAlerts(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
-		System.out.println("Inside register User");
+		System.out.println("Inside insert alerts");
 		JSONObject userJson = data.getJSONObject("userDetails");
-		UserAccount userAcc = new UserAccount();
 
-		userAcc.setUserFirstName(userJson.getString("firstname"));
-		userAcc.setUserLastName(userJson.getString("lastname"));
-		userAcc.setUserType(userJson.getString("type"));
-		userAcc.setLoginName(userJson.getString("email"));
-		userAcc.setLogin_password(userJson.getString("password"));
-		userAcc.setUserPhoneNumber(Long.parseLong(userJson.getString("phone")));
-		userAcc.setUserEmailAddress(userJson.getString("email"));
+		String loginName = userJson.getString("email");
+		String alerts = userJson.getString("userAlertPreference");
 
-		int success = TableDataGateway.registerUser(userAcc);
+		int success = TableDataGateway.insertAlerts(loginName,alerts);
 		
 		return success;
 

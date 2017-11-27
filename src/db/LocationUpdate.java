@@ -11,7 +11,7 @@ import util.DBUtil;
 
 public class LocationUpdate {
 
-	public static int reserveLocation(String userId, FoodTruck foodTruck) {
+	public static int reserveLocation(int userId, FoodTruck foodTruck) {
 		/*
 		 * ConnectionPool pool = ConnectionPool.getInstance(); Connection connection =
 		 * pool.getConnection();
@@ -25,11 +25,11 @@ public class LocationUpdate {
 			System.out.println(connection.toString());
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());
-			ps.setString(1, userId);
+			ps.setInt(1, userId);
 			ps.setString(2, foodTruck.getFoodTruckName());
 			ps.setString(3, String.valueOf(foodTruck.getLatitude()));
 			ps.setString(4, String.valueOf(foodTruck.getLongitude()));
-			// ps.setString(5, foodTruck.getFoodTruckTime());
+			ps.setString(5, String.valueOf(foodTruck.getFoodTruckTime()));
 			ps.setString(6, foodTruck.getFoodTruckStatus());
 			return ps.executeUpdate();
 		} catch (Exception e) {
@@ -43,3 +43,4 @@ public class LocationUpdate {
 	}
 
 }
+

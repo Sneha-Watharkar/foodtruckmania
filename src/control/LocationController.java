@@ -1,8 +1,5 @@
 package control;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,24 +15,43 @@ public class LocationController {
 	public static int reserveLocation(HttpServletRequest request, HttpServletResponse response) {
 		FoodTruck foodTruck = new FoodTruck();
 
-		String userId = request.getParameter("emailAddress");
-		foodTruck.setFoodTruckName(request.getParameter("foodTruckName"));
-		foodTruck.setFoodTruckLocation(request.getParameter("location"));
-		// foodTruck.setFoodTruckTime(Date.parse((request.getParameter("dateTime")));
-		foodTruck.setLatitude(Float.valueOf(request.getParameter("latitude")));
-		foodTruck.setLongitude(Float.valueOf(request.getParameter("longitude")));
+		UserAccount userAcc = (UserAccount) request.getAttribute("user");
+		JSONObject truckJson = data.getJSONObject("truckDetails");
+		foodTruck.setFoodTruckName(truckJson.getString("firstname"));
+		int userId = userAcc.getUserId();
+		foodTruck.setFoodTruckLocation(truckJson.getString("truckLocation"));
+		convertLocationToCoordinates(foodTruck);
+		foodTruck.setFoodTruckTime(truckJson.getString("dateTime"));
 		foodTruck.setFoodTruckStatus(STATUS_PENDING);
 		int dataInserted = TableDataGateway.reserveLocation(userId, foodTruck);
 		return dataInserted;
 	}
 
-	private ArrayList[] convertLocationToCoordinates() {
-		ArrayList[] locCoordinates = new ArrayList[2];
-		return locCoordinates;
-	}
+	private static void convertLocationToCoordinates(FoodTruck foodTruck) {
+		if (foodTruck.getFoodTruckLocation().equals("Opp. Student Union")) {
+			foodTruck.setLatitude((float) 35.3069394);
+			foodTruck.setLongitude((float) -80.7354401);
+		} else if (foodTruck.getFoodTruckLocation().equals("Richard Stadium")) {
+			foodTruck.setLatitude((float) 35.306703);
+			foodTruck.setLongitude((float) -80.730515);
 
-	public int reserveTimeSlot(int foodTruckId, Date timeslot) {
-		return 0;
+		} else if (foodTruck.getFoodTruckLocation().equals("Grigg Hall")) {
+			foodTruck.setLatitude((float) 35.304362);
+			foodTruck.setLongitude((float) -80.732019);
+
+		} else if (foodTruck.getFoodTruckLocation().equals("Portal")) {
+			foodTruck.setLatitude((float) 35.306667);
+			foodTruck.setLongitude((float) -80.735256);
+
+		} else if (foodTruck.getFoodTruckLocation().equals("Cato Hall")) {
+			foodTruck.setLatitude((float) 35.307886);
+			foodTruck.setLongitude((float) -80.733716);
+
+		} else {
+			foodTruck.setLatitude((float) 35.307400);
+			foodTruck.setLongitude((float) -80.724969);
+		}
+
 	}
 
 	public void locateTruck(int userId, int foodTruckId) {
@@ -43,3 +59,4 @@ public class LocationController {
 	}
 
 }
+
