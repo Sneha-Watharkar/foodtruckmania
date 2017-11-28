@@ -32,5 +32,15 @@ public class AlertsController {
 		return success;
 
 	}
+	/*
+	 * User selects any specific foodtruck and sets up as a favorite.Triggers call to TableDataGateway.
+	 */
+	public static int updateUserFav(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
+		JSONObject userFavJson = data.getJSONObject("userFav");
+		int userId = userFavJson.getInt("userId");
+		int foodTruckId = userFavJson.getInt("foodTruckId");
+		int favUpdate = TableDataGateway.updateUserFav(userId,foodTruckId);
+		return favUpdate;
+	}
 	
 }

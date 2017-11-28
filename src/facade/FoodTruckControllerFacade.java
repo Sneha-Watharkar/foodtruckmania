@@ -135,6 +135,15 @@ public class FoodTruckControllerFacade extends HttpServlet {
 				case "getFeedback":
 					ArrayList<FoodTruckRating> ratingList = RateController.getFeedback(request, response, data);
 					request.setAttribute("ratingLists", ratingList);
+					break;
+				case "setUserFavorites":
+					int favInsert = AlertsController.updateUserFav(request,response,data);
+					if(favInsert == 1) {
+						request.setAttribute("msg", "Customer favorite updated");
+					}else {
+						request.setAttribute("msg", "Unable to save customer favorite");
+					}
+					break;
 			}
 
 		} catch (JSONException e) {

@@ -6,6 +6,7 @@ import data.FoodTruck;
 import data.FoodTruckRating;
 import data.UserAccount;
 import db.AdminUpdate;
+import db.AlertsUpdate;
 import db.LocationUpdate;
 import db.RateUpdate;
 import db.UserUpdate;
@@ -94,6 +95,15 @@ public class TableDataGateway {
 		ArrayList<FoodTruckRating> ratings = new ArrayList<FoodTruckRating>();
 		ratings = RateUpdate.getFeedback(foodTruckId);
 		return ratings;
+	}
+	
+	/*
+	 * AlertUpdate class will be called upon to insert the user favorite truck into the DB.
+	 */
+	public static int updateUserFav(int userId, int foodTruckId) {
+		int isDataInserted = 0;
+		isDataInserted = AlertsUpdate.updateUserFavorite(userId,foodTruckId);
+		return isDataInserted;
 	}
 
 
