@@ -207,8 +207,23 @@ public class UserUpdate {
 
 	}
 
-	public static int insertAlerts(UserAccount userAcc) {
-		// TODO Auto-generated method stub
-		return 0;
+	public static int updateAlerts(UserAccount userAcc) {
+		PreparedStatement ps = null;
+		String query = "UPDATE UserAccount SET userAlertPreference = ? WHERE userID=?";
+		try {
+			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			Connection connection = ConnectionPool2.getConnection();
+			System.out.println(connection.toString());
+			ps = connection.prepareStatement(query);
+			System.out.println(ps.toString());
+			ps.setString(1,userAcc.getUserAlertPreference());
+			ps.setInt(1, getUserID(userAcc).getUserId());
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+			return 0;
+		} finally {
+			DBUtil.closePreparedStatement(ps);
+		}
 	}
 }

@@ -27,7 +27,7 @@ public class AlertsController {
 		String loginName = userJson.getString("email");
 		String alerts = userJson.getString("userAlertPreference");
 
-		int success = TableDataGateway.insertAlerts(loginName,alerts);
+		int success = TableDataGateway.updateAlerts(loginName,alerts);
 		
 		return success;
 

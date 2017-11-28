@@ -15,13 +15,11 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import control.AlertsController;
 import control.LocationController;
 import control.UserController;
+import data.FoodTruck;
 import data.UserAccount;
 import db.AdminUpdate;
 import db.UserUpdate;
@@ -35,7 +33,6 @@ public class FoodTruckControllerFacade extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("Came to face controller");
 		String url = "/index.jsp";
-		Gson gson = new Gson();
 		StringBuilder sb = new StringBuilder();
         BufferedReader br = request.getReader();
         String str = null;
@@ -109,6 +106,20 @@ public class FoodTruckControllerFacade extends HttpServlet {
 				case "getAlerts":
 					String alerts = AlertsController.getAlerts(request, response, data);
 					request.setAttribute("alerts", alerts);
+					break;
+				case "reserveLocation":
+					int locationUpdate = LocationController.reserveLocation(request, response, data);
+					if(locationUpdate == 1) {
+						request.setAttribute("msg", "Food Truck Location updated");
+					}else {
+						request.setAttribute("msg", "Unable to save truck location");
+					}
+					break;
+				case "locateTruck":
+					FoodTruck foodTruck = LocationController.locateTruck(request, response, data);
+					request.setAttribute("msg", "Food Truck Location found");
+					request.setAttribute("latitude", foodTruck.getLatitude());
+					request.setAttribute("longitude", foodTruck.getLongitude());
 					break;
 			}
 

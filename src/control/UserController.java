@@ -31,7 +31,7 @@ public class UserController {
 
 		int success = TableDataGateway.registerUser(userAcc);
 		if(success == 1 && userAcc.getUserType() == "Vendor"){
-			int foodSuccess = UserUpdate.registerFoodTruck(userAcc);
+			int foodSuccess = TableDataGateway.registerFoodTruck(userAcc);
 		}
 		return success;
 	}
