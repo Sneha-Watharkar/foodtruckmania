@@ -55,5 +55,16 @@ public class TableDataGateway {
 		return UserUpdate.registerFoodTruck(userAcc);
 	}
 
+	public static int reserveLocation(int userId, FoodTruck foodTruck) {
+		int isDataInserted = 0;
+		isDataInserted = LocationUpdate.reserveLocation(userId,foodTruck);
+		return isDataInserted;
+	}
+
+	public static FoodTruck locateTruck(FoodTruck foodTruck) {
+		LocationUpdate.locateTruck(foodTruck);
+		return foodTruck;
+	}
+
 }
 

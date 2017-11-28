@@ -13,7 +13,7 @@ public class FoodTruck implements Serializable {
 	private int foodTruckId;
 	private String foodTruckName;
 	private String foodTruckLocation;
-	private Date foodTruckTime;
+	private String foodTruckTime;
 	private Float latitude;
 	private Float longitude;
 	private String foodTruckMenu;
@@ -43,11 +43,11 @@ public class FoodTruck implements Serializable {
 		this.foodTruckLocation = foodTruckLocation;
 	}
 
-	public Date getFoodTruckTime() {
+	public String getFoodTruckTime() {
 		return foodTruckTime;
 	}
 
-	public void setFoodTruckTime(Date foodTruckTime) {
+	public void setFoodTruckTime(String foodTruckTime) {
 		this.foodTruckTime = foodTruckTime;
 	}
 

@@ -3,6 +3,7 @@ package db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import data.FoodTruck;
 import dbgateway.TableDataGateway;
@@ -39,6 +40,32 @@ public class LocationUpdate {
 			DBUtil.closePreparedStatement(ps);
 			// pool.freeConnection(connection);
 		}
+
+	}
+
+	/*
+	 * Returns coordinates for any food truck.
+	 */
+	public static FoodTruck locateTruck(FoodTruck foodTruck) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = "SELECT FROM FoodTruck (foodTruckId, foodTruckName)"
+				+ "where  foodTruckId = ? and foodTruckName = ?";
+		try {
+			Connection connection = ConnectionPool2.getConnection();
+			ps = connection.prepareStatement(query);
+			ps.setInt(1, foodTruck.getFoodTruckId()); 
+			ps.setString(2, foodTruck.getFoodTruckName());
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				foodTruck.setFoodTruckLocation(rs.getString("foodTruckLocation"));
+				foodTruck.setLatitude(rs.getFloat("latitude"));
+				foodTruck.setLongitude(rs.getFloat("longitude"));
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return foodTruck;
 
 	}
 
