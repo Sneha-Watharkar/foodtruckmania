@@ -2,6 +2,7 @@ package facade;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,8 +19,10 @@ import org.json.JSONObject;
 
 import control.AlertsController;
 import control.LocationController;
+import control.RateController;
 import control.UserController;
 import data.FoodTruck;
+import data.FoodTruckRating;
 import data.UserAccount;
 import db.AdminUpdate;
 import db.UserUpdate;
@@ -121,6 +124,17 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					request.setAttribute("latitude", foodTruck.getLatitude());
 					request.setAttribute("longitude", foodTruck.getLongitude());
 					break;
+				case "rateTruck":
+					int rateUpdate = RateController.rateTruck(request,response,data);
+					if(rateUpdate == 1) {
+						request.setAttribute("msg", "Customer review complete");
+					}else {
+						request.setAttribute("msg", "Unable to save customer review");
+					}
+					break;
+				case "getFeedback":
+					ArrayList<FoodTruckRating> ratingList = RateController.getFeedback(request, response, data);
+					request.setAttribute("ratingLists", ratingList);
 			}
 
 		} catch (JSONException e) {

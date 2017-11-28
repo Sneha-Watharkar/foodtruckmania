@@ -3,9 +3,11 @@ package dbgateway;
 import java.util.ArrayList;
 
 import data.FoodTruck;
+import data.FoodTruckRating;
 import data.UserAccount;
 import db.AdminUpdate;
 import db.LocationUpdate;
+import db.RateUpdate;
 import db.UserUpdate;
 
 public class TableDataGateway {
@@ -79,6 +81,21 @@ public class TableDataGateway {
 		int success = UserUpdate.updateAlerts(userAcc);
 		return success;
 	}
+
+	public static int rateTruck(int userId, FoodTruckRating ratingObj) {
+		int rateInsert = RateUpdate.rateTruck(userId,ratingObj);
+		return rateInsert;
+	}
+	
+	/*
+	 * This method will retrieve all the ratings for each of the food trucks
+	 */
+	public static ArrayList<FoodTruckRating> getFeedback(int foodTruckId) {
+		ArrayList<FoodTruckRating> ratings = new ArrayList<FoodTruckRating>();
+		ratings = RateUpdate.getFeedback(foodTruckId);
+		return ratings;
+	}
+
 
 }
 
