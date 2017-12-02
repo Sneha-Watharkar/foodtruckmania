@@ -29,6 +29,10 @@ var mainApp = angular.module('mainApp', ['ngRoute']);
 	            templateUrl : 'views/signupVendor.html',
 	            controller  : 'signUpController'
 	        })
+	        .when('/rateFoodTruck', {
+	            templateUrl : 'views/rateFoodTruck.html',
+	            controller  : 'rateFoodTruckController'
+	        })
 	        .otherwise({ redirectTo: '/' });
 	});
 	

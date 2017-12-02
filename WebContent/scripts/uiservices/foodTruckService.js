@@ -25,4 +25,8 @@ mainApp.service('FoodTruckService', function($http) {
 		           this.errors = data;
 		    });
     }
+    
+    this.rateFoodTruck = function () {
+    	
+    }
 });

@@ -5,6 +5,7 @@ mainApp.controller('loginController', function($scope, $location, $rootScope, $w
         
         $scope.loginUser = function(username,password) {
         	authenticatedUser = UserService.checkForUserExistence($scope.username);
+        	console.log(authenticatedUser," Details");
         	if(authenticatedUser) {
         		if(authenticatedUser.password == password){
         			console.log("Login Success");

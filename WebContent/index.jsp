@@ -21,6 +21,7 @@
 <script src="scripts/uicontrollers/HomePageController.js"></script>
 <script src="scripts/uicontrollers/LocateTruckController.js"></script>
 <script src="scripts/uicontrollers/ManageAlertsController.js"></script>
+<script src="scripts/uicontrollers/RateFoodTruckController.js"></script>
 <script src="scripts/uiservices/userService.js"></script>
 <script src="scripts/uiservices/foodTruckService.js"></script>
 <script src="scripts/directives/fileUpload.js"></script>

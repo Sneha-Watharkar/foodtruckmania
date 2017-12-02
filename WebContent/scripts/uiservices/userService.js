@@ -1,9 +1,23 @@
 mainApp.service('UserService', function($http) {
-    this.checkForUserExistence = function () {
-        
+    this.checkForUserExistence = function (userName) {
+    	$http({
+            method: 'POST',
+            url: 'login',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data:	JSON.stringify({data: userName, action:'login'})
+        })
+        .success(function (data) {
+        	console.log("Success", data);
+        	return data;
+        })
+        .error(function (data, status) {
+        	console.log("Failure "+ JSON.stringify({data: data}));
+        	return data;
+        });
     	
     	
-    	return x.toString(16);
     }
     
     this.updateUserAlerts = function (userAlerts) {

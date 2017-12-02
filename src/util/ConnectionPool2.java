@@ -1,7 +1,7 @@
 package util;
 
 import java.sql.*;
-import com.microsoft.sqlserver.jdbc.SQLServerDriver;
+//import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 public class ConnectionPool2 {
 
