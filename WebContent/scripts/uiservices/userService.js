@@ -2,7 +2,7 @@ mainApp.service('UserService', function($http) {
     this.checkForUserExistence = function (userName) {
     	$http({
             method: 'POST',
-            url: 'login',
+            url: 'loginUser',
             headers: {
                 'Content-Type': 'application/json'
             },
