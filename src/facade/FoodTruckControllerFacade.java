@@ -64,28 +64,14 @@ public class FoodTruckControllerFacade extends HttpServlet {
 				case "login":
 					UserAccount userAcc = UserController.login(request, response,data);
 					if(userAcc != null){
-						if(userAcc.getUserType() == "Customer"){
-							url = "/customer.jsp";
-							request.setAttribute("userType", "Customer");
 							request.setAttribute("user", userAcc);
 							request.setAttribute("msg", "Login Successful");
+							request.setAttribute("error", null);
 						}
-						else if(userAcc.getUserType() == "Vendor"){
-							url = "/vendor.jsp";
-							request.setAttribute("userType", "Vendor");
-							request.setAttribute("user", userAcc);
-							request.setAttribute("msg", "Login Successful");
-						}
-						else if(userAcc.getUserType() == "Admin"){
-							url = "/admin.jsp";
-							request.setAttribute("userType", "Admin");
-							request.setAttribute("user", userAcc);
-							request.setAttribute("msg", "Login Successful");
-						}
-					}
 					else{
-						url = "/login.jsp";
+						//url = "/login.jsp";
 						request.setAttribute("msg", "Login Failed");
+						request.setAttribute("error", "UserName or Password is wrong");
 					}
 					break;
 				case "fetchPendingApprovals":
