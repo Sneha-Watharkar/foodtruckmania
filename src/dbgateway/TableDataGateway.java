@@ -41,6 +41,7 @@ public class TableDataGateway {
 	}
 	public static UserAccount loginUser(String loginName, String password) {
 		UserAccount userAcc = new UserAccount();
+		System.out.println("user details "+loginName+" password "+password);
 		//Delegate call to the UserUpdate class to verify user credentials.
 		userAcc = UserUpdate.selectUserForLogin(loginName, password);
 		return userAcc;

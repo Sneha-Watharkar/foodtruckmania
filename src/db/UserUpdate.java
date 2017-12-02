@@ -26,8 +26,8 @@ public class UserUpdate {
 		String query = "INSERT INTO UserAccount (userFirstName, userLastName, userType,loginName,password,userPhoneNumber,userEmailAddress) "
 				+ "VALUES (?,?,?,?,?,?,?)";
 		try {
-			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
-			//Connection connection = ConnectionPool2.getConnection();
+			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			Connection connection = ConnectionPool2.getConnection();
 			System.out.println(connection.toString());
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());
@@ -58,8 +58,8 @@ public class UserUpdate {
 		String query = "INSERT INTO foodtruck(userID, foodTruckName,foodTruckStatus) "
 				+ "VALUES (?,?,?)";
 		try {
-			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
-			//Connection connection = ConnectionPool2.getConnection();
+			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			Connection connection = ConnectionPool2.getConnection();
 			System.out.println(connection.toString());
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());
@@ -76,6 +76,46 @@ public class UserUpdate {
 		}
 
 	}
+	
+	public static ArrayList<FoodTruck> getAllFoodTrucks(UserAccount userAcc) {
+		/*
+		 * ConnectionPool pool = ConnectionPool.getInstance(); Connection connection =
+		 * pool.getConnection();
+		 */
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String query = "Select * FROM foodtruck WHERE";
+		try {
+			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			Connection connection = ConnectionPool2.getConnection();
+			System.out.println(connection.toString());
+			ps = connection.prepareStatement(query);
+			System.out.println(ps.toString());
+			rs = ps.executeQuery();
+			System.out.println("Result set is :" + rs.getRow());
+			ArrayList<FoodTruck> foodTruckList = new ArrayList<FoodTruck>();
+			if (rs.next()) {
+				FoodTruck truck = new FoodTruck();
+				truck.setFoodTruckId(rs.getInt("foodTruckId"));
+				truck.setFoodTruckName(rs.getString("foodtruckName"));
+				truck.setLatitude(rs.getFloat("latitude"));
+				truck.setLongitude(rs.getFloat("truckTime"));
+				truck.setFoodTruckMenu(rs.getString("foodTruckMenu"));
+				truck.setFoodTruckStatus(rs.getString("foodTruckStatus"));
+				foodTruckList.add(truck);
+			}
+			return foodTruckList;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		} finally {
+			DBUtil.closePreparedStatement(ps);
+			// pool.freeConnection(connection);
+		}
+
+	}
+	
 	public static UserAccount getUserID(UserAccount userAcc) {
 		/*
 		 * ConnectionPool pool = ConnectionPool.getInstance(); Connection connection =
@@ -113,13 +153,14 @@ public class UserUpdate {
 		ResultSet rs = null;
 
 		
-		String query = "SELECT FROM UserAccount " +  "where loginName = ? and password = ?";
+		String query = "SELECT * FROM UserAccount WHERE loginName = ? AND Password = ?";
 		try {
-			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
-			Connection connection = ConnectionPool2.getConnection();
+			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			//Connection connection = ConnectionPool2.getConnection();
 			System.out.println("Select query is:" + query);
 			ps = connection.prepareStatement(query);
-			ps.setString(1, loginName); ps.setString(2, password);
+			ps.setString(1, loginName); 
+			ps.setString(2, password);
 			rs = ps.executeQuery();
 			System.out.println("Result set is :" + rs.getRow());
 			UserAccount userAcc = null;
@@ -137,9 +178,6 @@ public class UserUpdate {
 			return userAcc;
 		} catch (SQLException e) {
 			System.out.println(e);
-			return null;
-		} catch(ClassNotFoundException ex){
-			System.out.println(ex);
 			return null;
 		} finally {
 			DBUtil.closeResultSet(rs);

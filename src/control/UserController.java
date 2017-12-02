@@ -52,12 +52,12 @@ public class UserController {
 		return success;
 	}
 	public static UserAccount login(HttpServletRequest request, HttpServletResponse response,JSONObject data) {
-		System.out.println("Inside register User");
-		JSONObject userJson = data.getJSONObject("userDetails");
+		System.out.println("Inside Login User");
 		UserAccount userAcc = new UserAccount();
-		userAcc.setLoginName(userJson.getString("email"));
-		userAcc.setLogin_password(userJson.getString("password"));
+		userAcc.setLoginName(data.getString("name"));
+		userAcc.setLogin_password(data.getString("password"));
 		userAcc = TableDataGateway.loginUser(userAcc.getLoginName(), userAcc.getLogin_password());
+		System.out.println("User Details of login: LoginName: " + userAcc.getLoginName() + "FirstName: "+ userAcc.getUserFirstName() + "Last Name: " + userAcc.getUserLastName());
 		return userAcc;
 	}
 	/*
