@@ -76,6 +76,46 @@ public class UserUpdate {
 		}
 
 	}
+	
+	public static ArrayList<FoodTruck> getAllFoodTrucks(UserAccount userAcc) {
+		/*
+		 * ConnectionPool pool = ConnectionPool.getInstance(); Connection connection =
+		 * pool.getConnection();
+		 */
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String query = "Select * FROM foodtruck WHERE";
+		try {
+			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			Connection connection = ConnectionPool2.getConnection();
+			System.out.println(connection.toString());
+			ps = connection.prepareStatement(query);
+			System.out.println(ps.toString());
+			rs = ps.executeQuery();
+			System.out.println("Result set is :" + rs.getRow());
+			ArrayList<FoodTruck> foodTruckList = new ArrayList<FoodTruck>();
+			if (rs.next()) {
+				FoodTruck truck = new FoodTruck();
+				truck.setFoodTruckId(rs.getInt("foodTruckId"));
+				truck.setFoodTruckName(rs.getString("foodtruckName"));
+				truck.setLatitude(rs.getFloat("latitude"));
+				truck.setLongitude(rs.getFloat("truckTime"));
+				truck.setFoodTruckMenu(rs.getString("foodTruckMenu"));
+				truck.setFoodTruckStatus(rs.getString("foodTruckStatus"));
+				foodTruckList.add(truck);
+			}
+			return foodTruckList;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		} finally {
+			DBUtil.closePreparedStatement(ps);
+			// pool.freeConnection(connection);
+		}
+
+	}
+	
 	public static UserAccount getUserID(UserAccount userAcc) {
 		/*
 		 * ConnectionPool pool = ConnectionPool.getInstance(); Connection connection =
