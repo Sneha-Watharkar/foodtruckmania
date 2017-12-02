@@ -4,7 +4,11 @@ mainApp.controller('loginController', function($scope, $location, $rootScope, $w
         var authenticatedUser = null;
         
         $scope.loginUser = function(username,password) {
-        	authenticatedUser = UserService.checkForUserExistence($scope.username);
+        	var user = {
+        			name:$scope.username,
+        			password:$scope.password
+        	};
+        	authenticatedUser = UserService.checkForUserExistence(user);
         	console.log(authenticatedUser," Details");
         	if(authenticatedUser) {
         		if(authenticatedUser.password == password){
