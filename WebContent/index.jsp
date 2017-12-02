@@ -5,6 +5,7 @@
 
 <title>Food truck mania</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 <!-- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
 <!-- <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/jquery-3.2.1.min.js"></script> -->
@@ -25,6 +26,7 @@
 <script src="scripts/uiservices/userService.js"></script>
 <script src="scripts/uiservices/foodTruckService.js"></script>
 <script src="scripts/directives/fileUpload.js"></script>
+<script src="scripts/directives/starRating.js"></script>
 </head>
 <body ng-controller="mainController">
 	<div ng-view></div>

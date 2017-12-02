@@ -31,4 +31,8 @@
   	<servlet-name>FoodTruckControllerFacade</servlet-name>
   	<url-pattern>/reserveLocation</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>FoodTruckControllerFacade</servlet-name>
+  	<url-pattern>/rateTruck</url-pattern>
+  </servlet-mapping>
 </web-app>

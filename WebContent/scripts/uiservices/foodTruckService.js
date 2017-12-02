@@ -26,7 +26,22 @@ mainApp.service('FoodTruckService', function($http) {
 		    });
     }
     
-    this.rateFoodTruck = function () {
-    	
+    this.rateFoodTruck = function (ratingObj) {
+    	$http({
+            method: 'POST',
+            url: 'rateTruck',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data:	JSON.stringify({data: ratingObj, action:'rating'})
+        })
+        .success(function (data) {
+        	console.log("Success", data);
+        	return data;
+        })
+        .error(function (data, status) {
+        	console.log("Failure "+ JSON.stringify({data: data}));
+        	return data;
+        });
     }
 });
