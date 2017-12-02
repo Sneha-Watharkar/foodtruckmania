@@ -44,4 +44,23 @@ mainApp.service('FoodTruckService', function($http) {
         	return data;
         });
     }
+    
+    this.reserveLocation =  function (locationObj) {
+    	$http({
+            method: 'POST',
+            url: 'reserveLocation',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data:	JSON.stringify({data: locationObj, action:'reserveLocation'})
+        })
+        .success(function (data) {
+        	console.log("Success", data);
+        	return data;
+        })
+        .error(function (data, status) {
+        	console.log("Failure "+ JSON.stringify({data: data}));
+        	return data;
+        });
+    }
 });

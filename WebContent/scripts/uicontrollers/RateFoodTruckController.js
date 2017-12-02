@@ -44,4 +44,8 @@ mainApp.controller('rateFoodTruckController', function($scope, $location, $rootS
 				
 			}
 		};
+		
+		$scope.setAsActive = function (path) {
+			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
+		}
 });

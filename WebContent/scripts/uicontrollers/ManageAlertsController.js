@@ -13,4 +13,8 @@ mainApp.controller('manageAlertsController', function($scope, $location, $rootSc
         	
         	//var res = UserService.updateUserAlerts($scope.updatingAlertParam);
         }
+        
+        $scope.setAsActive = function (path) {
+			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
+		}
 });

@@ -31,4 +31,8 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
         },{
         	truckId: 5
         }];
+        
+        $scope.setAsActive = function (path) {
+			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
+		}
 });
