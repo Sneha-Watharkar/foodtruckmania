@@ -20,15 +20,18 @@ public class LocationController {
 	public static int reserveLocation(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
 		FoodTruck foodTruck = new FoodTruck();
 
-		int userId = 28;
+		int userId = data.getInt("userid");
 		foodTruck.setFoodTruckLocation(String.valueOf(data.getInt("location")));
 		convertLocationToCoordinates(foodTruck);
 		JSONArray daysJSon = data.getJSONArray("days");
+		StringBuffer sb = new StringBuffer();
 		if(daysJSon!=null && daysJSon.length()>0) {
 			for(int i=0;i<daysJSon.length();i++) {
-				foodTruck.setFoodTruckDay(daysJSon.getString(i));
+				sb.append(daysJSon.getString(i));
+				sb.append("-");
 			}
 		}
+		foodTruck.setFoodTruckDay(sb.toString());
 		foodTruck.setFoodTruckTime(data.getString("timeSlot"));
 		int dataInserted = TableDataGateway.reserveLocation(userId, foodTruck);
 		return dataInserted;
