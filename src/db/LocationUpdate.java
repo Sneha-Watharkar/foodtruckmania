@@ -19,20 +19,21 @@ public class LocationUpdate {
 		 * pool.getConnection();
 		 */
 		PreparedStatement ps = null;
-		String query = "INSERT INTO FoodTruck (userId, foodTruckName, latitude, longitude, truckTime, foodTruckStatus) "
-				+ "VALUES (?,?,?,?,?,?)";
+		String query = "UPDATE FoodTruck set " + "latitude=?," + "longitude = ?," + "foodTruckDay = ?,"
+		+ "truckTime = ? " + "  where userId = ?";
+		/*String query = "INSERT INTO FoodTruck (userId, latitude, longitude, truckTime, foodTruckStatus) "
+				+ "VALUES (?,?,?,?,?,?)";*/
 		try {
 			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
 			Connection connection = ConnectionPool2.getConnection();
 			System.out.println(connection.toString());
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());
-			ps.setInt(1, userId);
-			ps.setString(2, foodTruck.getFoodTruckName());
-			ps.setString(3, String.valueOf(foodTruck.getLatitude()));
-			ps.setString(4, String.valueOf(foodTruck.getLongitude()));
-			ps.setString(5, String.valueOf(foodTruck.getFoodTruckTime()));
-			ps.setString(6, foodTruck.getFoodTruckStatus());
+			ps.setString(1, String.valueOf(foodTruck.getLatitude()));
+			ps.setString(2, String.valueOf(foodTruck.getLongitude()));
+			ps.setString(3, foodTruck.getFoodTruckDay());
+			ps.setString(4, foodTruck.getFoodTruckTime());
+			ps.setInt(5, userId);
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);
