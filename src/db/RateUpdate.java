@@ -45,6 +45,25 @@ public class RateUpdate {
 			// pool.freeConnection(connection);
 		}
 	}
+	public static int setFavFoodTrucks(int userId, int foodTruckId){
+		PreparedStatement ps = null;
+		String query = "INSERT INTO UserFavorites(foodTruckId,userId)" 
+				+ "VALUES (?,?)";
+		try {
+//			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			Connection connection = ConnectionPool2.getConnection();
+			ps = connection.prepareStatement(query);
+			ps.setInt(1, foodTruckId);
+			ps.setInt(2, userId);
+			return ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e);
+			return 0;
+		} finally {
+			DBUtil.closePreparedStatement(ps);
+			// pool.freeConnection(connection);
+		}
+	}
 	public static ArrayList<FoodTruck> getFavFoodTrucks(int UserId){
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -90,6 +109,14 @@ public class RateUpdate {
 		}
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
 	/*
 	 * DB statement to fetch all the food truck ratings.
 	 */

@@ -104,7 +104,7 @@ public class TableDataGateway {
 	 */
 	public static int updateUserFav(int userId, int foodTruckId) {
 		int isDataInserted = 0;
-		isDataInserted = AlertsUpdate.updateUserFavorite(userId,foodTruckId);
+		isDataInserted = RateUpdate.setFavFoodTrucks(userId,foodTruckId);
 		return isDataInserted;
 	}
 
