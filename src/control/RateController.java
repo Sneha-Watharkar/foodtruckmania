@@ -27,7 +27,6 @@ public class RateController {
 		ratingObj.setFoodTruckId(rateJson.getInt("foodTruckId"));
 		int insertData = TableDataGateway.rateTruck(userAcc.getUserId(),ratingObj);
 		return insertData;
-		
 	}
 	
 	/*
