@@ -158,6 +158,10 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					ArrayList<FoodTruck> favFoodTrucks = UserController.getFavFoodTrucks(request,response,data);
 					returnObj.put("trucks", mapperObj.writeValueAsString(favFoodTrucks));
 					break;
+				case "getAllLocations":
+					ArrayList<FoodTruck> foodTruckLocations = LocationController.getAllLocations(request,response,data);
+					returnObj.put("trucks", mapperObj.writeValueAsString(foodTruckLocations));
+					break;
 				case "uploadMenu":
 					if(MenuController.uploadMenu(request, response,data)==0) {
 						returnObj.put("msg", "Menu Uploaded");
