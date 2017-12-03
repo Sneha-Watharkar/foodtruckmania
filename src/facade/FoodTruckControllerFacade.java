@@ -60,11 +60,13 @@ public class FoodTruckControllerFacade extends HttpServlet {
 				case "registerUser":
 					if (UserController.registerUser(request, response,data) == 1){
 						System.out.print("Register is successful");
-						request.setAttribute("msg", "Register is successful");
+						returnObj.put("msg", "User Registration successful");
+						returnObj.put("error", "None");
 					}
 					else{
 						System.out.print("Register failed");
-						request.setAttribute("msg", "Register failed");
+						returnObj.put("msg", "User Registration failed");
+						returnObj.put("error", "None");
 					}
 					break;
 				case "login":
