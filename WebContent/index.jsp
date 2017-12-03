@@ -9,10 +9,13 @@
 <!-- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" /> -->
 <!-- <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/jquery-3.2.1.min.js"></script> -->
+<!-- <script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script> -->
 <link href="dashboard.css" rel="stylesheet">
 <link href="styles.css" rel="stylesheet" type="text/css" />
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDT-MCqOgy_1XXeZAVCUysmoFt6mjFtKuE"
+  type="text/javascript"></script>
 <script src="scripts/mainApp.js"></script>
 
 
