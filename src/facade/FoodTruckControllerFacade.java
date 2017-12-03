@@ -70,14 +70,10 @@ public class FoodTruckControllerFacade extends HttpServlet {
 				case "login":
 					UserAccount userAcc = UserController.login(request, response,data);
 					if(userAcc != null){
-						try {
-							returnObj.put("user", mapperObj.writeValueAsString(userAcc));
-							returnObj.put("msg", "Login Successful");
-							returnObj.put("error", "None");
-				        } catch (IOException e) {
-				            // TODO Auto-generated catch block
-				            e.printStackTrace();	
-						}}
+						returnObj.put("user", mapperObj.writeValueAsString(userAcc));
+						returnObj.put("msg", "Login Successful");
+						returnObj.put("error", "None");
+					}
 					else{
 						//url = "/login.jsp";
 						request.setAttribute("msg", "Login Failed");
