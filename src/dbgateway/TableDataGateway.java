@@ -114,6 +114,10 @@ public class TableDataGateway {
 		return isDataInserted;
 	}
 
+	public static ArrayList<FoodTruck> getAllFoodTrucks() {
+		return UserUpdate.getAllFoodTrucks();
+	}
+
 
 }
 

@@ -20,7 +20,6 @@ public class UserController {
 		System.out.println("Inside register User");
 		JSONObject userJson = data.getJSONObject("userDetails");
 		UserAccount userAcc = new UserAccount();
-
 		userAcc.setUserFirstName(userJson.getString("firstname"));
 		userAcc.setUserLastName(userJson.getString("lastname"));
 		userAcc.setUserType(userJson.getString("type"));
@@ -44,6 +43,10 @@ public class UserController {
 		}
 		return results;
 	}
+	public static ArrayList<FoodTruck> getAllFoodTrucks(){
+		return TableDataGateway.getAllFoodTrucks();
+	}
+	
 	public static int approveFoodTruckRequests(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
 		JSONObject userJson = data.getJSONObject("userDetails");
 		UserAccount userAcc = new UserAccount();

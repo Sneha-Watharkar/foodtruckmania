@@ -77,7 +77,7 @@ public class UserUpdate {
 
 	}
 	
-	public static ArrayList<FoodTruck> getAllFoodTrucks(UserAccount userAcc) {
+	public static ArrayList<FoodTruck> getAllFoodTrucks() {
 		/*
 		 * ConnectionPool pool = ConnectionPool.getInstance(); Connection connection =
 		 * pool.getConnection();
@@ -85,7 +85,7 @@ public class UserUpdate {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String query = "Select * FROM foodtruck WHERE";
+		String query = "Select * FROM foodtruck WHERE foodTruckStatus='approved'";
 		try {
 			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
 			Connection connection = ConnectionPool2.getConnection();

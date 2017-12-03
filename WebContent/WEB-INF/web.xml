@@ -17,6 +17,10 @@
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>FoodTruckControllerFacade</servlet-name>
+  	<url-pattern>/getFoodTrucks</url-pattern>
+  	</servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>FoodTruckControllerFacade</servlet-name>
   	<url-pattern>/loginUser</url-pattern>
   </servlet-mapping>
   <servlet-mapping>

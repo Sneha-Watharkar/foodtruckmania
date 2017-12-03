@@ -87,6 +87,10 @@ public class FoodTruckControllerFacade extends HttpServlet {
 						returnObj.put("error", "UserName or Password is wrong");
 					}
 					break;
+				case "getAllFoodTrucks":
+					ArrayList<FoodTruck> foodTrucks = UserController.getAllFoodTrucks();
+					returnObj.put("trucks", mapperObj.writeValueAsString(foodTrucks));
+					break;
 				case "fetchPendingApprovals":
 					Map<Integer,String> results = UserController.fetchPendingApprovals();
 					JSONArray jsonArray = new JSONArray();
