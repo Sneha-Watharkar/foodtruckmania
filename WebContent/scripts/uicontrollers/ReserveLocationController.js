@@ -6,12 +6,14 @@ mainApp.controller('reserveLocationController', function($scope, $location, $roo
 		$scope.setAsActive = function (path) {
 			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
 		}
-		
+		 $scope.currentUser = UserService.getCurrentUser();
+	        console.log("In Reserve Location", $scope.currentUser);
 		$scope.reserveLocation = function() {
 			var locationObject = {
 					location: $scope.selectedLocation,
 					timeSlot:$scope.timeSlot,
-					days:$scope.selectedDays
+					days:$scope.selectedDays,
+					userId: $scope.currentUser.userId
 			};
 			console.log("Location", locationObject);
 			
