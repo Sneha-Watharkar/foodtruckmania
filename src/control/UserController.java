@@ -33,6 +33,7 @@ public class UserController {
 		if(success == 1 && userAcc.getUserType() == "Vendor"){
 			int foodSuccess = TableDataGateway.registerFoodTruck(userAcc);
 		}
+		System.out.println("Success : "+success);
 		return success;
 	}
 	public static Map<Integer,String> fetchPendingApprovals() {
