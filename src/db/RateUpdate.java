@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
+import data.FoodTruck;
 import data.FoodTruckRating;
 import dbgateway.TableDataGateway;
 import util.ConnectionPool2;
@@ -43,7 +44,26 @@ public class RateUpdate {
 			// pool.freeConnection(connection);
 		}
 	}
-
+	public static ArrayList<Integer> getFavFoodTrucks(int UserId){
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query1 = "SELECT * FROM UserFavorites where userID = ?";
+		
+		try{
+			ArrayList<Integer> foodTruckList = new ArrayList<Integer>();
+			Connection connection = ConnectionPool2.getConnection();
+			ps = connection.prepareStatement(query1);
+			rs = ps.executeQuery();
+			System.out.println("Result set is :" + rs.getRow());
+			if(rs.next()){
+				foodTruckList.add(rs.getInt("foodTruckID"));
+			}
+		}catch (Exception e) {
+		System.out.println(e);
+			return null;
+		}
+		
+	}
 	/*
 	 * DB statement to fetch all the food truck ratings.
 	 */
