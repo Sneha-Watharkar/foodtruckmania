@@ -154,6 +154,10 @@ public class FoodTruckControllerFacade extends HttpServlet {
 						returnObj.put("msg", "Unable to save customer favorite");
 					}
 					break;
+				case "getFavFoodTrucks":
+					ArrayList<FoodTruck> favFoodTrucks = UserController.getFavFoodTrucks(request,response,data);
+					returnObj.put("trucks", mapperObj.writeValueAsString(favFoodTrucks));
+					break;
 				case "uploadMenu":
 					if(MenuController.uploadMenu(request, response,data)==0) {
 						returnObj.put("msg", "Menu Uploaded");

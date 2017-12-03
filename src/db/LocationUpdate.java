@@ -69,6 +69,7 @@ public class LocationUpdate {
 		return foodTruck;
 
 	}
+	
 	public static ArrayList<FoodTruck> getAllLocations() {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
