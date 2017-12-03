@@ -1,8 +1,11 @@
 package control;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import data.FoodTruck;
@@ -13,19 +16,23 @@ public class LocationController {
 
 	private static final String STATUS_PENDING = "Pending";
 	
-	private static final String STATUS_ACTIVE = "Active";
 
 	public static int reserveLocation(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
 		FoodTruck foodTruck = new FoodTruck();
 
-		UserAccount userAcc = (UserAccount) request.getAttribute("user");
-		JSONObject truckJson = data.getJSONObject("truckID");
-		foodTruck.setFoodTruckName(truckJson.getString("truckname"));
-		int userId = userAcc.getUserId();
-		foodTruck.setFoodTruckLocation(truckJson.getString("truckLocation"));
+		int userId = data.getInt("userid");
+		foodTruck.setFoodTruckLocation(String.valueOf(data.getInt("location")));
 		convertLocationToCoordinates(foodTruck);
-		foodTruck.setFoodTruckTime(truckJson.getString("timeSlot"));
-		foodTruck.setFoodTruckStatus(STATUS_PENDING);
+		JSONArray daysJSon = data.getJSONArray("days");
+		StringBuffer sb = new StringBuffer();
+		if(daysJSon!=null && daysJSon.length()>0) {
+			for(int i=0;i<daysJSon.length();i++) {
+				sb.append(daysJSon.getString(i));
+				sb.append("-");
+			}
+		}
+		foodTruck.setFoodTruckDay(sb.toString());
+		foodTruck.setFoodTruckTime(data.getString("timeSlot"));
 		int dataInserted = TableDataGateway.reserveLocation(userId, foodTruck);
 		return dataInserted;
 	}
@@ -34,22 +41,22 @@ public class LocationController {
 	 * updates latitude and longitude coordiantes for each of the truck location.
 	 */
 	private static void convertLocationToCoordinates(FoodTruck foodTruck) {
-		if (foodTruck.getFoodTruckLocation().equals("Prospector")) {
+		if (foodTruck.getFoodTruckLocation().equals("1")) {
 			foodTruck.setLatitude((float) 35.3069394);
 			foodTruck.setLongitude((float) -80.7354401);
-		} else if (foodTruck.getFoodTruckLocation().equals("Colvard Hall")) {
+		} else if (foodTruck.getFoodTruckLocation().equals("2")) {
 			foodTruck.setLatitude((float) 35.306703);
 			foodTruck.setLongitude((float) -80.730515);
 
-		} else if (foodTruck.getFoodTruckLocation().equals("Student Activity Center")) {
+		} else if (foodTruck.getFoodTruckLocation().equals("3")) {
 			foodTruck.setLatitude((float) 35.304362);
 			foodTruck.setLongitude((float) -80.732019);
 
-		} else if (foodTruck.getFoodTruckLocation().equals("Student Union")) {
+		} else if (foodTruck.getFoodTruckLocation().equals("4")) {
 			foodTruck.setLatitude((float) 35.306667);
 			foodTruck.setLongitude((float) -80.735256);
 
-		} else if (foodTruck.getFoodTruckLocation().equals("Van Landingham / John Kick")) {
+		} else if (foodTruck.getFoodTruckLocation().equals("5")) {
 			foodTruck.setLatitude((float) 35.307886);
 			foodTruck.setLongitude((float) -80.733716);
 
@@ -67,6 +74,11 @@ public class LocationController {
 		foodTruck.setFoodTruckId(truckJson.getInt("foodTruckId"));
 		TableDataGateway.locateTruck(foodTruck);
 		return foodTruck;
+	}
+
+	public static ArrayList<FoodTruck> getAllLocations(HttpServletRequest request, HttpServletResponse response,
+			JSONObject data) {
+		return TableDataGateway.getAllLocations();
 	}
 
 }
