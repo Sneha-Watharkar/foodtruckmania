@@ -57,7 +57,9 @@ public class UserController {
 		userAcc.setLoginName(data.getString("name"));
 		userAcc.setLogin_password(data.getString("password"));
 		userAcc = TableDataGateway.loginUser(userAcc.getLoginName(), userAcc.getLogin_password());
-		System.out.println("User Details of login: LoginName: " + userAcc.getLoginName() + "FirstName: "+ userAcc.getUserFirstName() + "Last Name: " + userAcc.getUserLastName());
+		if (userAcc != null){
+			System.out.println("User Details of login: LoginName: " + userAcc.getLoginName() + "FirstName: "+ userAcc.getUserFirstName() + "Last Name: " + userAcc.getUserLastName());
+		}
 		return userAcc;
 	}
 	/*

@@ -77,7 +77,7 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					if(userAcc != null){
 						returnObj.put("user", mapperObj.writeValueAsString(userAcc));
 						returnObj.put("msg", "Login Successful");
-						returnObj.put("error", "None");
+						returnObj.put("error", "");
 					}
 					else{
 						//url = "/login.jsp";
