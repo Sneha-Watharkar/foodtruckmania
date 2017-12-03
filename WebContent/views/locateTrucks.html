@@ -1,3 +1,11 @@
 <div>
 	<div ng-include src="'views/commonTemplate.html'"></div>
+	 <main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+		<h4>{{currentPage}}</h4>
+		<div id="map"></div>
+		<!-- <div id="repeat" ng-repeat="marker in markers | orderBy : 'title'">
+         <a id="country_container" href="#" ng-click="openInfoWindow($event, marker)">
+         <label id="names" >{{marker.title}}</label></a>
+    	</div> -->
+	</main>
 </div>
