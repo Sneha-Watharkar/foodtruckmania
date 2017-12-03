@@ -27,10 +27,12 @@
 <script src="scripts/uicontrollers/ManageAlertsController.js"></script>
 <script src="scripts/uicontrollers/RateFoodTruckController.js"></script>
 <script src="scripts/uicontrollers/ReserveLocationController.js"></script>
+<script src="scripts/uicontrollers/UploadMenuController.js"></script>
 <script src="scripts/uiservices/userService.js"></script>
 <script src="scripts/uiservices/foodTruckService.js"></script>
 <script src="scripts/directives/fileUpload.js"></script>
 <script src="scripts/directives/starRating.js"></script>
+<script src="scripts/directives/notifications.js"></script>
 </head>
 <body ng-controller="mainController">
 	<div ng-view></div>

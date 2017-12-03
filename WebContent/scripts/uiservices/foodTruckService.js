@@ -63,4 +63,16 @@ mainApp.service('FoodTruckService', function($http) {
         	return data;
         });
     }
+    
+    this.getFoodMenu = function (truckId) {
+      $http.post('/loadMenu',{id: truckId}, {responseType:'arraybuffer'})
+  	  .success(function (response) {
+  	       var file = new Blob([response], {type: 'application/pdf'});
+  	       var fileURL = URL.createObjectURL(file);
+  	       return fileURL;
+  	  }).error(function (data) {
+	      	console.log("Failure "+ JSON.stringify({data: data}));
+	    	return data;
+  	  });
+    }
 });

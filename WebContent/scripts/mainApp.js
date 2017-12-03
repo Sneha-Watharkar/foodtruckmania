@@ -41,6 +41,10 @@ var mainApp = angular.module('mainApp', ['ngRoute']);
 	            templateUrl : 'views/locateTrucks.html',
 	            controller  : 'locateTruckController'
 	        })
+	        .when('/uploadMenu', {
+	            templateUrl : 'views/uploadMenu.html',
+	            controller  : 'uploadMenuController'
+	        })
 	        .otherwise({ redirectTo: '/' });
 	});
 	

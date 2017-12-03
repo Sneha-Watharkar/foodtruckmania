@@ -1,4 +1,4 @@
-mainApp.controller('homeController', function($scope, $location, FoodTruckService) {
+mainApp.controller('homeController', function($scope, $location, FoodTruckService, $sce, $window) {
         // create a message to display in our view
         $scope.currentPage = 'Home';
         $scope.rootUrl = $location.$$absUrl.substring(0,$scope.rootUrl.lastIndexOf('/')+1);
@@ -6,6 +6,7 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
         $scope.favFoodTrucks;
        // $scope.allFoodTrucks = FoodTruckService.getAllFoodtrucks();
         //$scope.favFoodTrucks = FoodTruckService.getFavoriteFoodtrucks();
+        
         $scope.allFoodTrucks = [{
         	truckId: 1,
         	name: "Asian Eatery"
@@ -35,4 +36,10 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
         $scope.setAsActive = function (path) {
 			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
 		}
+        
+        $scope.loadFoodMenu = function (truck) {
+        	/*var result = FoodTruckService.getFoodMenu(truck.truckId);
+        	$scope.foodMenuFile = $sce.trustAsResourceUrl(result);
+        	$window.open($scope.foodMenuFile);*/
+        }
 });

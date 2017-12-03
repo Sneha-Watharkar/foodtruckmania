@@ -17,4 +17,15 @@ mainApp.controller('manageAlertsController', function($scope, $location, $rootSc
         $scope.setAsActive = function (path) {
 			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
 		}
+        
+        $scope.displayNotification = function(status, message, type) {
+        	$scope.notification = {
+					/*status: 'hide',
+					type: '',
+					message: ''*/
+			};
+	        $scope.notification.status = status; 
+	        $scope.notification.message = message;
+	        $scope.notification.type = type;
+        };
 });
