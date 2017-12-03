@@ -40,6 +40,7 @@ public class TableDataGateway {
 		System.out.println(result);
 		return userAcc;
 	}
+	
 	public static UserAccount loginUser(String loginName, String password) {
 		UserAccount userAcc = new UserAccount();
 		System.out.println("user details "+loginName+" password "+password);
