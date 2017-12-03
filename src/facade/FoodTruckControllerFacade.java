@@ -2,6 +2,7 @@ package facade;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -15,8 +16,10 @@ import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-
+//import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.databind.ObjectWriter;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.JsonGenerationException;
 import control.AlertsController;
 import control.LocationController;
 import control.RateController;
@@ -36,9 +39,12 @@ public class FoodTruckControllerFacade extends HttpServlet {
 			throws ServletException, IOException {
 		System.out.println("Came to face controller");
 		String url = "/index.jsp";
+		JSONObject returnObj = new JSONObject();
 		StringBuilder sb = new StringBuilder();
         BufferedReader br = request.getReader();
+        ObjectMapper mapperObj = new ObjectMapper();
         String str = null;
+        //ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         while ((str = br.readLine()) != null) {
             sb.append(str);
         }
@@ -64,10 +70,14 @@ public class FoodTruckControllerFacade extends HttpServlet {
 				case "login":
 					UserAccount userAcc = UserController.login(request, response,data);
 					if(userAcc != null){
-							request.setAttribute("user", userAcc);
-							request.setAttribute("msg", "Login Successful");
-							request.setAttribute("error", null);
-						}
+						try {
+							returnObj.put("user", mapperObj.writeValueAsString(userAcc));
+							returnObj.put("msg", "Login Successful");
+							returnObj.put("error", "None");
+				        } catch (IOException e) {
+				            // TODO Auto-generated catch block
+				            e.printStackTrace();	
+						}}
 					else{
 						//url = "/login.jsp";
 						request.setAttribute("msg", "Login Failed");
@@ -131,11 +141,13 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					}
 					break;
 			}
-
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		getServletContext().getRequestDispatcher(url).forward(request, response);
+		PrintWriter pw = response.getWriter();
+		response.setContentType("application/json");
+		pw.println(returnObj.toString());
+		//getServletContext().getRequestDispatcher().forward(request, response);
 	}
 
 	@Override
