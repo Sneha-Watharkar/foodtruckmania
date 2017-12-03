@@ -156,8 +156,8 @@ public class UserUpdate {
 		
 		String query = "SELECT * FROM UserAccount WHERE loginName = ? AND Password = ?";
 		try {
-			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
-			//Connection connection = ConnectionPool2.getConnection();
+			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			Connection connection = ConnectionPool2.getConnection();
 			System.out.println("Select query is:" + query);
 			ps = connection.prepareStatement(query);
 			ps.setString(1, loginName); 
@@ -179,6 +179,9 @@ public class UserUpdate {
 			return userAcc;
 		} catch (SQLException e) {
 			System.out.println(e);
+			return null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
 			return null;
 		} finally {
 			DBUtil.closeResultSet(rs);

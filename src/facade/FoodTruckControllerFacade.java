@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 //import com.fasterxml.jackson.databind.ObjectMapper;
@@ -60,16 +61,17 @@ public class FoodTruckControllerFacade extends HttpServlet {
 			System.out.println("Action is " + action);
 			switch (action) {
 				case "registerUser":
-					if (UserController.registerUser(request, response,data) == 1){
-						System.out.print("Register is successful");
-						returnObj.put("msg", "User Registration successful");
-						returnObj.put("error", "None");
-					}
-					else{
+					int registerSuccess = UserController.registerUser(request, response, data);
+					if ( registerSuccess == 0){
 						System.out.print("Register failed");
 						returnObj.put("msg", "User Registration failed");
 						returnObj.put("error", "None");
 						returnObj.put("msg", "Register is successful");
+					}
+					else{
+						System.out.print("Register is successful");
+						returnObj.put("msg", "User Registration successful");
+						returnObj.put("error", "None");
 					}
 					break;
 				case "login":
@@ -87,7 +89,14 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					break;
 				case "fetchPendingApprovals":
 					Map<Integer,String> results = UserController.fetchPendingApprovals();
-					returnObj.put("results", mapperObj.writeValueAsString(results));
+					JSONArray jsonArray = new JSONArray();
+					for (Map.Entry<Integer, String> entry : results.entrySet()) {
+						JSONObject approval = new JSONObject();
+						approval.put("foodtruckid",entry.getKey());
+						approval.put("status", entry.getValue());
+						jsonArray.put(approval);
+					}
+					returnObj.put("results", jsonArray);
 					returnObj.put("msg", "Returned "+results.values().size()+" records");
 					break;
 				case "approveFoodTrucks":
