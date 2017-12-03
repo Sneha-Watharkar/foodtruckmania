@@ -19,12 +19,12 @@ public class LocationController {
 		FoodTruck foodTruck = new FoodTruck();
 
 		UserAccount userAcc = (UserAccount) request.getAttribute("user");
-		JSONObject truckJson = data.getJSONObject("truckDetails");
+		JSONObject truckJson = data.getJSONObject("truckID");
 		foodTruck.setFoodTruckName(truckJson.getString("truckname"));
 		int userId = userAcc.getUserId();
 		foodTruck.setFoodTruckLocation(truckJson.getString("truckLocation"));
 		convertLocationToCoordinates(foodTruck);
-		foodTruck.setFoodTruckTime(truckJson.getString("dateTime"));
+		foodTruck.setFoodTruckTime(truckJson.getString("timeSlot"));
 		foodTruck.setFoodTruckStatus(STATUS_PENDING);
 		int dataInserted = TableDataGateway.reserveLocation(userId, foodTruck);
 		return dataInserted;
