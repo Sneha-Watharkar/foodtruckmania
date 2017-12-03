@@ -118,6 +118,14 @@ public class TableDataGateway {
 		return UserUpdate.getAllFoodTrucks();
 	}
 
+	public static ArrayList<FoodTruck> getFavFoodTrucks(int userId) {
+		return RateUpdate.getFavFoodTrucks(userId);
+	}
+
+	public static ArrayList<FoodTruck> getAllLocations() {
+		return LocationUpdate.getAllLocations();
+	}
+
 
 }
 

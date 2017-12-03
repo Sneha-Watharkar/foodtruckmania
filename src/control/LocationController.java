@@ -1,5 +1,7 @@
 package control;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +16,6 @@ public class LocationController {
 
 	private static final String STATUS_PENDING = "Pending";
 	
-	private static final String STATUS_ACTIVE = "Active";
 
 	public static int reserveLocation(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
 		FoodTruck foodTruck = new FoodTruck();
@@ -29,7 +30,6 @@ public class LocationController {
 			}
 		}
 		foodTruck.setFoodTruckTime(data.getString("timeSlot"));
-		foodTruck.setFoodTruckStatus(STATUS_PENDING);
 		int dataInserted = TableDataGateway.reserveLocation(userId, foodTruck);
 		return dataInserted;
 	}
@@ -71,6 +71,11 @@ public class LocationController {
 		foodTruck.setFoodTruckId(truckJson.getInt("foodTruckId"));
 		TableDataGateway.locateTruck(foodTruck);
 		return foodTruck;
+	}
+
+	public static ArrayList<FoodTruck> getAllLocations(HttpServletRequest request, HttpServletResponse response,
+			JSONObject data) {
+		return TableDataGateway.getAllLocations();
 	}
 
 }

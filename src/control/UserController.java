@@ -82,5 +82,11 @@ public class UserController {
 		System.out.println("return success message:" + success);
 
 	}*/
+	public static ArrayList<FoodTruck> getFavFoodTrucks(HttpServletRequest request, HttpServletResponse response,
+			JSONObject data) {
+		
+		ArrayList<FoodTruck> results = TableDataGateway.getFavFoodTrucks(data.getInt("userID"));
+		return results;
+	}
 
 }
