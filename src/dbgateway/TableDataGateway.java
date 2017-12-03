@@ -8,6 +8,7 @@ import data.UserAccount;
 import db.AdminUpdate;
 import db.AlertsUpdate;
 import db.LocationUpdate;
+import db.MenuUpdate;
 import db.RateUpdate;
 import db.UserUpdate;
 
@@ -104,6 +105,12 @@ public class TableDataGateway {
 	public static int updateUserFav(int userId, int foodTruckId) {
 		int isDataInserted = 0;
 		isDataInserted = AlertsUpdate.updateUserFavorite(userId,foodTruckId);
+		return isDataInserted;
+	}
+
+	public static int uploadMenu(int userId, String filePath) {
+		int isDataInserted = 0;
+		isDataInserted = MenuUpdate.uploadMenu(userId,filePath);
 		return isDataInserted;
 	}
 

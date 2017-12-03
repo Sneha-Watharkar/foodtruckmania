@@ -1,5 +1,6 @@
 package facade;
 
+import java.awt.MenuContainer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,6 +23,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.JsonGenerationException;
 import control.AlertsController;
 import control.LocationController;
+import control.MenuController;
 import control.RateController;
 import control.UserController;
 import data.FoodTruck;
@@ -67,6 +69,7 @@ public class FoodTruckControllerFacade extends HttpServlet {
 						System.out.print("Register failed");
 						returnObj.put("msg", "User Registration failed");
 						returnObj.put("error", "None");
+						returnObj.put("msg", "Register is successful");
 					}
 					break;
 				case "login":
@@ -78,66 +81,78 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					}
 					else{
 						//url = "/login.jsp";
-						request.setAttribute("msg", "Login Failed");
-						request.setAttribute("error", "UserName or Password is wrong");
+						returnObj.put("msg", "Login Failed");
+						returnObj.put("error", "UserName or Password is wrong");
 					}
 					break;
 				case "fetchPendingApprovals":
 					Map<Integer,String> results = UserController.fetchPendingApprovals();
-					request.setAttribute("results", results);
-					request.setAttribute("msg", "Returned "+results.values().size()+" records");
+					returnObj.put("results", mapperObj.writeValueAsString(results));
+					returnObj.put("msg", "Returned "+results.values().size()+" records");
 					break;
 				case "approveFoodTrucks":
 					int updateResult = UserController.approveFoodTruckRequests(request, response, data);
 					if(updateResult == 1){
-						request.setAttribute("msg", "Approval Successful");
+						returnObj.put("msg", "Approval Successful");
 					}
 					else{
-						request.setAttribute("msg", "Approval failed");
+						returnObj.put("msg", "Approval failed");
 					}
 					break;
 				case "setAlerts":
 					int success = AlertsController.insertAlerts(request, response, data);
-					request.setAttribute("msg", "Alerts inserted successfully");
+					returnObj.put("msg", "Alerts inserted successfully");
 					break;
 				case "getAlerts":
 					String alerts = AlertsController.getAlerts(request, response, data);
-					request.setAttribute("alerts", alerts);
+					returnObj.put("alerts", mapperObj.writeValueAsString(alerts));
 					break;
 				case "reserveLocation":
 					int locationUpdate = LocationController.reserveLocation(request, response, data);
 					if(locationUpdate == 1) {
-						request.setAttribute("msg", "Food Truck Location updated");
+						returnObj.put("msg", "Food Truck Location updated");
 					}else {
-						request.setAttribute("msg", "Unable to save truck location");
+						returnObj.put("msg", "Unable to save truck location");
 					}
 					break;
 				case "locateTruck":
 					FoodTruck foodTruck = LocationController.locateTruck(request, response, data);
-					request.setAttribute("msg", "Food Truck Location found");
-					request.setAttribute("latitude", foodTruck.getLatitude());
-					request.setAttribute("longitude", foodTruck.getLongitude());
+					returnObj.put("msg", "Food Truck Location found");
+					returnObj.put("latitude", foodTruck.getLatitude());
+					returnObj.put("longitude", foodTruck.getLongitude());
 					break;
 				case "rateTruck":
 					int rateUpdate = RateController.rateTruck(request,response,data);
 					if(rateUpdate == 1) {
-						request.setAttribute("msg", "Customer review complete");
+						returnObj.put("msg", "Customer review complete");
 					}else {
-						request.setAttribute("msg", "Unable to save customer review");
+						returnObj.put("msg", "Unable to save customer review");
 					}
 					break;
 				case "getFeedback":
 					ArrayList<FoodTruckRating> ratingList = RateController.getFeedback(request, response, data);
-					request.setAttribute("ratingLists", ratingList);
+					returnObj.put("ratingLists", ratingList);
 					break;
 				case "setUserFavorites":
 					int favInsert = AlertsController.updateUserFav(request,response,data);
 					if(favInsert == 1) {
-						request.setAttribute("msg", "Customer favorite updated");
+						returnObj.put("msg", "Customer favorite updated");
 					}else {
-						request.setAttribute("msg", "Unable to save customer favorite");
+						returnObj.put("msg", "Unable to save customer favorite");
 					}
 					break;
+				case "uploadMenu":
+					if(MenuController.uploadMenu(request, response,data)==0) {
+						returnObj.put("msg", "Menu Uploaded");
+						returnObj.put("error", "None");
+					}else {
+						returnObj.put("msg", "Error uploading menu");
+						returnObj.put("error", "Error");
+					}
+				break;
+				case "displayMenu":
+					MenuController.displayMenu(data);
+				break;
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -145,7 +160,7 @@ public class FoodTruckControllerFacade extends HttpServlet {
 		PrintWriter pw = response.getWriter();
 		response.setContentType("application/json");
 		pw.println(returnObj.toString());
-		//getServletContext().getRequestDispatcher().forward(request, response);
+		System.out.println(returnObj.toString());
 	}
 
 	@Override
