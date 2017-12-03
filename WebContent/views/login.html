@@ -1,6 +1,9 @@
 <div class="container">
 	<div class="row">
 	    <div class="col-4 mx-auto">
+	    	<div class="alert alert-{{notification.type}}" 
+		style="visibility: hidden;" role="alert" 
+		data-notification="{{notification.status}}">{{notification.message}}</div>
             <div class="card">
             	<h4 class="card-header card-header-color">Login</h4>
             	<div class="card-block">

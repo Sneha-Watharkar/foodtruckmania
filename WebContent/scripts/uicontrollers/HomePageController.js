@@ -1,9 +1,11 @@
-mainApp.controller('homeController', function($scope, $location, FoodTruckService, $sce, $window) {
+mainApp.controller('homeController', function($scope, $location, FoodTruckService, $sce, $window, UserService) {
         // create a message to display in our view
         $scope.currentPage = 'Home';
         $scope.rootUrl = $location.$$absUrl.substring(0,$scope.rootUrl.lastIndexOf('/')+1);
         console.log("Home controller loads");
         $scope.favFoodTrucks;
+        $scope.currentUser = UserService.getCurrentUser();
+        console.log("In Home", $scope.currentUser);
        // $scope.allFoodTrucks = FoodTruckService.getAllFoodtrucks();
         //$scope.favFoodTrucks = FoodTruckService.getFavoriteFoodtrucks();
         

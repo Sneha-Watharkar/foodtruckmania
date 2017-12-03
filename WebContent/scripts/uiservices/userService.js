@@ -1,27 +1,27 @@
 mainApp.service('UserService', function($http) {
+	this.currentUser = {};
     this.checkForUserExistence = function (user) {
-    	$http({
+    	return $http({
             method: 'POST',
             url: 'loginUser',
             headers: {
                 'Content-Type': 'application/json'
             },
-            data:	JSON.stringify({data: user, action:'login'})
-        })
-        .success(function (data) {
-        	console.log("Success", data);
-        	return data;
-        })
-        .error(function (data, status) {
-        	console.log("Failure "+ JSON.stringify({data: data}));
-        	return data;
+            data:JSON.stringify({data: user, action:'login'})
         });
-    	
-    	
     }
     
     this.updateUserAlerts = function (userAlerts) {
     		var res = $http.post('updateUserAlerts',userAlerts);
     		return res;
+    }
+    
+    this.setCurrentUser = function (currentUser) {
+    	this.currentUser = currentUser;
+    	console.log("Current user in service", this.currentUser);
+    	return this.currentUser;
+    }
+    this.getCurrentUser = function () {
+    	return this.currentUser;
     }
 });
