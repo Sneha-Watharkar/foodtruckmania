@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import data.FoodTruck;
 import dbgateway.TableDataGateway;
@@ -68,7 +69,29 @@ public class LocationUpdate {
 		return foodTruck;
 
 	}
-	
+	public static ArrayList<FoodTruck> getAllLocations() {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query = "SELECT foodTruckName, latitude, longitude FROM FoodTruck";
+		try {
+			Connection connection = ConnectionPool2.getConnection();
+			ps = connection.prepareStatement(query);
+			ArrayList<FoodTruck> foodTruckList = new ArrayList<FoodTruck>();
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				FoodTruck foodTruck = new FoodTruck();
+				foodTruck.setFoodTruckLocation(rs.getString("foodTruckLocation"));
+				foodTruck.setLatitude(rs.getFloat("latitude"));
+				foodTruck.setLongitude(rs.getFloat("longitude"));
+				foodTruckList.add(foodTruck);
+			}
+			return foodTruckList;
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+
+	}
 	
 
 }

@@ -1,5 +1,6 @@
 package db;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -44,7 +45,7 @@ public class RateUpdate {
 			// pool.freeConnection(connection);
 		}
 	}
-	public static ArrayList<Integer> getFavFoodTrucks(int UserId){
+	public static ArrayList<FoodTruck> getFavFoodTrucks(int UserId){
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String query1 = "SELECT * FROM UserFavorites where userID = ?";
@@ -53,13 +54,38 @@ public class RateUpdate {
 			ArrayList<Integer> foodTruckList = new ArrayList<Integer>();
 			Connection connection = ConnectionPool2.getConnection();
 			ps = connection.prepareStatement(query1);
+			ps.setInt(1, UserId);
 			rs = ps.executeQuery();
 			System.out.println("Result set is :" + rs.getRow());
 			if(rs.next()){
 				foodTruckList.add(rs.getInt("foodTruckID"));
 			}
-		}catch (Exception e) {
+		}
+		catch (Exception e) {
 		System.out.println(e);
+		}
+		String query2 = "SELECT * from FoodTruck WHERE foodTruckID IN ?";
+		try{
+			ArrayList<FoodTruck> foodTruckList = new ArrayList<FoodTruck>();
+			Connection connection = ConnectionPool2.getConnection();
+			ps = connection.prepareStatement(query1);
+			ps.setArray(1, (Array) foodTruckList);
+			rs = ps.executeQuery();
+			System.out.println("Result set is :" + rs.getRow());
+			if(rs.next()){
+				FoodTruck truck = new FoodTruck();
+				truck.setFoodTruckId(rs.getInt("foodTruckId"));
+				truck.setFoodTruckName(rs.getString("foodtruckName"));
+				truck.setLatitude(rs.getFloat("latitude"));
+				truck.setLongitude(rs.getFloat("truckTime"));
+				truck.setFoodTruckMenu(rs.getString("foodTruckMenu"));
+				truck.setFoodTruckStatus(rs.getString("foodTruckStatus"));
+				foodTruckList.add(truck);
+			}
+			return foodTruckList;
+		}
+		catch (Exception e) {
+			System.out.println(e);
 			return null;
 		}
 		
