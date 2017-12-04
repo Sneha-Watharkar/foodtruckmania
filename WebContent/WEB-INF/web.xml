@@ -41,6 +41,10 @@
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>FoodTruckControllerFacade</servlet-name>
+  	<url-pattern>/getAllLocations</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>FoodTruckControllerFacade</servlet-name>
   	<url-pattern>/updateUserAlerts</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
