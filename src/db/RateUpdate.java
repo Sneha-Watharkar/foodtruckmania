@@ -34,7 +34,7 @@ public class RateUpdate {
 			ps.setString(1, String.valueOf(rating.getFoodTruckId()));
 			ps.setString(2, String.valueOf(userId));
 			ps.setString(3, String.valueOf(rating.getRating()));
-			ps.setTimestamp(4, (Timestamp) rating.getRatingDate());
+			ps.setDate(4, new java.sql.Date(rating.getRatingDate().getTime()));
 			ps.setString(5, rating.getComments());
 			return ps.executeUpdate();
 		} catch (Exception e) {

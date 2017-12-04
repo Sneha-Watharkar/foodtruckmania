@@ -28,9 +28,9 @@ public class RateController {
 		ratingObj.setComments(data.getString("comments"));
 		ratingObj.setFoodTruckId(truckJson.getInt("truckId"));
 		int insertData = TableDataGateway.rateTruck(user.getUserId(),ratingObj);
-		if (ratingObj.getRating() > 2){
+		/*if (ratingObj.getRating() > 2){
 			TableDataGateway.updateUserFav(user.getUserId(), truckJson.getInt("truckId"));
-		}
+		}*/
 		return insertData;
 	}
 	
