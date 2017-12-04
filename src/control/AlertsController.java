@@ -28,8 +28,22 @@ public class AlertsController {
 	    UserAccount user = (UserAccount) session.getAttribute("user");
 
 		int userId = user.getUserId();
-		String alerts = data.getString("userAlertPreference");
-
+		Boolean text = data.getBoolean("sms");
+		Boolean email = data.getBoolean("email");
+		String alerts = null;
+		if(text & email){
+			alerts = "text&email";
+		}
+		else if(email){
+			alerts = "email";
+		}
+		else if(text){
+			alerts = "text";
+		}
+		else{
+			alerts = "";
+		}
+		System.out.println(alerts);
 		int success = TableDataGateway.updateAlerts(userId,alerts);
 		
 		return success;

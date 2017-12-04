@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
@@ -18,14 +19,18 @@ public class RateController {
 	 * This method prepares the foodTruck Rating object to insert user ratings.
 	 */
 	public static int rateTruck(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
-		JSONObject rateJson = data.getJSONObject("truckDetails");
-		UserAccount userAcc = (UserAccount) request.getAttribute("user");
+		JSONObject truckJson = data.getJSONObject("truckName");
+		HttpSession session = request.getSession();
+	    UserAccount user = (UserAccount) session.getAttribute("user");
 		FoodTruckRating ratingObj = new FoodTruckRating();
 		ratingObj.setRatingDate(new Date());
-		ratingObj.setRating(rateJson.getInt("rating"));
-		ratingObj.setComments(rateJson.getString("comments"));
-		ratingObj.setFoodTruckId(rateJson.getInt("foodTruckId"));
-		int insertData = TableDataGateway.rateTruck(userAcc.getUserId(),ratingObj);
+		ratingObj.setRating(data.getInt("rating"));
+		ratingObj.setComments(data.getString("comments"));
+		ratingObj.setFoodTruckId(truckJson.getInt("truckId"));
+		int insertData = TableDataGateway.rateTruck(user.getUserId(),ratingObj);
+		if (ratingObj.getRating() > 2){
+			TableDataGateway.updateUserFav(user.getUserId(), truckJson.getInt("truckId"));
+		}
 		return insertData;
 	}
 	
