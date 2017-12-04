@@ -15,7 +15,7 @@ mainApp.service('FoodTruckService', function($http) {
     	return $http({
             method : 'POST',
             url : 'fetchPendingApprovals',
-            data: {'action': 'fetchPendingApprovals'}
+            data: {data: {},'action': 'fetchPendingApprovals'}
 		    });
     }
     
