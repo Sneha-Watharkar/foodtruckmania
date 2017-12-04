@@ -9,8 +9,6 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -23,10 +21,7 @@ import javax.servlet.http.Part;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.fasterxml.jackson.databind.ObjectWriter;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.JsonGenerationException;
 import control.AlertsController;
 import control.LocationController;
 import control.MenuController;
@@ -131,7 +126,8 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					break;
 				case "reserveLocation":
 					int locationUpdate = LocationController.reserveLocation(request, response, data);
-					if(locationUpdate == 1) {
+					System.out.println(locationUpdate);
+					if (locationUpdate == 1) {
 						returnObj.put("msg", "Food Truck Location updated");
 					}else {
 						returnObj.put("msg", "Unable to save truck location");

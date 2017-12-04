@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,7 +21,9 @@ public class LocationController {
 	public static int reserveLocation(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
 		FoodTruck foodTruck = new FoodTruck();
 
-		int userId = data.getInt("userid");
+		HttpSession session = request.getSession();
+	    UserAccount user = (UserAccount) session.getAttribute("user");
+	    int userId = user.getUserId();
 		foodTruck.setFoodTruckLocation(String.valueOf(data.getInt("location")));
 		convertLocationToCoordinates(foodTruck);
 		JSONArray daysJSon = data.getJSONArray("days");
