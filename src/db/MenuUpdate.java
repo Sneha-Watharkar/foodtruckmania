@@ -13,17 +13,14 @@ public class MenuUpdate {
 
 	public static int uploadMenu(int userId, String filePath) {
 		PreparedStatement ps = null;
-		String query = "UPDATE FoodTruck set foodTruckMenu=?" + "where userId = ?";
+		String query = "UPDATE FoodTruck SET foodTruckMenu=? WHERE userId = ?";
 		try {
-			File file = new File(filePath);
-			FileInputStream fis = new FileInputStream(file);
-			int len = (int) file.length();
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
 			System.out.println(connection.toString());
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());
-			ps.setBinaryStream(1, fis, len);
+			ps.setString(1, filePath);
 			ps.setInt(2, userId);
 			return ps.executeUpdate();
 		} catch (Exception e) {

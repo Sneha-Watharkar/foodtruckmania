@@ -11,10 +11,26 @@
   	<servlet-name>FoodTruckControllerFacade</servlet-name>
   	<servlet-class>facade.FoodTruckControllerFacade</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>MenuController</servlet-name>
+  	<servlet-class>control.MenuController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>MenuController</servlet-name>
+  	<url-pattern>/uploadMenu</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>FoodTruckControllerFacade</servlet-name>
   	<url-pattern>/registerUser</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>FoodTruckControllerFacade</servlet-name>
+  	<url-pattern>/getAllFoodTrucks</url-pattern>
+  	</servlet-mapping>
+  	<servlet-mapping>
+  	<servlet-name>FoodTruckControllerFacade</servlet-name>
+  	<url-pattern>/getFavFoodTrucks</url-pattern>
+  	</servlet-mapping>
   <servlet-mapping>
   	<servlet-name>FoodTruckControllerFacade</servlet-name>
   	<url-pattern>/getFoodTrucks</url-pattern>

@@ -52,6 +52,7 @@ public class FoodTruckControllerFacade extends HttpServlet {
         BufferedReader br = request.getReader();
         ObjectMapper mapperObj = new ObjectMapper();
         String str = null;
+        HttpSession session = request.getSession();
         //ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         while ((str = br.readLine()) != null) {
             sb.append(str);
@@ -85,6 +86,7 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					userAcc = UserController.login(request, response,data);
 					if(userAcc != null){
 						returnObj.put("user", mapperObj.writeValueAsString(userAcc));
+						session.setAttribute("user", userAcc);
 						returnObj.put("msg", "Login Successful");
 						returnObj.put("error", "");
 					}
@@ -177,10 +179,10 @@ public class FoodTruckControllerFacade extends HttpServlet {
 						returnObj.put("msg", "Error uploading menu");
 						returnObj.put("error", "Error");
 					}
-				break;
+					break;
 				case "displayMenu":
 					MenuController.displayMenu(data);
-				break;
+					break;
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
