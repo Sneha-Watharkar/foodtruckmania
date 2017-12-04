@@ -5,13 +5,16 @@ mainApp.controller('manageAlertsController', function($scope, $location, $rootSc
         
         $scope.updateUserAlerts = function (smsAlert, emailAlert) {
         	$scope.updatingAlertParam = {
-        			sms:smsAlert,
-        			email:emailAlert
+        			sms:smsAlert || false,
+        			email:emailAlert || false
         	};
         	
         	console.log("Alerts",$scope.updatingAlertParam);
-        	
-        	//var res = UserService.updateUserAlerts($scope.updatingAlertParam);
+        	UserService.updateUserAlerts($scope.updatingAlertParam).then(function(res){
+        		console.log("alert res",res);
+        	},function(err){
+        		
+        	});
         }
         
         $scope.setAsActive = function (path) {
