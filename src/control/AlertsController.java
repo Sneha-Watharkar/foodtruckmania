@@ -53,8 +53,11 @@ public class AlertsController {
 	 * User selects any specific foodtruck and sets up as a favorite.Triggers call to TableDataGateway.
 	 */
 	public static int updateUserFav(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
-		int userId = data.getInt("userId");
-		int foodTruckId = data.getInt("foodTruckId");
+		JSONObject truckJson = data.getJSONObject("truck");
+		HttpSession session = request.getSession();
+	    UserAccount user = (UserAccount) session.getAttribute("user");
+		int userId = user.getUserId();
+		int foodTruckId = truckJson.getInt("foodTruckId");
 		int favUpdate = TableDataGateway.updateUserFav(userId,foodTruckId);
 		return favUpdate;
 	}
