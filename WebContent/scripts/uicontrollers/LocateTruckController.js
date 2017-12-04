@@ -9,6 +9,8 @@ mainApp.controller('locateTruckController', function($scope, $location, FoodTruc
         
         FoodTruckService.getAllLocations().then(function(res){
         	console.log("Res of locations",res);
+        	var resultString = res.data.trucks;
+        	$scope.locationData = JSON.parse(resultString);
         }, function(err){
         	
         });

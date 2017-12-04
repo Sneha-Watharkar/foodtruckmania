@@ -30,9 +30,10 @@ mainApp.controller('rateFoodTruckController', function($scope, $location, $rootS
 		}
 		
 		$scope.addFoodTruckRating = function () {
+			console.log(JSON.parse($scope.selectedTruckName));
 			if($scope.selectedTruckName) {
 				var ratingObject = {
-					truckName: $scope.selectedTruckName,
+					truckName: JSON.parse($scope.selectedTruckName),
 					rating: $scope.currentRating,
 					comments: $scope.truckComments
 				};
