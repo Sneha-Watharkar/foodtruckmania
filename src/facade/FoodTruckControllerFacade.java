@@ -116,16 +116,22 @@ public class FoodTruckControllerFacade extends HttpServlet {
 						returnObj.put("msg", "Approval failed");
 					}
 					break;
-				case "updateUserAlerts":
+				case "setAlerts":
 					int success = AlertsController.insertAlerts(request, response, data);
 					returnObj.put("msg", "Alerts inserted successfully");
 					break;
 				case "getAlerts":
 					String alerts = AlertsController.getAlerts(request, response, data);
-					String[] alertArray = alerts.split("&");
-					for(String s: alertArray){
-						String[] alert = s.split("=");
-						returnObj.put(alert[0],alert[1]);
+					if(alerts != null){	
+						String[] alertArray = alerts.split("&");
+						for(String s: alertArray){
+							String[] alert = s.split("=");
+							returnObj.put(alert[0],alert[1]);
+						}
+					}
+					else{
+						returnObj.put("text", "false");
+						returnObj.put("email", "false");
 					}
 					break;
 				case "reserveLocation":

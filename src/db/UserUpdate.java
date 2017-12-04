@@ -23,8 +23,8 @@ public class UserUpdate {
 		 * pool.getConnection();
 		 */
 		PreparedStatement ps = null;
-		String query = "INSERT INTO UserAccount (userFirstName, userLastName, userType,loginName,password,userPhoneNumber,userEmailAddress,userAlertPreference) "
-				+ "VALUES (?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO UserAccount (userFirstName, userLastName, userType,loginName,password,userPhoneNumber,userEmailAddress) "
+				+ "VALUES (?,?,?,?,?,?,?)";
 		try {
 			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
 			Connection connection = ConnectionPool2.getConnection();
@@ -38,7 +38,6 @@ public class UserUpdate {
 			ps.setString(5, userAcc.getLogin_password());
 			ps.setString(6, String.valueOf(userAcc.getUserPhoneNumber()));
 			ps.setString(7, userAcc.getUserEmailAddress());
-			ps.setString(8, "text=false&email=false");
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);
@@ -242,7 +241,7 @@ public class UserUpdate {
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());
 			ps.setString(1,userAcc.getUserAlertPreference());
-			ps.setInt(1, getUserID(userAcc).getUserId());
+			ps.setInt(2, userAcc.getUserId());
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);
