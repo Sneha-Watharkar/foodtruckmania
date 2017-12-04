@@ -26,5 +26,9 @@ mainApp.service('UserService', function($http) {
     
     this.getAlerts = function () {
 		return $http.post('updateUserAlerts',{data:{},'action':'getAlerts'});
-}
+    }
+    
+    this.updateFavTrucks = function(favObj) {
+    	return $http.post('setUserFavorites',{data:favObj,'action':'setUserFavorites'});
+    }
 });

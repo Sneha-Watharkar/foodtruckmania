@@ -71,4 +71,8 @@
   	<servlet-name>FoodTruckControllerFacade</servlet-name>
   	<url-pattern>/fetchPendingApprovals</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>FoodTruckControllerFacade</servlet-name>
+  	<url-pattern>/setUserFavorites</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -35,6 +35,7 @@
 <script src="scripts/directives/fileUpload.js"></script>
 <script src="scripts/directives/starRating.js"></script>
 <script src="scripts/directives/notifications.js"></script>
+<script src="scripts/directives/containsFilter.js"></script>
 </head>
 <body ng-controller="mainController">
 	<div ng-view></div>

@@ -8,6 +8,7 @@
 					<tr>
 						<th>#</th>
 						<th>Truck Name</th>
+						<th>Set Favorite Action</th>
 						<th>Menu</th>
 					</tr>
 				</thead>
@@ -15,7 +16,12 @@
 					<tr ng-repeat="truck in allFoodTrucks track by $index">
 						<td>{{$index+1}}</td>
 						<td>{{truck.foodTruckName}}</td>
-						<td><button class="btn btn-primary" ng-model="viewMenuBtn"
+						<td><button class="btn btn-primary"
+						  	ng-click="updateUserFav(truck, true)">Mark as Favorite</button>
+						  	<button class="btn btn-primary" ng-model="updateFavBtn"		
+						  	ng-click="updateUserFav(truck, false)"
+						  	ng-if="favFoodTrucks | contains:truck.foodTruckId" >Remove from Favorites</button></td>
+						<td><button class="btn btn-primary"
 						  	ng-click="loadFoodMenu(truck)">View Menu</button></td>
 					</tr>
 				</tbody>
