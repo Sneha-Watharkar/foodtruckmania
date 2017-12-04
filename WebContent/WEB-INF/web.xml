@@ -44,6 +44,10 @@
   	<url-pattern>/updateUserAlerts</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+  <servlet-name>FoodTruckControllerFacade</servlet-name>
+  	<url-pattern>/getAlerts</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
   	<servlet-name>FoodTruckControllerFacade</servlet-name>
   	<url-pattern>/signUpUser</url-pattern>
   </servlet-mapping>

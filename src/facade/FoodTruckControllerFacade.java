@@ -122,7 +122,11 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					break;
 				case "getAlerts":
 					String alerts = AlertsController.getAlerts(request, response, data);
-					returnObj.put("alerts", mapperObj.writeValueAsString(alerts));
+					String[] alertArray = alerts.split("&");
+					for(String s: alertArray){
+						String[] alert = s.split("=");
+						returnObj.put(alert[0],alert[1]);
+					}
 					break;
 				case "reserveLocation":
 					int locationUpdate = LocationController.reserveLocation(request, response, data);

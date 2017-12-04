@@ -76,8 +76,8 @@ public class TableDataGateway {
 		return foodTruck;
 	}
 
-	public static String getUserAlerts(String loginName) {
-		UserAccount userAcc = UserUpdate.getUserAlerts(loginName);
+	public static String getUserAlerts(int userId) {
+		UserAccount userAcc = UserUpdate.getUserAlerts(userId);
 		String alerts = userAcc.getUserAlertPreference();
 		return alerts;
 	}
