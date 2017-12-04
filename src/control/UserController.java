@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 
@@ -87,8 +88,9 @@ public class UserController {
 	}*/
 	public static ArrayList<FoodTruck> getFavFoodTrucks(HttpServletRequest request, HttpServletResponse response,
 			JSONObject data) {
-		
-		ArrayList<FoodTruck> results = TableDataGateway.getFavFoodTrucks(data.getInt("userID"));
+		HttpSession session = request.getSession();
+	    UserAccount user = (UserAccount) session.getAttribute("user");
+		ArrayList<FoodTruck> results = TableDataGateway.getFavFoodTrucks(user.getUserId());
 		return results;
 	}
 
