@@ -59,7 +59,7 @@ public class LocationUpdate {
 			ps.setInt(1, foodTruck.getFoodTruckId()); 
 			ps.setString(2, foodTruck.getFoodTruckName());
 			rs = ps.executeQuery();
-			if(rs.next()) {
+			while(rs.next()) {
 				foodTruck.setFoodTruckLocation(rs.getString("foodTruckLocation"));
 				foodTruck.setLatitude(rs.getFloat("latitude"));
 				foodTruck.setLongitude(rs.getFloat("longitude"));
@@ -74,13 +74,13 @@ public class LocationUpdate {
 	public static ArrayList<FoodTruck> getAllLocations() {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = "SELECT foodTruckName, latitude, longitude FROM FoodTruck";
+		String query = "SELECT foodTruckName, latitude, longitude FROM FoodTruck WHERE foodTruckStatus = 'approve'";
 		try {
 			Connection connection = ConnectionPool2.getConnection();
 			ps = connection.prepareStatement(query);
 			ArrayList<FoodTruck> foodTruckList = new ArrayList<FoodTruck>();
 			rs = ps.executeQuery();
-			if(rs.next()) {
+			while(rs.next()) {
 				FoodTruck foodTruck = new FoodTruck();
 				foodTruck.setFoodTruckName(rs.getString("foodTruckName"));
 				foodTruck.setLatitude(rs.getFloat("latitude"));
