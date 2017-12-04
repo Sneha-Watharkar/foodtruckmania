@@ -29,6 +29,7 @@
 <script src="scripts/uicontrollers/ReserveLocationController.js"></script>
 <script src="scripts/uicontrollers/UploadMenuController.js"></script>
 <script src="scripts/uicontrollers/ViewFeedBackController.js"></script>
+<script src="scripts/uicontrollers/AdminController.js"></script>
 <script src="scripts/uiservices/userService.js"></script>
 <script src="scripts/uiservices/foodTruckService.js"></script>
 <script src="scripts/directives/fileUpload.js"></script>

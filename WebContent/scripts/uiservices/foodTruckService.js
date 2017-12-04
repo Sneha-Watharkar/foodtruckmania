@@ -3,14 +3,11 @@ mainApp.service('FoodTruckService', function($http) {
 	this.errors = null;
 	this.favFoodTrucks = null;
     this.getAllFoodtrucks = function () {
-    	$http({
+    	console.log("getAllFoodtrucks service");
+    	return $http({
             method : 'GET',
-            url : 'javaAngularJS'
-		    }).success(function(data, status, headers, config) {
-		           this.allFoodTrucks = data;
-		           return this.allFoodTrucks;
-		    }).error(function(data, status, headers, config) {
-		           this.errors = data;
+            url : 'getAllFoodTrucks',
+            data: {'action': 'getAllFoodTrucks'}
 		    });
     }
     

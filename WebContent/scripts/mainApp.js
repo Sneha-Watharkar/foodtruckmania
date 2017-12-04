@@ -49,6 +49,10 @@ var mainApp = angular.module('mainApp', ['ngRoute']);
 	            templateUrl : 'views/viewFeedBacks.html',
 	            controller  : 'viewFeedBackController'
 	        })
+	        .when('/manageTrucks', {
+	            templateUrl : 'views/adminUI.html',
+	            controller  : 'adminController'
+	        })
 	        .otherwise({ redirectTo: '/' });
 	});
 	
