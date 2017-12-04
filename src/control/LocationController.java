@@ -24,7 +24,7 @@ public class LocationController {
 		HttpSession session = request.getSession();
 	    UserAccount user = (UserAccount) session.getAttribute("user");
 	    int userId = user.getUserId();
-		foodTruck.setFoodTruckLocation(String.valueOf(data.getInt("location")));
+		foodTruck.setFoodTruckLocation(data.getString("location"));
 		convertLocationToCoordinates(foodTruck);
 		JSONArray daysJSon = data.getJSONArray("days");
 		StringBuffer sb = new StringBuffer();
@@ -44,22 +44,22 @@ public class LocationController {
 	 * updates latitude and longitude coordiantes for each of the truck location.
 	 */
 	private static void convertLocationToCoordinates(FoodTruck foodTruck) {
-		if (foodTruck.getFoodTruckLocation().equals("1")) {
+		if (foodTruck.getFoodTruckLocation().equals("Prospector")) {
 			foodTruck.setLatitude((float) 35.3069394);
 			foodTruck.setLongitude((float) -80.7354401);
-		} else if (foodTruck.getFoodTruckLocation().equals("2")) {
+		} else if (foodTruck.getFoodTruckLocation().equals("Colvard Hall")) {
 			foodTruck.setLatitude((float) 35.306703);
 			foodTruck.setLongitude((float) -80.730515);
 
-		} else if (foodTruck.getFoodTruckLocation().equals("3")) {
+		} else if (foodTruck.getFoodTruckLocation().equals("Student Activity Center")) {
 			foodTruck.setLatitude((float) 35.304362);
 			foodTruck.setLongitude((float) -80.732019);
 
-		} else if (foodTruck.getFoodTruckLocation().equals("4")) {
+		} else if (foodTruck.getFoodTruckLocation().equals("Student Union")) {
 			foodTruck.setLatitude((float) 35.306667);
 			foodTruck.setLongitude((float) -80.735256);
 
-		} else if (foodTruck.getFoodTruckLocation().equals("5")) {
+		} else if (foodTruck.getFoodTruckLocation().equals("Van Landingham / John Kick")) {
 			foodTruck.setLatitude((float) 35.307886);
 			foodTruck.setLongitude((float) -80.733716);
 

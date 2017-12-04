@@ -20,7 +20,7 @@ public class LocationUpdate {
 		 */
 		PreparedStatement ps = null;
 		String query = "UPDATE FoodTruck set " + "latitude=?," + "longitude = ?," + "foodTruckDay = ?,"
-		+ "truckTime = ? " + "  where userId = ?";
+		+ "truckTime = ?, " + "truckLocation = ? " + "  where userId = ?";
 		/*String query = "INSERT INTO FoodTruck (userId, latitude, longitude, truckTime, foodTruckStatus) "
 				+ "VALUES (?,?,?,?,?,?)";*/
 		try {
@@ -33,7 +33,8 @@ public class LocationUpdate {
 			ps.setString(2, String.valueOf(foodTruck.getLongitude()));
 			ps.setString(3, foodTruck.getFoodTruckDay());
 			ps.setString(4, foodTruck.getFoodTruckTime());
-			ps.setInt(5, userId);
+			ps.setString(5,foodTruck.getFoodTruckLocation());
+			ps.setInt(6, userId);
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);
@@ -74,7 +75,7 @@ public class LocationUpdate {
 	public static ArrayList<FoodTruck> getAllLocations() {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = "SELECT foodTruckName, latitude, longitude FROM FoodTruck WHERE foodTruckStatus = 'approve'";
+		String query = "SELECT foodTruckName, truckLocation, latitude, longitude FROM FoodTruck WHERE foodTruckStatus = 'approve'";
 		try {
 			Connection connection = ConnectionPool2.getConnection();
 			ps = connection.prepareStatement(query);
@@ -83,6 +84,7 @@ public class LocationUpdate {
 			while(rs.next()) {
 				FoodTruck foodTruck = new FoodTruck();
 				foodTruck.setFoodTruckName(rs.getString("foodTruckName"));
+				foodTruck.setFoodTruckLocation(rs.getString("truckLocation"));
 				foodTruck.setLatitude(rs.getFloat("latitude"));
 				foodTruck.setLongitude(rs.getFloat("longitude"));
 				foodTruckList.add(foodTruck);
