@@ -1,4 +1,4 @@
-mainApp.controller('locateTruckController', function($scope, $location) {
+mainApp.controller('locateTruckController', function($scope, $location, FoodTruckService) {
         // create a message to display in our view
         $scope.currentPage = 'Truck Locations';
         $scope.rootUrl = $location.$$absUrl.substring(0,$scope.rootUrl.lastIndexOf('/')+1);;
@@ -7,6 +7,11 @@ mainApp.controller('locateTruckController', function($scope, $location) {
 			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
 		}
         
+        FoodTruckService.getAllLocations().then(function(res){
+        	console.log("Res of locations",res);
+        }, function(err){
+        	
+        });
         $scope.locations = [
             {
                 location : 'Library',

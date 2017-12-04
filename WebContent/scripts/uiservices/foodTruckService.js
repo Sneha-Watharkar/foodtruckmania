@@ -72,4 +72,13 @@ mainApp.service('FoodTruckService', function($http) {
 	    	return data;
   	  });
     }
+    
+    this.getAllLocations = function () {
+    	console.log("getAllFoodtrucks service");
+    	return $http({
+            method : 'GET',
+            url : 'getAllLocations',
+            data: {'action': 'getAllLocations'}
+		    });
+    }
 });
