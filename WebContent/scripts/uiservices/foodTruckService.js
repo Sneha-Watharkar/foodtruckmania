@@ -89,4 +89,15 @@ mainApp.service('FoodTruckService', function($http) {
             data: {'action': 'getAllLocations'}
 		    });
     }
+    
+    this.approveRejectFoodTruck = function(truckObj) {
+    	return $http({
+            method: 'POST',
+            url: 'approveFoodTrucks',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data:JSON.stringify({data: truckObj, action:'approveFoodTrucks'})
+        });
+    }
 });

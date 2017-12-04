@@ -12,13 +12,13 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="truck in allFoodTrucks track by $index">
-						<td>{{truck.truckId}}</td>
-						<td>{{truck.name}}</td>
+					<tr ng-repeat="truck in allPendingFoodTrucks track by $index">
+						<td>{{$index+1}}</td>
+						<td>{{truck.foodTruckName}}</td>
 						<td><button class="btn btn-primary" ng-model="acceptBtn"
-						  	>Accept</button>
+						  	ng-click="acceptFoodTruck(truck)">Accept</button>
 						  	<button class="btn btn-default" ng-model="rejectBtn"
-						  	>Reject</button></td>
+						  	ng-click="rejectFoodTruck(truck)">Reject</button></td>
 					</tr>
 				</tbody>
 			</table>

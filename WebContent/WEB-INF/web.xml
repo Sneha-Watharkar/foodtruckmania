@@ -49,7 +49,7 @@
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>FoodTruckControllerFacade</servlet-name>
-  	<url-pattern>/approveVendors</url-pattern>
+  	<url-pattern>/approveFoodTrucks</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
   	<servlet-name>FoodTruckControllerFacade</servlet-name>
