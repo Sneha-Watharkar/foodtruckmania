@@ -24,12 +24,13 @@ public class AlertsController {
 	}
 	public static int insertAlerts(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
 		System.out.println("Inside insert alerts");
-		JSONObject userJson = data.getJSONObject("userDetails");
+		HttpSession session = request.getSession();
+	    UserAccount user = (UserAccount) session.getAttribute("user");
 
-		String loginName = userJson.getString("email");
-		String alerts = userJson.getString("userAlertPreference");
+		int userId = user.getUserId();
+		String alerts = data.getString("userAlertPreference");
 
-		int success = TableDataGateway.updateAlerts(loginName,alerts);
+		int success = TableDataGateway.updateAlerts(userId,alerts);
 		
 		return success;
 

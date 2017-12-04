@@ -82,9 +82,9 @@ public class TableDataGateway {
 		return alerts;
 	}
 
-	public static int updateAlerts(String loginName, String alerts) {
+	public static int updateAlerts(int userId, String alerts) {
 		UserAccount userAcc = new UserAccount();
-		userAcc.setLoginName(loginName);
+		userAcc.setUserId(userId);
 		userAcc.setUserAlertPreference(alerts);
 		int success = UserUpdate.updateAlerts(userAcc);
 		return success;
