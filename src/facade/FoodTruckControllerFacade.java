@@ -63,7 +63,7 @@ public class FoodTruckControllerFacade extends HttpServlet {
 			UserAccount userAcc = new UserAccount();
 			switch (action) {
 				case "registerUser":
-					int registerSuccess = UserController.registerUser(request, response, data,userAcc);
+					int registerSuccess = UserController.registerUser(request, response, data);
 					if ( registerSuccess == 0){
 						System.out.print("Register failed");
 						returnObj.put("msg", "User Registration failed");

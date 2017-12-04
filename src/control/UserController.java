@@ -1,6 +1,7 @@
 package control;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,8 +17,9 @@ import dbgateway.TableDataGateway;
 
 public class UserController {
 
-	public static int registerUser(HttpServletRequest request, HttpServletResponse response, JSONObject data, UserAccount userAcc) {
+	public static int registerUser(HttpServletRequest request, HttpServletResponse response, JSONObject data ) {
 		System.out.println("Inside register User");
+		UserAccount userAcc = new UserAccount();
 		JSONObject userJson = data.getJSONObject("userDetails");
 		userAcc.setUserFirstName(userJson.getString("firstname"));
 		userAcc.setUserLastName(userJson.getString("lastname"));
@@ -38,8 +40,8 @@ public class UserController {
 	}
 	public static Map<Integer,String> fetchPendingApprovals() {
 		ArrayList<FoodTruck> pendingApprovals = TableDataGateway.fetchPendingApprovals();
-		Map<Integer,String> results = null;
-		for (FoodTruck userAcc:pendingApprovals){
+		Map<Integer,String> results = new HashMap<Integer, String>();
+		for (FoodTruck userAcc: pendingApprovals){
 			results.put(userAcc.getFoodTruckId(), userAcc.getFoodTruckName());
 		}
 		return results;

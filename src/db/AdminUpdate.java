@@ -13,7 +13,7 @@ public class AdminUpdate {
 	public static ArrayList<FoodTruck> fetchPendingApprovals(){
 		ArrayList<FoodTruck> list = new ArrayList<FoodTruck>();
 		PreparedStatement ps = null;
-		String query = "SELECT FROM FoodTruck WHERE foodTruckStatus='Pending'";
+		String query = "SELECT * FROM FoodTruck WHERE foodTruckStatus='Pending'";
 		try {
 			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
 			Connection connection = ConnectionPool2.getConnection();
@@ -21,13 +21,16 @@ public class AdminUpdate {
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
+			System.out.println("length of the lsit: ");
+			while (rs.next()) {
 				FoodTruck foodTruck = new FoodTruck();
 				foodTruck.setFoodTruckId(rs.getInt("foodtruckID"));
 				foodTruck.setFoodTruckName(rs.getString("foodTruckName"));
 				foodTruck.setFoodTruckStatus(rs.getString("foodTruckStatus"));
+				System.out.println(rs.getString("foodTruckName"));
 				list.add(foodTruck);
 			}
+			System.out.println("length of the lsit: "+list.size());
 			return list;
 		} catch (Exception e) {
 			System.out.println(e);
