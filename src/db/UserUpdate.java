@@ -90,12 +90,13 @@ public class UserUpdate {
 			rs = ps.executeQuery();
 			System.out.println("Result set is :" + rs.getRow());
 			ArrayList<FoodTruck> foodTruckList = new ArrayList<FoodTruck>();
-			if (rs.next()) {
+			while (rs.next()) {
 				FoodTruck truck = new FoodTruck();
 				truck.setFoodTruckId(rs.getInt("foodTruckId"));
 				truck.setFoodTruckName(rs.getString("foodtruckName"));
 				truck.setLatitude(rs.getFloat("latitude"));
-				truck.setLongitude(rs.getFloat("truckTime"));
+				truck.setLongitude(rs.getFloat("longitude"));
+				truck.setFoodTruckTime(rs.getString("truckTime"));
 				truck.setFoodTruckMenu(rs.getString("foodTruckMenu"));
 				truck.setFoodTruckStatus(rs.getString("foodTruckStatus"));
 				foodTruckList.add(truck);
