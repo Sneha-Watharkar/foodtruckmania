@@ -49,22 +49,17 @@ public class UserUpdate {
 
 	}
 	
-	public static int registerFoodTruck(UserAccount userAcc) {
-		/*
-		 * ConnectionPool pool = ConnectionPool.getInstance(); Connection connection =
-		 * pool.getConnection();
-		 */
+	public static int registerFoodTruck(UserAccount userAcc,String foodTruckName) {
 		PreparedStatement ps = null;
 		String query = "INSERT INTO foodtruck(userID, foodTruckName,foodTruckStatus) "
 				+ "VALUES (?,?,?)";
 		try {
-			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
 			Connection connection = ConnectionPool2.getConnection();
 			System.out.println(connection.toString());
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());
 			ps.setInt(1, getUserID(userAcc).getUserId());
-			ps.setString(2, userAcc.getUserFirstName() + userAcc.getUserLastName());
+			ps.setString(2, foodTruckName);
 			ps.setString(3, "Pending");
 			return ps.executeUpdate();
 		} catch (Exception e) {
@@ -72,7 +67,6 @@ public class UserUpdate {
 			return 0;
 		} finally {
 			DBUtil.closePreparedStatement(ps);
-			// pool.freeConnection(connection);
 		}
 
 	}
@@ -118,15 +112,11 @@ public class UserUpdate {
 	
 	
 	public static UserAccount getUserID(UserAccount userAcc) {
-		/*
-		 * ConnectionPool pool = ConnectionPool.getInstance(); Connection connection =
-		 * pool.getConnection();
-		 */
+		
 		PreparedStatement ps = null;
 		String query = "SELECT userId FROM UserAccount " +  "where loginName = ?";
 		try {
-			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
-			//Connection connection = ConnectionPool2.getConnection();
+			Connection connection = ConnectionPool2.getConnection();
 			System.out.println(connection.toString());
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());
@@ -142,7 +132,6 @@ public class UserUpdate {
 			return null;
 		} finally {
 			DBUtil.closePreparedStatement(ps);
-			// pool.freeConnection(connection)
 		}
 		
 
@@ -267,5 +256,27 @@ public class UserUpdate {
 		} finally {
 			DBUtil.closePreparedStatement(ps);
 		}
+	}
+
+	public static void getFoodTruckId(UserAccount userAcc) {
+		PreparedStatement ps = null;
+		String query = "SELECT foodTruckId FROM FoodTruck " +  "where userId = ?";
+		try {
+			Connection connection = ConnectionPool2.getConnection();
+			System.out.println(connection.toString());
+			ps = connection.prepareStatement(query);
+			System.out.println(ps.toString());
+			ps.setInt(1, userAcc.getUserId());
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+				userAcc.setTruckId(rs.getInt("foodTruckId"));
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DBUtil.closePreparedStatement(ps);
+		}
+
+		
 	}
 }

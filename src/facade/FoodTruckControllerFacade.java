@@ -64,9 +64,10 @@ public class FoodTruckControllerFacade extends HttpServlet {
 			System.out.println("Data is " + data);
 			String action = jObj.getString("action");
 			System.out.println("Action is " + action);
+			UserAccount userAcc = new UserAccount();
 			switch (action) {
 				case "registerUser":
-					int registerSuccess = UserController.registerUser(request, response, data);
+					int registerSuccess = UserController.registerUser(request, response, data,userAcc);
 					if ( registerSuccess == 0){
 						System.out.print("Register failed");
 						returnObj.put("msg", "User Registration failed");
@@ -74,13 +75,14 @@ public class FoodTruckControllerFacade extends HttpServlet {
 						returnObj.put("msg", "Register is successful");
 					}
 					else{
+						returnObj.put("user", mapperObj.writeValueAsString(userAcc));
 						System.out.print("Register is successful");
 						returnObj.put("msg", "User Registration successful");
 						returnObj.put("error", "None");
 					}
 					break;
 				case "login":
-					UserAccount userAcc = UserController.login(request, response,data);
+					userAcc = UserController.login(request, response,data);
 					if(userAcc != null){
 						returnObj.put("user", mapperObj.writeValueAsString(userAcc));
 						returnObj.put("msg", "Login Successful");

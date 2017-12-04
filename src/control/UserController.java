@@ -16,10 +16,9 @@ import dbgateway.TableDataGateway;
 
 public class UserController {
 
-	public static int registerUser(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
+	public static int registerUser(HttpServletRequest request, HttpServletResponse response, JSONObject data, UserAccount userAcc) {
 		System.out.println("Inside register User");
 		JSONObject userJson = data.getJSONObject("userDetails");
-		UserAccount userAcc = new UserAccount();
 		userAcc.setUserFirstName(userJson.getString("firstname"));
 		userAcc.setUserLastName(userJson.getString("lastname"));
 		userAcc.setUserType(userJson.getString("type"));
@@ -29,8 +28,10 @@ public class UserController {
 		userAcc.setUserEmailAddress(userJson.getString("email"));
 
 		int success = TableDataGateway.registerUser(userAcc);
-		if(success == 1 && userAcc.getUserType() == "Vendor"){
-			int foodSuccess = TableDataGateway.registerFoodTruck(userAcc);
+		if(success == 1 && userAcc.getUserType().equals("vendor")){
+			JSONObject truckJson = data.getJSONObject("truckDetails");
+			String foodTruckName = truckJson.getString("name");
+			TableDataGateway.registerFoodTruck(userAcc,foodTruckName);
 		}
 		System.out.println("Success : "+success);
 		return success;

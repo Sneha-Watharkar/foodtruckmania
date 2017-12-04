@@ -27,6 +27,15 @@ public class UserAccount implements Serializable {
 	private String userEmailAddress;
 	private String userAlertPreference;
 	private ArrayList favTrucks;
+	private int truckId;
+
+	public int getTruckId() {
+		return truckId;
+	}
+
+	public void setTruckId(int truckId) {
+		this.truckId = truckId;
+	}
 
 	public int getUserId() {
 		return userId;
