@@ -28,13 +28,13 @@ public class RateUpdate {
 		String query = "INSERT INTO FoodTruckRating (foodTruckId,userId,rating,ratingDate,Comment)" 
 				+ "VALUES (?,?,?,?,?)";
 		try {
-//			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
 			Connection connection = ConnectionPool2.getConnection();
 			ps = connection.prepareStatement(query);
 			ps.setString(1, String.valueOf(rating.getFoodTruckId()));
 			ps.setString(2, String.valueOf(userId));
 			ps.setString(3, String.valueOf(rating.getRating()));
-			ps.setTimestamp(4, (Timestamp) rating.getRatingDate());
+			java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+			ps.setTimestamp(4, date);
 			ps.setString(5, rating.getComments());
 			return ps.executeUpdate();
 		} catch (Exception e) {
