@@ -1,0 +1,27 @@
+<div>
+	<div ng-include src="'views/commonTemplate.html'"></div>
+	<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+		<h4>{{currentPage}}</h4>
+		<div class="table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Truck Name</th>
+						<th>Accept/Reject</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="truck in allFoodTrucks track by $index">
+						<td>{{truck.truckId}}</td>
+						<td>{{truck.name}}</td>
+						<td><button class="btn btn-primary" ng-model="acceptBtn"
+						  	>Accept</button>
+						  	<button class="btn btn-default" ng-model="rejectBtn"
+						  	>Reject</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
+</div>
