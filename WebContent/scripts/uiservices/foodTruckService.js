@@ -20,15 +20,11 @@ mainApp.service('FoodTruckService', function($http) {
     }
     
     this.getFavoriteFoodtrucks = function (userId) {
-    	$http({
-            method : 'GET',
-            url : 'javaAngularJS'
-		    }).success(function(data, status, headers, config) {
-		           this.favFoodTrucks = data;
-		           return this.favFoodTrucks;
-		    }).error(function(data, status, headers, config) {
-		           this.errors = data;
-		    });
+    	return $http({
+            method : 'POST',
+            url : 'getFavFoodTrucks',
+            data: {data: {},'action': 'getFavFoodTrucks'}
+    	});
     }
     
     this.rateFoodTruck = function (ratingObj) {
@@ -84,9 +80,9 @@ mainApp.service('FoodTruckService', function($http) {
     this.getAllLocations = function () {
     	console.log("getAllFoodtrucks service");
     	return $http({
-            method : 'GET',
+            method : 'POST',
             url : 'getAllLocations',
-            data: {'action': 'getAllLocations'}
+            data: {data: {},'action': 'getAllLocations'}
 		    });
     }
     

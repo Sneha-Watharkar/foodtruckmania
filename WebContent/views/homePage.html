@@ -13,8 +13,8 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="truck in allFoodTrucks track by $index">
-						<td>{{truck.truckId}}</td>
-						<td>{{truck.name}}</td>
+						<td>{{$index+1}}</td>
+						<td>{{truck.foodTruckName}}</td>
 						<td><button class="btn btn-primary" ng-model="viewMenuBtn"
 						  	ng-click="loadFoodMenu(truck)">View Menu</button></td>
 					</tr>

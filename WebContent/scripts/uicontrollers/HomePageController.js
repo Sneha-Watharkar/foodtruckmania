@@ -9,33 +9,20 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
         if($scope.currentUser.userType == "customer") {
         	FoodTruckService.getAllFoodtrucks().then(function(res){
             	console.log("All food trucks",  res);
-            	$scope.allFoodTrucks = res;
+            	var truckString = res.data.trucks;
+            	$scope.allFoodTrucks = JSON.parse(truckString);
             }, function(err){
             	
             });
-        	//$scope.favFoodTrucks = FoodTruckService.getFavoriteFoodtrucks();
+        	FoodTruckService.getFavoriteFoodtrucks().then(function(res){
+            	console.log("All fav food trucks",  res);
+            	/*var truckString = res.data.trucks;
+            	$scope.allFoodTrucks = JSON.parse(truckString);*/
+            }, function(err){
+            	
+            });
+        	/*FoodTruckService.getFavoriteFoodtrucks();*/
         }
-        
-        
-        $scope.allFoodTrucks = [{
-        	truckId: 1,
-        	name: "Asian Eatery"
-        },{
-        	truckId: 2,
-        	name: "Maki of Japan"
-        },
-        {
-        	truckId: 3,
-        	name: "Dominos"
-        },
-        {
-        	truckId: 4,
-        	name: "Chinese Gourmet"
-        },
-        {
-        	truckId: 5,
-        	name: "Subz"
-        }];
         
         $scope.favFoodTrucks = [{
         	truckId: 3,
