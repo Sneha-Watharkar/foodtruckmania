@@ -149,7 +149,7 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					returnObj.put("latitude", foodTruck.getLatitude());
 					returnObj.put("longitude", foodTruck.getLongitude());
 					break;
-				case "rateTruck":
+				case "rating":
 					int rateUpdate = RateController.rateTruck(request,response,data);
 					if(rateUpdate == 1) {
 						returnObj.put("msg", "Customer review complete");
