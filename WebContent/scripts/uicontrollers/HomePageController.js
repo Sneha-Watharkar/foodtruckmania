@@ -6,8 +6,16 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
         $scope.favFoodTrucks;
         $scope.currentUser = UserService.getCurrentUser();
         console.log("In Home", $scope.currentUser);
-       // $scope.allFoodTrucks = FoodTruckService.getAllFoodtrucks();
-        //$scope.favFoodTrucks = FoodTruckService.getFavoriteFoodtrucks();
+        if($scope.currentUser.userType == "customer") {
+        	FoodTruckService.getAllFoodtrucks().then(function(res){
+            	console.log("All food trucks",  res);
+            	$scope.allFoodTrucks = res;
+            }, function(err){
+            	
+            });
+        	//$scope.favFoodTrucks = FoodTruckService.getFavoriteFoodtrucks();
+        }
+        
         
         $scope.allFoodTrucks = [{
         	truckId: 1,
@@ -38,10 +46,4 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
         $scope.setAsActive = function (path) {
 			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
 		}
-        
-        $scope.loadFoodMenu = function (truck) {
-        	/*var result = FoodTruckService.getFoodMenu(truck.truckId);
-        	$scope.foodMenuFile = $sce.trustAsResourceUrl(result);
-        	$window.open($scope.foodMenuFile);*/
-        }
 });

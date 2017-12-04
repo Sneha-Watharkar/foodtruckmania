@@ -26,11 +26,9 @@ mainApp.controller('signUpController', function($scope, $location, $http, UserSe
 				$scope.dataTosend.userDetails = vendor;
 				var truckDetails = {};
 				truckDetails = {
-						name: $scope.truckName,
-						location:$scope.truckLocation
+						name: $scope.truckName
 				};
 				$scope.dataTosend.truckDetails = truckDetails;
-				$scope.dataTosend.menu = $scope.file;
 			} else if (userType == 'customer') {
 				var customer = {
 						firstname: $scope.firstname,

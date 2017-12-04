@@ -57,8 +57,12 @@ public class TableDataGateway {
 		return AdminUpdate.fetchPendingApprovals();
 	}
 
-	public static int registerFoodTruck(UserAccount userAcc) {
-		return UserUpdate.registerFoodTruck(userAcc);
+	public static int registerFoodTruck(UserAccount userAcc, String foodTruckName) {
+		int foodTruckInserted =  UserUpdate.registerFoodTruck(userAcc,foodTruckName);
+		if(foodTruckInserted == 1) {
+			UserUpdate.getFoodTruckId(userAcc);
+		}
+		return foodTruckInserted;
 	}
 
 	public static int reserveLocation(int userId, FoodTruck foodTruck) {
