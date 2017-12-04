@@ -68,43 +68,50 @@ public class RateUpdate {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String query1 = "SELECT * FROM UserFavorites where userID = ?";
-		
+		ArrayList<Integer> foodTruckIds = new ArrayList<Integer>();
 		try{
-			ArrayList<Integer> foodTruckList = new ArrayList<Integer>();
 			Connection connection = ConnectionPool2.getConnection();
 			ps = connection.prepareStatement(query1);
 			ps.setInt(1, UserId);
 			rs = ps.executeQuery();
 			System.out.println("Result set is :" + rs.getRow());
 			if(rs.next()){
-				foodTruckList.add(rs.getInt("foodTruckID"));
+				foodTruckIds.add(rs.getInt("foodTruckID"));
 			}
-		}
-		catch (Exception e) {
-		System.out.println(e);
-		}
-		String query2 = "SELECT * from FoodTruck WHERE foodTruckID IN ?";
-		try{
-			ArrayList<FoodTruck> foodTruckList = new ArrayList<FoodTruck>();
-			Connection connection = ConnectionPool2.getConnection();
-			ps = connection.prepareStatement(query1);
-			ps.setArray(1, (Array) foodTruckList);
-			rs = ps.executeQuery();
-			System.out.println("Result set is :" + rs.getRow());
-			if(rs.next()){
-				FoodTruck truck = new FoodTruck();
-				truck.setFoodTruckId(rs.getInt("foodTruckId"));
-				truck.setFoodTruckName(rs.getString("foodtruckName"));
-				truck.setLatitude(rs.getFloat("latitude"));
-				truck.setLongitude(rs.getFloat("truckTime"));
-				truck.setFoodTruckMenu(rs.getString("foodTruckMenu"));
-				truck.setFoodTruckStatus(rs.getString("foodTruckStatus"));
-				foodTruckList.add(truck);
-			}
-			return foodTruckList;
 		}
 		catch (Exception e) {
 			System.out.println(e);
+		}
+		System.out.println("Favorite Food Truck Ids: "+foodTruckIds);
+		String query2 = "SELECT * from FoodTruck WHERE foodTruckID IN ?";
+		if (foodTruckIds.size() !=0 && !foodTruckIds.isEmpty()){
+			try{
+				ArrayList<FoodTruck> foodTruckList = new ArrayList<FoodTruck>();
+				Connection connection = ConnectionPool2.getConnection();
+				ps = connection.prepareStatement(query1);
+				Integer[] Ids = foodTruckIds.toArray(new Integer[foodTruckIds.size()]);
+				System.out.println("Favorite Food Truck Ids: "+Ids);
+				ps.setArray(1, connection.createArrayOf("int",Ids));
+				rs = ps.executeQuery();
+				System.out.println("Result set is :" + rs.getRow());
+				if(rs.next()){
+					FoodTruck truck = new FoodTruck();
+					truck.setFoodTruckId(rs.getInt("foodTruckId"));
+					truck.setFoodTruckName(rs.getString("foodtruckName"));
+					truck.setLatitude(rs.getFloat("latitude"));
+					truck.setLongitude(rs.getFloat("truckTime"));
+					truck.setFoodTruckMenu(rs.getString("foodTruckMenu"));
+					truck.setFoodTruckStatus(rs.getString("foodTruckStatus"));
+					foodTruckList.add(truck);
+				}
+				return foodTruckList;
+			}
+			catch (Exception e) {
+				System.out.println(e);
+				return null;
+			}
+		}
+		else{
 			return null;
 		}
 		
