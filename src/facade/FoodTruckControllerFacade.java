@@ -101,7 +101,7 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					for (Map.Entry<Integer, String> entry : results.entrySet()) {
 						JSONObject approval = new JSONObject();
 						approval.put("foodtruckid",entry.getKey());
-						approval.put("status", entry.getValue());
+						approval.put("foodTruckName", entry.getValue());
 						jsonArray.put(approval);
 					}
 					returnObj.put("results", jsonArray);
