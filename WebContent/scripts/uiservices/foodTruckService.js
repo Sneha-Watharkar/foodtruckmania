@@ -10,6 +10,14 @@ mainApp.service('FoodTruckService', function($http) {
             data: {'action': 'getAllFoodTrucks'}
 		    });
     }
+    this.fetchPendingApprovals = function () {
+    	console.log("fetchPendingApprovals service");
+    	return $http({
+            method : 'POST',
+            url : 'fetchPendingApprovals',
+            data: {'action': 'fetchPendingApprovals'}
+		    });
+    }
     
     this.getFavoriteFoodtrucks = function (userId) {
     	$http({

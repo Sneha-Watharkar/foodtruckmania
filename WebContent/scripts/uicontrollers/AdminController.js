@@ -5,6 +5,14 @@ mainApp.controller('adminController', function($scope, $location, FoodTruckServi
         $scope.setAsActive = function (path) {
 			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
 		}
+        
+        FoodTruckService.fetchPendingApprovals().then(function(res){
+        	$scope.allPendingFoodTrucks = res.data;
+        	console.log("Pending trucks are",$scope.allPendingFoodTrucks );
+        },
+        function(err){
+        	
+        });
         $scope.allFoodTrucks = [{
         	truckId: 1,
         	name: "Asian Eatery"
