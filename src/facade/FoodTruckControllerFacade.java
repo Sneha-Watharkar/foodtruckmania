@@ -122,16 +122,16 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					break;
 				case "getAlerts":
 					String alerts = AlertsController.getAlerts(request, response, data);
-					if(alerts != null){	
+					System.out.println("Retrieved alerts: "+alerts);
+					if(alerts != null && !alerts.isEmpty() ){	
 						String[] alertArray = alerts.split("&");
 						for(String s: alertArray){
-							String[] alert = s.split("=");
-							returnObj.put(alert[0],alert[1]);
+							returnObj.put(s,1);
 						}
 					}
 					else{
-						returnObj.put("text", "false");
-						returnObj.put("email", "false");
+						returnObj.put("text", 0);
+						returnObj.put("email", 0);
 					}
 					break;
 				case "reserveLocation":
