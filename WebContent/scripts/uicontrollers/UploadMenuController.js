@@ -1,4 +1,4 @@
-mainApp.controller('uploadMenuController', function($scope, $location, $window, $sce) {
+mainApp.controller('uploadMenuController', function($scope, $location, $window, $sce, UserService, $http) {
         // create a message to display in our view
         $scope.currentPage = 'Upload Menu';
         $scope.rootUrl = $location.$$absUrl.substring(0,$scope.rootUrl.lastIndexOf('/')+1);;
