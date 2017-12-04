@@ -82,7 +82,7 @@ public class LocationUpdate {
 			rs = ps.executeQuery();
 			if(rs.next()) {
 				FoodTruck foodTruck = new FoodTruck();
-				foodTruck.setFoodTruckLocation(rs.getString("foodTruckLocation"));
+				foodTruck.setFoodTruckName(rs.getString("foodTruckName"));
 				foodTruck.setLatitude(rs.getFloat("latitude"));
 				foodTruck.setLongitude(rs.getFloat("longitude"));
 				foodTruckList.add(foodTruck);
