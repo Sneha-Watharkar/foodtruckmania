@@ -12,7 +12,7 @@ import dbgateway.TableDataGateway;
 public class AlertsController {
 	public static String getAlerts(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
 		System.out.println("Inside get Alerts");
-		JSONObject userJson = data.getJSONObject("userDetails");
+		/*JSONObject userJson = data.getJSONObject("userDetails");*/
 		HttpSession session = request.getSession();
 	    UserAccount user = (UserAccount) session.getAttribute("user");
 		int userId = user.getUserId();

@@ -2,7 +2,13 @@ mainApp.controller('manageAlertsController', function($scope, $location, $rootSc
         // create a message to display in our view
 		$scope.currentPage = 'Manage Alerts';
 		$scope.rootUrl = $location.$$absUrl.substring(0,$scope.rootUrl.lastIndexOf('/')+1);
-        
+		
+		
+		UserService.getAlerts().then(function(res){
+    		console.log("alert res",res);
+    	},function(err){
+    		
+    	});
         $scope.updateUserAlerts = function (smsAlert, emailAlert) {
         	$scope.updatingAlertParam = {
         			sms:smsAlert || false,

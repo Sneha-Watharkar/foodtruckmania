@@ -23,4 +23,8 @@ mainApp.service('UserService', function($http) {
     this.getCurrentUser = function () {
     	return this.currentUser;
     }
+    
+    this.getAlerts = function () {
+		return $http.post('updateUserAlerts',{data:{},'action':'getAlerts'});
+}
 });

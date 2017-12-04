@@ -116,7 +116,7 @@ public class FoodTruckControllerFacade extends HttpServlet {
 						returnObj.put("msg", "Approval failed");
 					}
 					break;
-				case "setAlerts":
+				case "updateUserAlerts":
 					int success = AlertsController.insertAlerts(request, response, data);
 					returnObj.put("msg", "Alerts inserted successfully");
 					break;
