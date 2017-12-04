@@ -5,9 +5,9 @@ mainApp.service('FoodTruckService', function($http) {
     this.getAllFoodtrucks = function () {
     	console.log("getAllFoodtrucks service");
     	return $http({
-            method : 'GET',
+            method : 'POST',
             url : 'getAllFoodTrucks',
-            data: {'action': 'getAllFoodTrucks'}
+            data: {data: {},'action': 'getAllFoodTrucks'}
 		    });
     }
     this.fetchPendingApprovals = function () {

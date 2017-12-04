@@ -80,7 +80,7 @@ public class UserUpdate {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String query = "Select * FROM foodtruck WHERE foodTruckStatus='approved'";
+		String query = "Select * FROM foodtruck WHERE foodTruckStatus='approve'";
 		try {
 			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
 			Connection connection = ConnectionPool2.getConnection();
