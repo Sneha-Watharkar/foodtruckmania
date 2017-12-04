@@ -49,7 +49,7 @@ public class AdminUpdate {
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());
 			ps.setString(1,foodTruckStatus);
-			ps.setInt(1, foodTruckId);
+			ps.setInt(2, foodTruckId);
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);

@@ -51,10 +51,10 @@ public class UserController {
 	}
 	
 	public static int approveFoodTruckRequests(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
-		JSONObject userJson = data.getJSONObject("userDetails");
-		UserAccount userAcc = new UserAccount();
-		int foodTruckId = userJson.getInt("foodTruckId");
-		String foodTruckStatus = userJson.getString("foodTruckStatus");
+		JSONObject truckJson = data.getJSONObject("truck");
+		int foodTruckId = truckJson.getInt("foodtruckid");
+		String foodTruckStatus = data.getString("foodTruckStatus");
+		System.out.println("food Truck Status: "+foodTruckStatus);
 		int success = TableDataGateway.approveRequests(foodTruckId, foodTruckStatus);
 		return success;
 	}
