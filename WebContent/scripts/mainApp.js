@@ -45,6 +45,10 @@ var mainApp = angular.module('mainApp', ['ngRoute']);
 	            templateUrl : 'views/uploadMenu.html',
 	            controller  : 'uploadMenuController'
 	        })
+	        .when('/feedbacks', {
+	            templateUrl : 'views/viewFeedBacks.html',
+	            controller  : 'viewFeedBackController'
+	        })
 	        .otherwise({ redirectTo: '/' });
 	});
 	
