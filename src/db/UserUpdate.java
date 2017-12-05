@@ -37,8 +37,8 @@ public class UserUpdate {
 			ps.setString(4, userAcc.getLoginName());
 			ps.setString(5, userAcc.getLogin_password());
 			ps.setString(6, String.valueOf(userAcc.getUserPhoneNumber()));
-			ps.setString(7, "text=0&email=0");
 			ps.setString(7, userAcc.getUserEmailAddress());
+			ps.setString(8, "text=0&email=0");
 			return ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e);

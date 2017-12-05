@@ -16,9 +16,7 @@ public class AlertsController {
 		HttpSession session = request.getSession();
 	    UserAccount user = (UserAccount) session.getAttribute("user");
 		int userId = user.getUserId();
-
 		String alerts = TableDataGateway.getUserAlerts(userId);
-		
 		return alerts;
 
 	}
@@ -26,7 +24,6 @@ public class AlertsController {
 		System.out.println("Inside insert alerts");
 		HttpSession session = request.getSession();
 	    UserAccount user = (UserAccount) session.getAttribute("user");
-
 		int userId = user.getUserId();
 		Boolean text = data.getBoolean("sms");
 		Boolean email = data.getBoolean("email");
@@ -61,5 +58,4 @@ public class AlertsController {
 		int favUpdate = TableDataGateway.updateUserFav(userId,foodTruckId);
 		return favUpdate;
 	}
-	
 }
