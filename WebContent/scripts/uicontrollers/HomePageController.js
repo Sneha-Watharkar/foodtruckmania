@@ -9,9 +9,6 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
         	FoodTruckService.getFavoriteFoodtrucks().then(function(res){
             	console.log("All fav food trucks",  res);
             	$scope.favFoodTrucks = res.data.trucks;
-            	$scope.favFoodTrucks = ["20"];
-            	/*var truckString = res.data.trucks;
-            	$scope.allFoodTrucks = JSON.parse(truckString);*/
             }, function(err){
             	
             });
@@ -22,9 +19,6 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
             }, function(err){
             	
             });
-        	
-//        	for(var i=0;i<)
-        	
         }
         
         $scope.setAsActive = function (path) {
@@ -35,8 +29,35 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
         	console.log("Truck obj is ",truck);
         	UserService.updateFavTrucks(truck).then(function(res) {
         		console.log("Res of fav hello", res);
+        		$scope.displayNotification('show', "Added to favorites", 'success');
+        		FoodTruckService.getFavoriteFoodtrucks().then(function(res){
+                	console.log("All fav food trucks",  res);
+                	$scope.favFoodTrucks = res.data.trucks;
+                }, function(err){
+                	
+                });
         	}, function(err){
         		
         	});
         };
+        
+        $scope.loadFoodMenu = function(truck) {
+        	FoodTruckService.viewMenu(truck).then(function(menu){
+        		console.log("menu is ",menu);
+        		/*var file = new Blob([$scope.menuFile], {type: 'application/pdf'});
+ 	  	       var fileURL = URL.createObjectURL(file);
+ 	        $scope.foodMenuFile = $sce.trustAsResourceUrl(fileURL);
+ 	        $window.open($scope.foodMenuFile);*/
+        	}, function(err){
+        		
+        	});
+        };
+        
+        $scope.displayNotification = function(status, message, type) {
+        	$scope.notification = {};
+	        $scope.notification.status = status; 
+	        $scope.notification.message = message;
+	        $scope.notification.type = type;
+        };
+		
 });

@@ -5,25 +5,13 @@ mainApp.controller('rateFoodTruckController', function($scope, $location, $rootS
 		$scope.userRating = 0;
 		$scope.currentRating = 0;
 		$scope.currentUser = UserService.getCurrentUser();
-		$scope.allFoodTrucks = [{
-        	truckId: 1,
-        	name: "Asian Eatery"
-        },{
-        	truckId: 2,
-        	name: "Maki of Japan"
-        },
-        {
-        	truckId: 3,
-        	name: "Dominos"
-        },
-        {
-        	truckId: 4,
-        	name: "Chinese Gourmet"
-        },
-        {
-        	truckId: 5,
-        	name: "Subz"
-        }];
+		FoodTruckService.getAllFoodtrucks().then(function(res){
+        	console.log("All food trucks in res loc",  res);
+        	var truckString = res.data.trucks;
+        	$scope.allFoodTrucks = JSON.parse(truckString);
+        }, function(err){
+        	
+        });
 		
 		$scope.getUserRating = function (rating) {
 			console.log("Rating ccaptured",rating);
@@ -34,15 +22,19 @@ mainApp.controller('rateFoodTruckController', function($scope, $location, $rootS
 			console.log(JSON.parse($scope.selectedTruckName));
 			if($scope.selectedTruckName) {
 				var ratingObject = {
-					truckName: JSON.parse($scope.selectedTruckName),
 					rating: $scope.currentRating,
-					comments: $scope.truckComments
+					comments: $scope.truckComments,
+					truck: JSON.parse($scope.selectedTruckName)
 				};
 				
 				console.log("Rating object is", ratingObject);
 				
-				var result = FoodTruckService.rateFoodTruck(ratingObject);
-				console.log("Result of rating", result);
+				FoodTruckService.rateFoodTruck(ratingObject).then(function(res){
+					console.log("Result of rating", res);
+					$scope.displayNotification('show', res.data.msg, 'success');	
+				},function(err){
+					console.log("Error",err);
+				});
 				
 			}
 		};
@@ -50,4 +42,11 @@ mainApp.controller('rateFoodTruckController', function($scope, $location, $rootS
 		$scope.setAsActive = function (path) {
 			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
 		}
+		
+		$scope.displayNotification = function(status, message, type) {
+        	$scope.notification = {};
+	        $scope.notification.status = status; 
+	        $scope.notification.message = message;
+	        $scope.notification.type = type;
+        };
 });

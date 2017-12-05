@@ -28,21 +28,13 @@ mainApp.service('FoodTruckService', function($http) {
     }
     
     this.rateFoodTruck = function (ratingObj) {
-    	$http({
+    	return $http({
             method: 'POST',
             url: 'rateTruck',
             headers: {
                 'Content-Type': 'application/json'
             },
             data:	JSON.stringify({data: ratingObj, action:'rating'})
-        })
-        .success(function (data) {
-        	console.log("Success", data);
-        	return data;
-        })
-        .error(function (data, status) {
-        	console.log("Failure "+ JSON.stringify({data: data}));
-        	return data;
         });
     }
     
@@ -65,8 +57,8 @@ mainApp.service('FoodTruckService', function($http) {
         });
     }
     
-    this.getFoodMenu = function (truckId) {
-      $http.post('/loadMenu',{id: truckId}, {responseType:'arraybuffer'})
+    this.viewMenu = function (truck) {
+      $http.post('/viewMenu',{data:{'truck':truck,'action':'viewMenu'}}, {responseType:'arraybuffer'})
   	  .success(function (response) {
   	       var file = new Blob([response], {type: 'application/pdf'});
   	       var fileURL = URL.createObjectURL(file);

@@ -2,13 +2,16 @@
 	<div ng-include src="'views/commonTemplate.html'"></div>
 	<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
 		<h4>{{currentPage}}</h4>
+		<div class="alert alert-{{notification.type}}" 
+		style="visibility: hidden;" role="alert" 
+		data-notification="{{notification.status}}">{{notification.message}}</div>
 		<div class="row">
 			<div class="form-group col-2">
 				<label for="selectedTruckName">Select Food Truck</label>
 			</div>
 			<div class="form-group col-4">
 					<select ng-model="selectedTruckName" class="form-control" >
-						<option ng-repeat="truck in allFoodTrucks track by $index" value="{{truck}}">{{truck.name}}</option>
+						<option ng-repeat="truck in allFoodTrucks track by $index" value="{{truck}}">{{truck.foodTruckName}}</option>
 					</select>
 			</div>
 		</div>
