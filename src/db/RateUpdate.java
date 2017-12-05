@@ -34,7 +34,7 @@ public class RateUpdate {
 			ps.setString(1, String.valueOf(rating.getFoodTruckId()));
 			ps.setString(2, String.valueOf(userId));
 			ps.setString(3, String.valueOf(rating.getRating()));
-			ps.setTimestamp(4, (Timestamp) rating.getRatingDate());
+			ps.setDate(4, new java.sql.Date(rating.getRatingDate().getTime()));
 			ps.setString(5, rating.getComments());
 			return ps.executeUpdate();
 		} catch (Exception e) {
@@ -83,25 +83,37 @@ public class RateUpdate {
 			System.out.println(e);
 		}
 		System.out.println("Favorite Food Truck Ids: "+foodTruckIds);
-		String query2 = "SELECT * from FoodTruck WHERE foodTruckID IN ?";
 		if (foodTruckIds.size() !=0 && !foodTruckIds.isEmpty()){
 			try{
 				ArrayList<FoodTruck> foodTruckList = new ArrayList<FoodTruck>();
+				PreparedStatement ps1 = null;
+				ResultSet rs1 = null;
+				String query2 = "SELECT * from FoodTruck WHERE foodTruckID IN (?)";
 				Connection connection = ConnectionPool2.getConnection();
-				ps = connection.prepareStatement(query1);
+				ps1 = connection.prepareStatement(query2);
 				Integer[] Ids = foodTruckIds.toArray(new Integer[foodTruckIds.size()]);
 				System.out.println("Favorite Food Truck Ids: "+Ids);
-				ps.setArray(1, connection.createArrayOf("int",Ids));
-				rs = ps.executeQuery();
-				System.out.println("Result set is :" + rs.getRow());
-				if(rs.next()){
+				String ids = "";
+				for(int i=0 ; i< Ids.length;i++){
+					if(i == (Ids.length - 1) || Ids.length == 1){
+						ids = ids + Ids[i];
+					}
+					else{
+						ids = ids + Ids[i] + ",";
+					}
+				}
+				System.out.println("Favorite Food Truck Ids: "+ids);
+				ps1.setString(1, ids);
+				rs1 = ps1.executeQuery();
+				System.out.println("Result set is :" + rs1.getRow());
+				if(rs1.next()){
 					FoodTruck truck = new FoodTruck();
-					truck.setFoodTruckId(rs.getInt("foodTruckId"));
-					truck.setFoodTruckName(rs.getString("foodtruckName"));
-					truck.setLatitude(rs.getFloat("latitude"));
-					truck.setLongitude(rs.getFloat("truckTime"));
-					truck.setFoodTruckMenu(rs.getString("foodTruckMenu"));
-					truck.setFoodTruckStatus(rs.getString("foodTruckStatus"));
+					truck.setFoodTruckId(rs1.getInt("foodTruckId"));
+					truck.setFoodTruckName(rs1.getString("foodTruckName"));
+					truck.setLatitude(rs1.getFloat("latitude"));
+					truck.setLongitude(rs1.getFloat("longitude"));
+					truck.setFoodTruckMenu(rs1.getString("foodTruckMenu"));
+					truck.setFoodTruckStatus(rs1.getString("foodTruckStatus"));
 					foodTruckList.add(truck);
 				}
 				return foodTruckList;
