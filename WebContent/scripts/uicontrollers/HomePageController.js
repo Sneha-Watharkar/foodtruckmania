@@ -44,10 +44,10 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
         $scope.loadFoodMenu = function(truck) {
         	FoodTruckService.viewMenu(truck).then(function(menu){
         		console.log("menu is ",menu);
-        		/*var file = new Blob([$scope.menuFile], {type: 'application/pdf'});
+        		var file = new Blob([menu.data], {type: 'application/pdf'});
  	  	       var fileURL = URL.createObjectURL(file);
  	        $scope.foodMenuFile = $sce.trustAsResourceUrl(fileURL);
- 	        $window.open($scope.foodMenuFile);*/
+ 	        $window.open($scope.foodMenuFile);
         	}, function(err){
         		
         	});
