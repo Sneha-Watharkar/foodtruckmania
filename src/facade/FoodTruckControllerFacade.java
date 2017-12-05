@@ -184,7 +184,6 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					//response.setContentType("application/octet-stream");
 				    response.setHeader("Content-Disposition", "filename="+fileName);
 				    File srcFile = new File(applicationPath + "/uploads/"+fileName);
-				    
 				    OutputStream out = response.getOutputStream();
 				    FileInputStream in = new FileInputStream(srcFile);
 				    byte[] buffer = new byte[4096];
