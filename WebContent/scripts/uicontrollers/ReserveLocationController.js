@@ -18,7 +18,12 @@ mainApp.controller('reserveLocationController', function($scope, $location, $roo
 			};
 			console.log("Location", locationObject);
 			
-			var result = FoodTruckService.reserveLocation(locationObject);
+			FoodTruckService.reserveLocation(locationObject).then(function(res){
+				console.log("Reserve Loc",res);
+				$scope.displayNotification('show',res.data.msg,'info');
+			},function(err){
+				
+			});
 		};
 		
 		$scope.displayNotification = function(status, message, type) {

@@ -39,26 +39,19 @@ mainApp.service('FoodTruckService', function($http) {
     }
     
     this.reserveLocation =  function (locationObj) {
-    	$http({
+    	return $http({
             method: 'POST',
             url: 'reserveLocation',
             headers: {
                 'Content-Type': 'application/json'
             },
             data:	JSON.stringify({data: locationObj, action:'reserveLocation'})
-        })
-        .success(function (data) {
-        	console.log("Success", data);
-        	return data;
-        })
-        .error(function (data, status) {
-        	console.log("Failure "+ JSON.stringify({data: data}));
-        	return data;
         });
     }
     
     this.viewMenu = function (truck) {
-      return $http.post('/viewMenu',{data:{'truck':truck,'action':'viewMenu'}}, {responseType:'arraybuffer'});
+    	console.log("View menu service");
+      return $http.post('viewMenu',{data:{'truck':truck,'action':'viewMenu'}}, {responseType:'arraybuffer'});
   	  /*.success(function (response) {
   	       var file = new Blob([response], {type: 'application/pdf'});
   	       var fileURL = URL.createObjectURL(file);
