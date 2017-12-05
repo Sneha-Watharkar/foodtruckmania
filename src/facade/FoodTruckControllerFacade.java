@@ -189,6 +189,9 @@ public class FoodTruckControllerFacade extends HttpServlet {
 				case "displayMenu":
 					MenuController.displayMenu(data);
 					break;
+				case "logout":
+	                session.invalidate();
+	                break;
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

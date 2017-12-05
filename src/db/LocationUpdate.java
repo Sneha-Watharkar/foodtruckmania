@@ -75,7 +75,7 @@ public class LocationUpdate {
 	public static ArrayList<FoodTruck> getAllLocations() {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query = "SELECT foodTruckName, truckLocation, latitude, longitude FROM FoodTruck WHERE foodTruckStatus = 'approve'";
+		String query = "SELECT * FROM FoodTruck WHERE foodTruckStatus = 'approve'";
 		try {
 			Connection connection = ConnectionPool2.getConnection();
 			ps = connection.prepareStatement(query);
@@ -85,9 +85,12 @@ public class LocationUpdate {
 				FoodTruck foodTruck = new FoodTruck();
 				foodTruck.setFoodTruckName(rs.getString("foodTruckName"));
 				foodTruck.setFoodTruckLocation(rs.getString("truckLocation"));
+				foodTruck.setFoodTruckId(rs.getInt("foodTruckId"));
 				foodTruck.setLatitude(rs.getFloat("latitude"));
 				foodTruck.setLongitude(rs.getFloat("longitude"));
-				foodTruckList.add(foodTruck);
+				if(foodTruck.getLatitude() != 0.0){
+					foodTruckList.add(foodTruck);
+				}
 			}
 			return foodTruckList;
 		}catch(Exception e) {
