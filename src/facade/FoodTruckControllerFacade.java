@@ -35,6 +35,7 @@ import data.FoodTruckRating;
 import data.UserAccount;
 import db.AdminUpdate;
 import db.UserUpdate;
+import util.Mailer;
 
 public class FoodTruckControllerFacade extends HttpServlet {
 
@@ -56,12 +57,11 @@ public class FoodTruckControllerFacade extends HttpServlet {
             sb.append(str);
         }
         System.out.println("Request is "+sb.toString());
-        JSONObject jObj;
+        JSONObject jObj =  new JSONObject(sb.toString());
+		JSONObject data = jObj.getJSONObject("data");
+		System.out.println("Data is " + data);
+		String action = jObj.getString("action");
 		try {
-			jObj = new JSONObject(sb.toString());
-			JSONObject data = jObj.getJSONObject("data");
-			System.out.println("Data is " + data);
-			String action = jObj.getString("action");
 			System.out.println("Action is " + action);
 			UserAccount userAcc = new UserAccount();
 			switch (action) {
@@ -179,6 +179,7 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					//response.setContentType("application/octet-stream");
 				    response.setHeader("Content-Disposition", "filename="+fileName);
 				    File srcFile = new File(applicationPath + "/uploads/"+fileName);
+				    
 				    OutputStream out = response.getOutputStream();
 				    FileInputStream in = new FileInputStream(srcFile);
 				    byte[] buffer = new byte[4096];
@@ -186,10 +187,17 @@ public class FoodTruckControllerFacade extends HttpServlet {
 				    while ((length = in.read(buffer)) > 0){
 				        out.write(buffer, 0, length);
 				    }
+				    response.setContentType(getServletContext().getMimeType(fileName));
 				    in.close();
 				    out.flush();
 					break;
-				case "getFavFoodTrucks":
+				case "sendMail":
+					ArrayList<String> emails = UserUpdate.getEmailAddress(2);
+					for(String email:emails){
+						Mailer.sendMail(email,"test@localhost.com","test","test",false);
+					}
+					break;
+					case "getFavFoodTrucks":
 					ArrayList<FoodTruck> favFoodTrucks = UserController.getFavFoodTrucks(request,response,data);
 					returnObj.put("trucks", mapperObj.writeValueAsString(favFoodTrucks));
 					break;
@@ -217,7 +225,9 @@ public class FoodTruckControllerFacade extends HttpServlet {
 			e.printStackTrace();
 		}
 		PrintWriter pw = response.getWriter();
-		response.setContentType("application/json");
+		if(action != "viewMenu"){
+			response.setContentType("application/json");
+		}
 		pw.println(returnObj.toString());
 		System.out.println(returnObj.toString());
 	}

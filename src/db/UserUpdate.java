@@ -252,6 +252,31 @@ public class UserUpdate {
 		}
 	}
 
+	public static ArrayList<String> getEmailAddress(int foodTruckId){
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String query ="SELECT userEmailAddress from UserAccount WHERE userID IN (SELECT userID from dbo.UserFavorites WHERE foodTruckId = ?)";
+		try {
+			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
+			Connection connection = ConnectionPool2.getConnection();
+			System.out.println(connection.toString());
+			ps = connection.prepareStatement(query);
+			ArrayList<String> emails = new ArrayList<String>();
+			System.out.println(ps.toString());
+			ps.setInt(1, foodTruckId);
+			rs  = ps.executeQuery();
+			while(rs.next()){
+				emails.add(rs.getString("userEmailAddress"));
+			}
+			return emails;
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		} finally {
+			DBUtil.closePreparedStatement(ps);
+		}
+	}
+	
 	public static void getFoodTruckId(UserAccount userAcc) {
 		PreparedStatement ps = null;
 		String query = "SELECT foodTruckId FROM FoodTruck " +  "where userId = ?";

@@ -51,7 +51,7 @@ public class MenuController extends HttpServlet{
 		filePart.write(applicationPath + "/uploads" + "/" + fileName);
 		//File file = new File(uploads, fileName);
 		int userId = user.getUserId();
-		System.out.println(user.getUserId());
+		System.out.println(applicationPath + "/uploads" + "/" + fileName);
 		int insertMenu = TableDataGateway.uploadMenu(userId,fileName);
 		System.out.println(insertMenu);
 		returnObj.put("msg", "File uploaded successfully");
