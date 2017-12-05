@@ -31,4 +31,8 @@ mainApp.service('UserService', function($http) {
     this.updateFavTrucks = function(truck) {
     	return $http.post('setUserFavorites',{data:{'truck':truck},'action':'setUserFavorites'});
     }
+    
+    this.logout = function(){
+    	return $http.post('logout',{data:{},'action':'logout'});
+    }
 });

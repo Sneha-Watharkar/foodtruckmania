@@ -51,7 +51,7 @@ mainApp.service('FoodTruckService', function($http) {
     
     this.viewMenu = function (truck) {
     	console.log("View menu service");
-      return $http.post('viewMenu',{data:{'truck':truck,'action':'viewMenu'}}, {responseType:'arraybuffer'});
+      return $http.post('viewMenu',{data:truck,action:'viewMenu'}, {responseType:'arraybuffer'});
   	  /*.success(function (response) {
   	       var file = new Blob([response], {type: 'application/pdf'});
   	       var fileURL = URL.createObjectURL(file);

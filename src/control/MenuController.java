@@ -93,7 +93,7 @@ public class MenuController extends HttpServlet{
 	}
 
 	public static String displayMenu(JSONObject data) {
-		JSONObject truckJson = data.getJSONObject("truck");
+		JSONObject truckJson = data.getJSONObject("data");
 		int foodTruckId = truckJson.getInt("foodTruckId");
 		return MenuUpdate.displayMenu(foodTruckId);
 	}

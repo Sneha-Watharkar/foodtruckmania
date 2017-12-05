@@ -59,5 +59,15 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
 	        $scope.notification.message = message;
 	        $scope.notification.type = type;
         };
+        
+        $scope.logOut = function() {
+        	
+        	UserService.logout().then(function(res){
+        		console.log("clicked correctly",res);
+        		$window.location.assign($scope.rootUrl);
+        	}, function(err){
+        		
+        	});
+        };
 		
 });
