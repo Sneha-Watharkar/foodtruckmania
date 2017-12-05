@@ -79,4 +79,8 @@
   	<servlet-name>FoodTruckControllerFacade</servlet-name>
   	<url-pattern>/getFeedback</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>FoodTruckControllerFacade</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  </servlet-mapping>
 </web-app>

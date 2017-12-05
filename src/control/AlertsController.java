@@ -32,16 +32,16 @@ public class AlertsController {
 		Boolean email = data.getBoolean("email");
 		String alerts = null;
 		if(text & email){
-			alerts = "text&email";
+			alerts = "text=1&email=1";
 		}
 		else if(email){
-			alerts = "email";
+			alerts = "text=0&email=1";
 		}
 		else if(text){
-			alerts = "text";
+			alerts = "text=1&email=0";
 		}
 		else{
-			alerts = "";
+			alerts = "text=0&email=0";
 		}
 		System.out.println(alerts);
 		int success = TableDataGateway.updateAlerts(userId,alerts);
@@ -50,7 +50,7 @@ public class AlertsController {
 
 	}
 	/*
-	 * User selects any specific foodtruck and sets up as a favorite.Triggers call to TableDataGateway.
+	 * User selects any specific foodtruck and sets up as 	a favorite.Triggers call to TableDataGateway.
 	 */
 	public static int updateUserFav(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
 		JSONObject truckJson = data.getJSONObject("truck");

@@ -126,7 +126,8 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					if(alerts != null && !alerts.isEmpty() ){	
 						String[] alertArray = alerts.split("&");
 						for(String s: alertArray){
-							returnObj.put(s,1);
+							String[] alert = s.split("=");
+							returnObj.put(alert[0],alert[1]);
 						}
 					}
 					else{
