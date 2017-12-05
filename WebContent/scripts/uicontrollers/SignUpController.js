@@ -74,21 +74,26 @@ mainApp.controller('signUpController', function($scope, $location, $http, UserSe
 	            }*/
 	        })
 	        .success(function (data) {
-	        	console.log("Success");
+	        	console.log("Success", data);
 				$scope.message = data;
+				$scope.displayNotification('show', 'Registered Successfully', 'success');
+				$scope.goBacktoLoginPage();
+				
 	        })
 	        .error(function (data, status) {
 	        	console.log("Failure "+ JSON.stringify({data: data}));
 	        });
-	        
-			/*var res = $http.post('registerUser', $scope.userDetails);
-			res.success(function(data, status, headers, config) {
-				
-			});
-			res.error(function(data, status, headers, config) {
-				
-				alert( "failure message: " + JSON.stringify({data: data}));
-			});	
-			*/
 		}
+		
+		$scope.displayNotification = function(status, message, type) {
+        	$scope.notification = {};
+	        $scope.notification.status = status; 
+	        $scope.notification.message = message;
+	        $scope.notification.type = type;
+        };
+		
+		/* $scope.loadLoginPage = function() {
+	        	console.log("Load Home page",$scope.rootUrl+'home');
+	        	$location.path($scope.rootUrl);
+	        };  */
     });
