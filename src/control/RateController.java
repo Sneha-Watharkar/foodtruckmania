@@ -41,8 +41,8 @@ public class RateController {
 		HttpSession session = request.getSession();
 	    UserAccount user = (UserAccount) session.getAttribute("user");
 		ArrayList<FoodTruckRating> ratingLists = new ArrayList<>();
-		int foodTruckId = user.getTruckId();
-		ratingLists = TableDataGateway.getFeedback(foodTruckId);
+		int userId = user.getUserId();
+		ratingLists = TableDataGateway.getFeedback(userId);
 		return ratingLists;
 	}
 

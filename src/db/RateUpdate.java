@@ -139,7 +139,7 @@ public class RateUpdate {
 	/*
 	 * DB statement to fetch all the food truck ratings.
 	 */
-	public static ArrayList<FoodTruckRating> getFeedback(int foodTruckId) {
+	public static ArrayList<FoodTruckRating> getFeedback(int userId) {
 		/*
 		 * ConnectionPool pool = ConnectionPool.getInstance(); Connection connection =
 		 * pool.getConnection();
@@ -148,17 +148,16 @@ public class RateUpdate {
 		ResultSet rs = null;
 		ArrayList<FoodTruckRating> ratingsList = new ArrayList<>();
 		
-		String query = "Select * from FoodTruckRating" + "where foodTruckId = ?" ;
+		String query = "SELECT * from FoodTruckRating WHERE foodTruckId = (SELECT foodTruckID from foodTruck WHERE UserId = ?)" ;
 		try {
 			Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
 			ps = connection.prepareStatement(query);
-			ps.setString(1, String.valueOf(foodTruckId));
+			ps.setString(1, String.valueOf(userId));
 			
 			rs = ps.executeQuery();
-			
-			FoodTruckRating foodTruckRating = null;
-			if (rs.next()) {
-				foodTruckRating = new FoodTruckRating();
+			System.out.println(userId);
+			while (rs.next()) {
+				FoodTruckRating foodTruckRating = new FoodTruckRating();
 				foodTruckRating.setRating(rs.getInt("rating"));
 				foodTruckRating.setRatingDate(rs.getDate("ratingDate"));
 				foodTruckRating.setFoodTruckId(rs.getInt("foodTruckId"));
