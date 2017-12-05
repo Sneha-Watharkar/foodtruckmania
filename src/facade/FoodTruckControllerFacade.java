@@ -3,8 +3,10 @@ package facade;
 import java.awt.MenuContainer;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,6 +23,7 @@ import javax.servlet.http.Part;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.apache.commons.io.FileUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import control.AlertsController;
 import control.LocationController;
@@ -169,6 +172,22 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					}else {
 						returnObj.put("msg", "Unable to save customer favorite");
 					}
+					break;
+				case "viewMenu":
+					String fileName = MenuController.displayMenu(data);
+					String applicationPath = request.getServletContext().getRealPath("");
+					//response.setContentType("application/octet-stream");
+				    response.setHeader("Content-Disposition", "filename="+fileName);
+				    File srcFile = new File(applicationPath + "/uploads/"+fileName);
+				    OutputStream out = response.getOutputStream();
+				    FileInputStream in = new FileInputStream(srcFile);
+				    byte[] buffer = new byte[4096];
+				    int length;
+				    while ((length = in.read(buffer)) > 0){
+				        out.write(buffer, 0, length);
+				    }
+				    in.close();
+				    out.flush();
 					break;
 				case "getFavFoodTrucks":
 					ArrayList<FoodTruck> favFoodTrucks = UserController.getFavFoodTrucks(request,response,data);

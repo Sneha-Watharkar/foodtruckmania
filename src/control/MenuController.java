@@ -22,6 +22,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONObject;
 
 import data.UserAccount;
+import db.MenuUpdate;
 import dbgateway.TableDataGateway;
 import util.DBUtil;
 
@@ -59,6 +60,7 @@ public class MenuController extends HttpServlet{
 		pw.println(returnObj.toString());
 		System.out.println(returnObj.toString());
 	}
+	
 	private static String getSubmittedFileName(Part part) {
 	    for (String cd : part.getHeader("content-disposition").split(";")) {
 	        if (cd.trim().startsWith("filename")) {
@@ -90,9 +92,10 @@ public class MenuController extends HttpServlet{
 		}
 	}
 
-	public static void displayMenu(JSONObject data) {
-		
-
+	public static String displayMenu(JSONObject data) {
+		JSONObject truckJson = data.getJSONObject("truck");
+		int foodTruckId = truckJson.getInt("foodTruckId");
+		return MenuUpdate.displayMenu(foodTruckId);
 	}
 
 
