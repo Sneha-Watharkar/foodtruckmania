@@ -95,5 +95,18 @@ mainApp.service('FoodTruckService', function($http) {
             },
             data:JSON.stringify({data: truckObj, action:'approveFoodTrucks'})
         });
+    	
+    }
+    
+    this.getFeedBacks = function() {
+    	return $http({
+            method: 'POST',
+            url: 'getFeedback',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data:JSON.stringify({data: {}, action:'getFeedback'})
+        });
+    	
     }
 });
