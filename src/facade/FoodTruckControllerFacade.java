@@ -192,9 +192,12 @@ public class FoodTruckControllerFacade extends HttpServlet {
 				    out.flush();
 					break;
 				case "sendMail":
-					UserUpdate.getEmailAddress(2);
-					Mailer.sendMail("nikhilmhegde@gmail.com","test@localhost.com","test","test",false);
-				case "getFavFoodTrucks":
+					ArrayList<String> emails = UserUpdate.getEmailAddress(2);
+					for(String email:emails){
+						Mailer.sendMail(email,"test@localhost.com","test","test",false);
+					}
+					break;
+					case "getFavFoodTrucks":
 					ArrayList<FoodTruck> favFoodTrucks = UserController.getFavFoodTrucks(request,response,data);
 					returnObj.put("trucks", mapperObj.writeValueAsString(favFoodTrucks));
 					break;
