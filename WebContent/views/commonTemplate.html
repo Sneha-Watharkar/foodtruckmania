@@ -7,29 +7,36 @@
       <div class="row">
         <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
           <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-              <a class="nav-link" ng-class="setAsActive('/home')" ng-href="{{rootUrl}}home">Home</a>
+            <li class="nav-item" ng-if="currentUser.userType=='customer'">
+              <a class="nav-link" ng-class="setAsActive('/home')" ng-href="{{rootUrl}}home"
+              >Home</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" ng-if="currentUser.userType=='customer'">
               <a class="nav-link" ng-class="setAsActive('/locateTrucks')" ng-href="{{rootUrl}}locateTrucks">Locate food trucks</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" ng-class="setAsActive('/rateFoodTruck')" ng-href="{{rootUrl}}rateFoodTruck">Rate Food truck</a>
+            <li class="nav-item" ng-if="currentUser.userType=='customer'">
+              <a class="nav-link" ng-class="setAsActive('/rateFoodTruck')" ng-href="{{rootUrl}}rateFoodTruck"
+              >Rate Food truck</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" ng-class="setAsActive('/manageAlerts')" ng-href="{{rootUrl}}manageAlerts">Manage Alerts</a>
+            <li class="nav-item" ng-if="currentUser.userType=='customer'">
+              <a class="nav-link" ng-class="setAsActive('/manageAlerts')" ng-href="{{rootUrl}}manageAlerts"
+              >Manage Alerts</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" ng-class="setAsActive('/reserveLocation')" ng-href="{{rootUrl}}reserveLocation">Reserve Location</a>
+            <li class="nav-item" ng-if="currentUser.userType=='vendor'">
+              <a class="nav-link" ng-class="setAsActive('/reserveLocation')" ng-href="{{rootUrl}}reserveLocation"
+              >Reserve Location</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" ng-class="setAsActive('/uploadMenu')" ng-href="{{rootUrl}}uploadMenu">Upload Menu</a>
+            <li class="nav-item" ng-if="currentUser.userType=='vendor'">
+              <a class="nav-link" ng-class="setAsActive('/uploadMenu')" ng-href="{{rootUrl}}uploadMenu"
+              >Upload Menu</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" ng-class="setAsActive('/feedbacks')" ng-href="{{rootUrl}}feedbacks">Feedbacks</a>
+            <li class="nav-item" ng-if="currentUser.userType=='vendor'">
+              <a class="nav-link" ng-class="setAsActive('/feedbacks')" ng-href="{{rootUrl}}feedbacks"
+              >Feedbacks</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" ng-class="setAsActive('/manageTrucks')" ng-href="{{rootUrl}}manageTrucks">Manage Trucks</a>
+            <li class="nav-item" ng-if="currentUser.userType=='admin'">
+              <a class="nav-link" ng-class="setAsActive('/manageTrucks')" ng-href="{{rootUrl}}manageTrucks"
+              >Manage Trucks</a>
             </li>
           </ul>
         </nav>

@@ -13,7 +13,13 @@ mainApp.controller('loginController', function($scope, $location, $rootScope, $w
         	    	 $scope.currentUser = JSON.parse(results.data.user);
         	    	 console.log("Current user is ",$scope.currentUser);
         	    	 UserService.setCurrentUser($scope.currentUser);
-         			$scope.loadHomePage();
+        	    	 if($scope.currentUser.userType == 'customer') {
+        	    		 $scope.loadHomePage();
+        	    	 } else if ($scope.currentUser.userType == 'vendor') {
+        	    		 $scope.loadReserveLocationPage();
+        	    	 } else if($scope.currentUser.userType == 'admin') {
+        	    		 $scope.loadAdminPage();
+        	    	 }
         	     } else {
         	    	 $scope.displayNotification('show', results.data.msg + "! " + results.data.error, 'danger');
         	     }
@@ -25,7 +31,15 @@ mainApp.controller('loginController', function($scope, $location, $rootScope, $w
         $scope.loadHomePage = function() {
         	console.log("Load Home page",$scope.rootUrl+'home');
         	$window.location.assign($scope.rootUrl+'home');
-        };  
+        };
+        
+        $scope.loadReserveLocationPage = function() {
+        	$window.location.assign($scope.rootUrl+'reserveLocation');
+        }
+        
+        $scope.loadAdminPage = function() {
+        	$window.location.assign($scope.rootUrl+'manageTrucks');
+        }
         
         $scope.displayNotification = function(status, message, type) {
         	$scope.notification = {};

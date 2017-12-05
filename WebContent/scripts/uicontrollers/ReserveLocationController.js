@@ -3,6 +3,7 @@ mainApp.controller('reserveLocationController', function($scope, $location, $roo
         // create a message to display in our view
 		$scope.currentPage = 'Reserve Location';
 		$scope.rootUrl = $location.$$absUrl.substring(0,$scope.rootUrl.lastIndexOf('/')+1);
+		$scope.currentUser = UserService.getCurrentUser();
 		$scope.setAsActive = function (path) {
 			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
 		}

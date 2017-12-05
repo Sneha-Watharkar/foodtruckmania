@@ -7,6 +7,8 @@ mainApp.controller('viewFeedBackController', function($scope, $location, $rootSc
 			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
 		}
 		
+		$scope.currentUser = UserService.getCurrentUser();
+		
 		FoodTruckService.getFeedBacks().then(function(res) {
 			console.log("Res of Feedbacks",res);
 		}, function (){

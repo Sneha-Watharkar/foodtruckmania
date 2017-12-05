@@ -3,7 +3,7 @@ mainApp.controller('manageAlertsController', function($scope, $location, $rootSc
 		$scope.currentPage = 'Manage Alerts';
 		$scope.rootUrl = $location.$$absUrl.substring(0,$scope.rootUrl.lastIndexOf('/')+1);
 		
-		
+		$scope.currentUser = UserService.getCurrentUser();
 		UserService.getAlerts().then(function(res){
     		console.log("alert res",res);
     	},function(err){

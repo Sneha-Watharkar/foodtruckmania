@@ -4,6 +4,7 @@ mainApp.controller('rateFoodTruckController', function($scope, $location, $rootS
 		$scope.rootUrl = $location.$$absUrl.substring(0,$scope.rootUrl.lastIndexOf('/')+1);
 		$scope.userRating = 0;
 		$scope.currentRating = 0;
+		$scope.currentUser = UserService.getCurrentUser();
 		$scope.allFoodTrucks = [{
         	truckId: 1,
         	name: "Asian Eatery"

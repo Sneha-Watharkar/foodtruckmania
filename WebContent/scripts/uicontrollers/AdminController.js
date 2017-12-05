@@ -6,6 +6,8 @@ mainApp.controller('adminController', function($scope, $location, FoodTruckServi
 			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
 		}
         
+        $scope.currentUser = UserService.getCurrentUser();
+        
         FoodTruckService.fetchPendingApprovals().then(function(res){
         	$scope.allPendingFoodTrucks = res.data.results;
         	console.log("Pending trucks are",$scope.allPendingFoodTrucks );
