@@ -159,7 +159,9 @@ public class RateUpdate {
 			FoodTruckRating foodTruckRating = null;
 			if (rs.next()) {
 				foodTruckRating = new FoodTruckRating();
-				foodTruckRating.setRating(rs.getInt("foodTruckId"));
+				foodTruckRating.setRating(rs.getInt("rating"));
+				foodTruckRating.setRatingDate(rs.getDate("ratingDate"));
+				foodTruckRating.setFoodTruckId(rs.getInt("foodTruckId"));
 				foodTruckRating.setComments(rs.getString("Comment"));
 				ratingsList.add(foodTruckRating);
 			}
