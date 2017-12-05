@@ -58,15 +58,15 @@ mainApp.service('FoodTruckService', function($http) {
     }
     
     this.viewMenu = function (truck) {
-      $http.post('/viewMenu',{data:{'truck':truck,'action':'viewMenu'}}, {responseType:'arraybuffer'})
-  	  .success(function (response) {
+      return $http.post('/viewMenu',{data:{'truck':truck,'action':'viewMenu'}}, {responseType:'arraybuffer'});
+  	  /*.success(function (response) {
   	       var file = new Blob([response], {type: 'application/pdf'});
   	       var fileURL = URL.createObjectURL(file);
   	       return fileURL;
   	  }).error(function (data) {
 	      	console.log("Failure "+ JSON.stringify({data: data}));
 	    	return data;
-  	  });
+  	  });*/
     }
     
     this.getAllLocations = function () {
