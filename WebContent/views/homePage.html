@@ -17,10 +17,7 @@
 						<td>{{$index+1}}</td>
 						<td>{{truck.foodTruckName}}</td>
 						<td><button class="btn btn-primary"
-						  	ng-click="updateUserFav(truck, true)">Mark as Favorite</button>
-						  	<button class="btn btn-primary" ng-model="updateFavBtn"		
-						  	ng-click="updateUserFav(truck, false)"
-						  	ng-if="favFoodTrucks | contains:truck.foodTruckId" >Remove from Favorites</button></td>
+						  	ng-click="updateUserFav(truck)">Mark as Favorite</button>
 						<td><button class="btn btn-primary"
 						  	ng-click="loadFoodMenu(truck)">View Menu</button></td>
 					</tr>

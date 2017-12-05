@@ -12,17 +12,22 @@ mainApp.controller('locateTruckController', function($scope, $location, FoodTruc
         	console.log("Res of locations",res);
         	var resultString = res.data.trucks;
         	$scope.locationData = JSON.parse(resultString);
+        	console.log("Location Data", $scope.locationData);
+        	
+        	for (i = 0; i < $scope.locationData.length; i++){
+                createMarker($scope.locationData[i]);
+            }
         }, function(err){
         	
         });
-        $scope.locations = [
+        /*$scope.locations = [
             {
                 location : 'Library',
                 desc : 'UNCC Campus',
                 lat : 35.30809,
                 long : -80.73270000000002
             }
-         ];
+         ];*/
         
         var mapOptions = {
                 zoom: 14,
@@ -38,21 +43,17 @@ mainApp.controller('locateTruckController', function($scope, $location, FoodTruc
             
             var marker = new google.maps.Marker({
                 map: $scope.map,
-                position: new google.maps.LatLng(info.lat, info.long),
-                title: info.city
+                position: new google.maps.LatLng(info.latitude, info.longitude),
+                title: info.foodTruckName
             });
-            marker.content = '<div class="infoWindowContent">' + info.desc + '</div>';
+            marker.content = '<div class="infoWindowContent">' + info.foodTruckLocation + '</div>';
             
             google.maps.event.addListener(marker, 'click', function(){
-                infoWindow.setContent('<h2>' + marker.title + '</h2>' + marker.content);
+                infoWindow.setContent('<h5>' + marker.title + '</h5>' + marker.content);
                 infoWindow.open($scope.map, marker);
             });
             
             $scope.markers.push(marker);     
-        }
-        
-        for (i = 0; i < $scope.locations.length; i++){
-            createMarker($scope.locations[i]);
         }
 
         $scope.openInfoWindow = function(e, selectedMarker){

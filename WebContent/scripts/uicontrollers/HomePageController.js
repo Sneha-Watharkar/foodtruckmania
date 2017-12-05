@@ -31,13 +31,12 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
 			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
 		}
         
-        $scope.updateUserFav = function(truck, isFavorite){
-        	var favoriteObj = {
-        			truck: truck,
-        			isFavorite: isFavorite
-        	};
+        $scope.updateUserFav = function(truck){
+        	/*var favoriteObj = {
+        			truck: truck
+        	};*/
         	
-        	UserService.updateFavTrucks(favoriteObj).then(function(res) {
+        	UserService.updateFavTrucks(truck).then(function(res) {
         		console.log("Res of fav", res);
         	}, function(err){
         		
