@@ -6,4 +6,10 @@ mainApp.controller('viewFeedBackController', function($scope, $location, $rootSc
 		$scope.setAsActive = function (path) {
 			return ($location.path().substr(0, path.length) == path) ? 'active' : '';
 		}
+		
+		FoodTruckService.getFeedBacks().then(function(res) {
+			console.log("Res of Feedbacks",res);
+		}, function (){
+			
+		});
 });
