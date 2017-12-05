@@ -2,6 +2,9 @@
 	<div ng-include src="'views/commonTemplate.html'"></div>
 	<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
 		<h4>{{currentPage}}</h4>
+		<div class="alert alert-{{notification.type}}" 
+		style="visibility: hidden;" role="alert" 
+		data-notification="{{notification.status}}">{{notification.message}}</div>
 		<div class="table-responsive">
 			<table class="table table-striped">
 				<thead>
@@ -17,7 +20,10 @@
 						<td>{{$index+1}}</td>
 						<td>{{truck.foodTruckName}}</td>
 						<td><button class="btn btn-primary"
-						  	ng-click="updateUserFav(truck)">Mark as Favorite</button>
+						  	ng-click="updateUserFav(truck)"
+						  	ng-if="!(favFoodTrucks.indexOf(truck.foodTruckId)>=0)">Mark as Favorite</button>
+						  	<h6 style="color:green;"
+						  	ng-if="favFoodTrucks.indexOf(truck.foodTruckId)>=0" >Added to favorites</h6>
 						<td><button class="btn btn-primary"
 						  	ng-click="loadFoodMenu(truck)">View Menu</button></td>
 					</tr>
