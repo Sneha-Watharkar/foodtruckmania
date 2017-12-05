@@ -2,5 +2,27 @@
 	<div ng-include src="'views/commonTemplate.html'"></div>
 	<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
 		<h4>{{currentPage}}</h4>
+		<div class="table-responsive">
+				<table class="table table-striped" ng-if="userRatings">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Rating Date</th>
+							<th>User Rating</th>
+							<th>User Comments</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="rate in userRatings track by $index">
+							<td>{{$index+1}}</td>
+							<td>{{rate.ratingDate}}</td>
+							<td><star-rating ng-model="rate.rating" readonly="true" max="5"></star-rating>
+							</td>
+							<td>{{rate.comments}}</td>
+						</tr>
+					</tbody>
+				</table>
+				<p ng-if="!userRatings")>{{errorMsg}}</p>
+		</div>
 	</main>
 </div>

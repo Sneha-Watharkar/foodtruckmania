@@ -6,6 +6,19 @@ mainApp.controller('manageAlertsController', function($scope, $location, $rootSc
 		$scope.currentUser = UserService.getCurrentUser();
 		UserService.getAlerts().then(function(res){
     		console.log("alert res",res);
+    		if(res.data){
+    			if(res.data.text=='1'){
+    				$scope.smsAlert = true
+    			} else {
+    				$scope.smsAlert = false
+    			}
+    			if(res.data.email=='1'){
+    				$scope.emailAlert = true
+    			} else {
+    				$scope.emailAlert = false
+    			}
+    		}
+    		
     	},function(err){
     		
     	});
@@ -18,6 +31,7 @@ mainApp.controller('manageAlertsController', function($scope, $location, $rootSc
         	console.log("Alerts",$scope.updatingAlertParam);
         	UserService.updateUserAlerts($scope.updatingAlertParam).then(function(res){
         		console.log("alert res",res);
+        		$scope.displayNotification('show',res.data.msg,'info');
         	},function(err){
         		
         	});

@@ -23,7 +23,7 @@ import javax.servlet.http.Part;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.apache.commons.io.FileUtils;
+//import org.apache.commons.io.FileUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import control.AlertsController;
 import control.LocationController;
