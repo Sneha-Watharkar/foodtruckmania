@@ -31,4 +31,12 @@ mainApp.controller('reserveLocationController', function($scope, $location, $roo
 	        $scope.notification.message = message;
 	        $scope.notification.type = type;
         };
+        
+        $scope.sendMail = function() {
+        	FoodTruckService.sendMail().then(function(res){
+        		console.log("Res of email",res);
+        	},function(err){
+        		
+        	});
+        }
 });

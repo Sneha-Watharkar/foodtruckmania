@@ -98,7 +98,17 @@ mainApp.service('FoodTruckService', function($http) {
                 'Content-Type': 'application/json'
             },
             data:JSON.stringify({data: {}, action:'getFeedback'})
-        });
-    	
+        });	
+    }
+    
+    this.sendMail = function() {
+    	return $http({
+            method: 'POST',
+            url: 'sendMail',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data:JSON.stringify({data: {}, action:'sendMail'})
+        });	
     }
 });
