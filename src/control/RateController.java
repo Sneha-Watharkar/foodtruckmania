@@ -38,9 +38,10 @@ public class RateController {
 	 * This method retrieves all the feedback for any given food truck.
 	 */
 	public static ArrayList<FoodTruckRating> getFeedback(HttpServletRequest request, HttpServletResponse response, JSONObject data) {
-		JSONObject rateJson = data.getJSONObject("truckDetails");
+		HttpSession session = request.getSession();
+	    UserAccount user = (UserAccount) session.getAttribute("user");
 		ArrayList<FoodTruckRating> ratingLists = new ArrayList<>();
-		int foodTruckId = rateJson.getInt("foodTruckId");
+		int foodTruckId = user.getTruckId();
 		ratingLists = TableDataGateway.getFeedback(foodTruckId);
 		return ratingLists;
 	}

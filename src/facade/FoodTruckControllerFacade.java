@@ -159,7 +159,7 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					break;
 				case "getFeedback":
 					ArrayList<FoodTruckRating> ratingList = RateController.getFeedback(request, response, data);
-					returnObj.put("ratingLists", ratingList);
+					returnObj.put("ratingLists", mapperObj.writeValueAsString(ratingList));
 					break;
 				case "setUserFavorites":
 					int favInsert = AlertsController.updateUserFav(request,response,data);
