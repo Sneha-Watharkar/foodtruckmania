@@ -229,11 +229,11 @@ public class FoodTruckControllerFacade extends HttpServlet {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		PrintWriter pw = response.getWriter();
-		if(action != "viewMenu"){
+		if(!action.equalsIgnoreCase("viewMenu")){
+			PrintWriter pw = response.getWriter();
 			response.setContentType("application/json");
+			pw.println(returnObj.toString());
 		}
-		pw.println(returnObj.toString());
 		System.out.println(returnObj.toString());
 	}
 

@@ -33,16 +33,16 @@ public class MenuUpdate {
 		}
 	}
 	
-	public static String displayMenu(int userId) {
+	public static String displayMenu(int foodTruckId) {
 		PreparedStatement ps = null;
-		String query = "SELECT foodTruckMenu FROM FoodTruck " +  "where userId = ?";
+		String query = "SELECT foodTruckMenu FROM FoodTruck where foodTruckId = ?";
 		String filePath;
 		try {
 			Connection connection = ConnectionPool2.getConnection();
 			System.out.println(connection.toString());
 			ps = connection.prepareStatement(query);
 			System.out.println(ps.toString());
-			ps.setInt(1, userId);
+			ps.setInt(1, foodTruckId);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()){
 				filePath = rs.getString("foodTruckMenu");
