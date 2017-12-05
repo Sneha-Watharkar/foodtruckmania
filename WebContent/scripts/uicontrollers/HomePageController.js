@@ -32,12 +32,9 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
 		}
         
         $scope.updateUserFav = function(truck){
-        	/*var favoriteObj = {
-        			truck: truck
-        	};*/
-        	
+        	console.log("Truck obj is ",truck);
         	UserService.updateFavTrucks(truck).then(function(res) {
-        		console.log("Res of fav", res);
+        		console.log("Res of fav hello", res);
         	}, function(err){
         		
         	});
