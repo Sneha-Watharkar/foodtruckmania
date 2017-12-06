@@ -23,14 +23,22 @@ public class Mailer {
         try {
             // 1 - get a mail session
             Properties props = new Properties();
-            props.put("mail.smtp.host", "localhost");
-            /* props.put("mail.transport.protocol", "smtps");
-            props.put("mail.smtps.host", "smtp.gmail.com");
-            props.put("mail.smtps.port", 465);
-            props.put("mail.smtps.auth", "true");
-            props.put("mail.smtps.quitwait", "false");*/
+            //props.put("mail.smtp.host", "localhost");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", "smtp.gmail.com");
+            props.put("mail.smtp.user", "rc530297@gmail.com");
+            props.put("mail.smtp.password", "adminadmin");
+            props.put("mail.smtp.port", "465");
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory"); 
+            //props.put("mail.transport.protocol", "smtp");
+            //props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+    		//props.put("mail.smtp.port", "587"); //TLS Port
+    		//props.put("mail.smtp.auth", "true"); //enable authentication
+    		//props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
             Session session = Session.getDefaultInstance(props);
             session.setDebug(true);
+            
             
             // 2 - create a message
             Message message = new MimeMessage(session);
@@ -46,12 +54,12 @@ public class Mailer {
             Address toAddress = new InternetAddress(to);
             message.setFrom(fromAddress);
             message.setRecipient(Message.RecipientType.TO, toAddress);
-            Transport.send(message);
+            //Transport.send(message);
             // 4 - send the message
-            /*Transport transport = session.getTransport();
-            transport.connect("rc530297@gmail.com", "adminadmin");
-            transport.sendMessage(message, message.getAllRecipients());
-            transport.close();*/
+            Transport transport = session.getTransport("smtp");
+            transport.connect("smtp.gmail.com","rc530297@gmail.com", "adminadmin");
+            transport.sendMessage(message,message.getAllRecipients());
+            transport.close();
         } catch (MessagingException ex) {
             Logger.getLogger(Mailer.class.getName()).log(Level.SEVERE, null, ex);
         }

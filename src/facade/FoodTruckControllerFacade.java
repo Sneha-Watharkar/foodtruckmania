@@ -86,9 +86,9 @@ public class FoodTruckControllerFacade extends HttpServlet {
 						returnObj.put("user", mapperObj.writeValueAsString(userAcc));
 						session.setAttribute("user", userAcc);
 						if(userAcc.getUserType().equalsIgnoreCase("vendor")){
-							System.out.println("User is Vendor");
-							FoodTruck truck = UserUpdate.getFoodTrucks(userAcc.getTruckId());
+							FoodTruck truck = UserUpdate.getFoodTrucks(userAcc.getUserId());
 							session.setAttribute("foodTruck", truck);
+							System.out.println("User is Vendor"+userAcc.getTruckId());
 						}
 						returnObj.put("msg", "Login Successful");
 						returnObj.put("error", "");
@@ -197,7 +197,9 @@ public class FoodTruckControllerFacade extends HttpServlet {
 					break;
 				case "sendMail":
 					FoodTruck truck = (FoodTruck) session.getAttribute("foodTruck");
+					System.out.println(truck.getFoodTruckId());
 					ArrayList<String> emails = UserUpdate.getEmailAddress(truck.getFoodTruckId());
+					System.out.println(emails);
 					for(String email:emails){
 						Mailer.sendMail(email,"test@localhost.com","test","test",false);
 					}

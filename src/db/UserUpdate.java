@@ -295,7 +295,7 @@ public class UserUpdate {
 	public static ArrayList<String> getEmailAddress(int foodTruckId){
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query ="SELECT userEmailAddress from UserAccount WHERE userID IN (SELECT userID from dbo.UserFavorites WHERE foodTruckId = ?)";
+		String query ="SELECT userEmailAddress from UserAccount WHERE userID IN (SELECT userID from UserFavorites WHERE foodTruckId = ?)";
 		try {
 			//Connection connection = DriverManager.getConnection(TableDataGateway.connectionString);
 			Connection connection = ConnectionPool2.getConnection();
