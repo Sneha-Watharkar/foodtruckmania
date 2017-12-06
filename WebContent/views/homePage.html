@@ -21,7 +21,7 @@
 						<td>{{truck.foodTruckName}}</td>
 						<td><button class="btn btn-primary"
 						  	ng-click="updateUserFav(truck)"
-						  	ng-if="!(favFoodTrucks.indexOf(truck.foodTruckId)>=0)">Mark as Favorite</button>
+						  	ng-if="favFoodTrucks.indexOf(truck.foodTruckId)<0">Mark as Favorite</button>
 						  	<h6 style="color:green;"
 						  	ng-if="favFoodTrucks.indexOf(truck.foodTruckId)>=0" >Added to favorites</h6>
 						<td><button class="btn btn-primary"

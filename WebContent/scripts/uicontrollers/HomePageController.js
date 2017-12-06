@@ -8,7 +8,8 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
         if($scope.currentUser.userType == "customer") {
         	FoodTruckService.getFavoriteFoodtrucks().then(function(res){
             	console.log("All fav food trucks",  res);
-            	$scope.favFoodTrucks = res.data.trucks;
+            	$scope.favFoodTrucks = JSON.parse(res.data.trucks);
+            	console.log("All fav food trucks",  $scope.favFoodTrucks);
             }, function(err){
             	
             });
@@ -31,8 +32,8 @@ mainApp.controller('homeController', function($scope, $location, FoodTruckServic
         		console.log("Res of fav hello", res);
         		$scope.displayNotification('show', "Added to favorites", 'success');
         		FoodTruckService.getFavoriteFoodtrucks().then(function(res){
-                	console.log("All fav food trucks",  res);
-                	$scope.favFoodTrucks = res.data.trucks;
+                	$scope.favFoodTrucks = JSON.parse(res.data.trucks);
+                	console.log("All fav food trucks",  $scope.favFoodTrucks);
                 }, function(err){
                 	
                 });

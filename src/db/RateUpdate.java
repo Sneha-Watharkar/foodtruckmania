@@ -67,46 +67,18 @@ public class RateUpdate {
 	public static ArrayList<FoodTruck> getFavFoodTrucks(int UserId){
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String query1 = "SELECT * FROM UserFavorites where userID = ?";
-		ArrayList<Integer> foodTruckIds = new ArrayList<Integer>();
-		try{
-			Connection connection = ConnectionPool2.getConnection();
-			ps = connection.prepareStatement(query1);
-			ps.setInt(1, UserId);
-			rs = ps.executeQuery();
-			System.out.println("Result set is :" + rs.getRow());
-			if(rs.next()){
-				foodTruckIds.add(rs.getInt("foodTruckID"));
-			}
-		}
-		catch (Exception e) {
-			System.out.println(e);
-		}
-		System.out.println("Favorite Food Truck Ids: "+foodTruckIds);
-		if (foodTruckIds.size() !=0 && !foodTruckIds.isEmpty()){
+		System.out.println("Usr id"+UserId);
 			try{
 				ArrayList<FoodTruck> foodTruckList = new ArrayList<FoodTruck>();
 				PreparedStatement ps1 = null;
 				ResultSet rs1 = null;
-				String query2 = "SELECT * from FoodTruck WHERE foodTruckID IN (?)";
+				String query2 = "SELECT * from FoodTruck WHERE foodTruckId IN (SELECT foodTruckId FROM UserFavorites where userId = ?)";
 				Connection connection = ConnectionPool2.getConnection();
 				ps1 = connection.prepareStatement(query2);
-				Integer[] Ids = foodTruckIds.toArray(new Integer[foodTruckIds.size()]);
-				System.out.println("Favorite Food Truck Ids: "+Ids);
-				String ids = "";
-				for(int i=0 ; i< Ids.length;i++){
-					if(i == (Ids.length - 1) || Ids.length == 1){
-						ids = ids + Ids[i];
-					}
-					else{
-						ids = ids + Ids[i] + ",";
-					}
-				}
-				System.out.println("Favorite Food Truck Ids: "+ids);
-				ps1.setString(1, ids);
+				ps1.setInt(1, UserId);
 				rs1 = ps1.executeQuery();
 				System.out.println("Result set is :" + rs1.getRow());
-				if(rs1.next()){
+				while(rs1.next()){
 					FoodTruck truck = new FoodTruck();
 					truck.setFoodTruckId(rs1.getInt("foodTruckId"));
 					truck.setFoodTruckName(rs1.getString("foodTruckName"));
@@ -122,10 +94,6 @@ public class RateUpdate {
 				System.out.println(e);
 				return null;
 			}
-		}
-		else{
-			return null;
-		}
 		
 	}
 	
