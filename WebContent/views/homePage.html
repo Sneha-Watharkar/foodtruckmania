@@ -25,7 +25,10 @@
 						  	<h6 style="color:green;"
 						  	ng-if="favFoodTrucks.indexOf(truck.foodTruckId)>=0" >Added to favorites</h6>
 						<td><button class="btn btn-primary"
-						  	ng-click="loadFoodMenu(truck)">View Menu</button></td>
+						  	ng-click="loadFoodMenu(truck)"
+						  	ng-if="truck.foodTruckMenu">View Menu</button>
+						  	<h6 
+						  	ng-if="!truck.foodTruckMenu" >Menu Unavailable</h6></td>
 					</tr>
 				</tbody>
 			</table>
